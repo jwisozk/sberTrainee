@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple_700"
+    tools:context=".TraineePlaceholderFragment">
+
+    <TextView
+        android:id="@+id/traineeNumberLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        style="@style/InfoTextStyle"
+        android:text="@string/trainee_number_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/traineeNumberTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        style="@style/InfoTextStyle"
+        android:text="@string/trainee_number"
+        app:layout_constraintBottom_toBottomOf="@+id/traineeNumberLabelTextView"
+        app:layout_constraintStart_toEndOf="@+id/traineeNumberLabelTextView"
+        app:layout_constraintTop_toTopOf="@+id/traineeNumberLabelTextView" />
+
+    <TextView
+        android:id="@+id/fullNameLabelInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        style="@style/InfoTextStyle"
+        android:text="@string/full_name"
+        app:layout_constraintStart_toStartOf="@+id/traineeNumberLabelTextView"
+        app:layout_constraintTop_toBottomOf="@+id/traineeNumberLabelTextView" />
+
+    <TextView
+        android:id="@+id/genderInfoLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/InfoTextStyle"
+        android:text="@string/gender"
+        app:layout_constraintStart_toStartOf="@+id/fullNameLabelInfoTextView"
+        app:layout_constraintTop_toBottomOf="@+id/fullNameLabelInfoTextView" />
+
+    <TextView
+        android:id="@+id/fullNameSampleInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        style="@style/InfoTextStyle"
+        android:text="@string/full_name_sample"
+        app:layout_constraintBottom_toBottomOf="@+id/fullNameLabelInfoTextView"
+        app:layout_constraintStart_toEndOf="@+id/fullNameLabelInfoTextView"
+        app:layout_constraintTop_toTopOf="@+id/fullNameLabelInfoTextView" />
+
+    <TextView
+        android:id="@+id/genderInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        style="@style/InfoTextStyle"
+        android:text="@string/gender_man"
+        app:layout_constraintBottom_toBottomOf="@+id/genderInfoLabelTextView"
+        app:layout_constraintStart_toEndOf="@+id/genderInfoLabelTextView"
+        app:layout_constraintTop_toTopOf="@+id/genderInfoLabelTextView" />
+
+    <TextView
+        android:id="@+id/providedLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/InfoTextStyle"
+        android:text="@string/provided_label"
+        app:layout_constraintStart_toStartOf="@+id/genderInfoLabelTextView"
+        app:layout_constraintTop_toBottomOf="@+id/genderInfoLabelTextView" />
+
+    <TextView
+        android:id="@+id/alphaAccountInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/InfoTextStyle"
+        android:text="@string/alpha_account"
+        app:layout_constraintStart_toStartOf="@+id/providedLabel"
+        app:layout_constraintTop_toBottomOf="@+id/providedLabel" />
+
+    <TextView
+        android:id="@+id/SigmaAccountInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/InfoTextStyle"
+        android:text="@string/sigma_account"
+        app:layout_constraintStart_toStartOf="@+id/alphaAccountInfoTextView"
+        app:layout_constraintTop_toBottomOf="@+id/alphaAccountInfoTextView" />
+
+    <TextView
+        android:id="@+id/workComputerInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/InfoTextStyle"
+        android:text="@string/work_computer"
+        app:layout_constraintStart_toStartOf="@+id/SigmaAccountInfoTextView"
+        app:layout_constraintTop_toBottomOf="@+id/SigmaAccountInfoTextView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

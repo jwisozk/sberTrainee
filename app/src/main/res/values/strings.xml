@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Новобранцы</string>
+    <string name="trainee_number_label">Стажер №</string>
+    <string name="trainee_number">1</string>
+    <string name="full_name">ФИО:</string>
+    <string name="full_name_sample">Иванов Иван Иваныч</string>
+    <string name="gender">Пол:</string>
+    <string name="gender_man">м</string>
+    <string name="gender_woman">ж</string>
+    <string name="alpha_account">Альфа аккаунт</string>
+    <string name="sigma_account">Сигма аккаунт</string>
+    <string name="computer_provided">Компьтер предоставлен</string>
+    <string name="add_trainee">Добавить</string>
+    <string name="provided_label">Предоставлены:</string>
+    <string name="work_computer">Рабочий компьютер</string>
+</resources>

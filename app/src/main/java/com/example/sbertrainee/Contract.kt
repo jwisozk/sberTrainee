@@ -1,5 +1,7 @@
 package com.example.sbertrainee
 
+import com.example.sbertrainee.mvp.TraineeData
+
 interface Contract {
 
     interface View {
@@ -10,7 +12,7 @@ interface Contract {
 //        fun hasSComputer(): Boolean
 //        fun addTrainee()
         fun getTraineeData(): TraineeData
-        fun showErrorMessage(msgError: String)
+        fun showErrorMessage(msgErrorId: Int)
     }
 
     interface Presenter {

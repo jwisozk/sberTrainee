@@ -1,19 +1,20 @@
-package com.example.sbertrainee
+package com.example.sbertrainee.mvp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import com.example.sbertrainee.*
 import androidx.viewpager2.widget.ViewPager2 as ViewPager
 
-class MainActivity : AppCompatActivity(), Contract.View {
+class TraineeActivity : AppCompatActivity(), Contract.View {
 
     companion object {
         private const val GENDER_MAN = "м"
         private const val GENDER_WOMAN = "ж"
     }
 
-    private var presenter: Presenter? = null
+    private var traineePresenter: TraineePresenter? = null
     private lateinit var editTextFullName: EditText
     private lateinit var radioGroupGender: RadioGroup
     private lateinit var checkBoxHasAlphaAccount: CheckBox
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity(), Contract.View {
 
         val addButton: Button = findViewById(R.id.addTraineeButton)
         addButton.setOnClickListener {
-            presenter?.onButtonWasClicked()
+            traineePresenter?.onButtonWasClicked()
         }
 //        val radioButton = findViewById<RadioButton>(R.id.radioGenderMan)
 //        val radioGroup: RadioGroup = findViewById(R.id.radioGroup)
@@ -51,11 +52,11 @@ class MainActivity : AppCompatActivity(), Contract.View {
 //                radio
 //        }
         val model = TraineeViewModel()
-        presenter = Presenter(model).apply {
-            attachView(this@MainActivity)
-            viewIsReady()
+        traineePresenter = TraineePresenter(model).apply {
+            attachView(this@TraineeActivity)
         }
-//        presenter.attachView(this)
+
+
 //        presenter.viewIsReady()
     }
 
@@ -70,11 +71,17 @@ class MainActivity : AppCompatActivity(), Contract.View {
             gender,
             checkBoxHasAlphaAccount.isChecked,
             checkBoxHasSigmaAccount.isChecked,
-            checkBoxHasComputer.isChecked)
+            checkBoxHasComputer.isChecked
+        )
     }
 
-    override fun showErrorMessage(msgError: String) {
+    override fun showErrorMessage(msgErrorId: Int) {
         Log.d(this.toString(), "click")
-        Toast.makeText(this, msgError, Toast.LENGTH_LONG).show()
+        Toast.makeText(this, getString(msgErrorId), Toast.LENGTH_LONG).show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        traineePresenter?.detachView()
     }
 }

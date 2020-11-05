@@ -13,6 +13,7 @@ interface Contract {
 //        fun addTrainee()
         fun getTraineeData(): TraineeData
         fun showErrorMessage(msgErrorId: Int)
+        fun showTraineeInfo(traineeData: TraineeData)
     }
 
     interface Presenter {

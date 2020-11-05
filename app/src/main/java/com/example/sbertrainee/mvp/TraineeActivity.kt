@@ -2,12 +2,17 @@ package com.example.sbertrainee.mvp
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sbertrainee.*
 import androidx.viewpager2.widget.ViewPager2 as ViewPager
 
 class TraineeActivity : AppCompatActivity(), Contract.View {
+
+    private lateinit var viewPager: ViewPager
+    private lateinit var pagerAdapter: TraineeSectionsPagerAdapter
+    private lateinit var traineeList: MutableList<TraineeData>
 
     companion object {
         private const val GENDER_MAN = "м"
@@ -29,9 +34,11 @@ class TraineeActivity : AppCompatActivity(), Contract.View {
 
 
     private fun init() {
-        val pagerAdapter = TraineeSectionsPagerAdapter(this)
-        val viewPager: ViewPager = findViewById(R.id.traineeViewPager)
-        viewPager.adapter = pagerAdapter
+        traineeList = ArrayList()
+        val viewPagerAdapter = ViewPagerAdapter(traineeList, layoutInflater)
+//        pagerAdapter = TraineeSectionsPagerAdapter(this)
+        viewPager = findViewById(R.id.traineeViewPager)
+        viewPager.adapter = viewPagerAdapter
 
         editTextFullName = findViewById(R.id.fullNameEditText)
         radioGroupGender = findViewById(R.id.radioGroup)
@@ -51,8 +58,7 @@ class TraineeActivity : AppCompatActivity(), Contract.View {
 //            when (radio)
 //                radio
 //        }
-        val model = TraineeViewModel()
-        traineePresenter = TraineePresenter(model).apply {
+        traineePresenter = TraineePresenter().apply {
             attachView(this@TraineeActivity)
         }
 
@@ -73,6 +79,15 @@ class TraineeActivity : AppCompatActivity(), Contract.View {
             checkBoxHasSigmaAccount.isChecked,
             checkBoxHasComputer.isChecked
         )
+    }
+
+    override fun showTraineeInfo(traineeData: TraineeData) {
+        traineeList.add(traineeData)
+//        val viewPagerAdapter = ViewPagerAdapter(traineeList, layoutInflater)
+//        viewPager.adapter = viewPagerAdapter
+//        (viewPager.adapter as ViewPagerAdapter).addTrainee(traineeData)
+        (viewPager.adapter as ViewPagerAdapter).submitList(traineeList)
+        viewPager.currentItem = traineeList.size - 1
     }
 
     override fun showErrorMessage(msgErrorId: Int) {

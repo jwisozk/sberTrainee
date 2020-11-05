@@ -14,8 +14,14 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="InfoLabelTextStyle">
+        <item name="android:textColor">@color/teal_200</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="InfoTextStyle">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">18sp</item>
     </style>
+
 </resources>

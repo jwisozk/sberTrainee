@@ -1,10 +1,10 @@
 package com.example.sbertrainee.mvp
 
+import android.view.View
 import com.example.sbertrainee.Contract
 import com.example.sbertrainee.R
-import com.example.sbertrainee.TraineeViewModel
 
-class TraineePresenter(val model: TraineeViewModel) : Contract.Presenter {
+class TraineePresenter : Contract.Presenter {
     private var view: Contract.View? = null
 
 
@@ -15,7 +15,6 @@ class TraineePresenter(val model: TraineeViewModel) : Contract.Presenter {
     fun detachView() {
         view = null
     }
-
 
     private fun isValidData(data: TraineeData?): Boolean {
         val checkResult = when {
@@ -34,8 +33,11 @@ class TraineePresenter(val model: TraineeViewModel) : Contract.Presenter {
         val traineeData = view?.getTraineeData()
         if (!isValidData(traineeData))
             return
-
+        traineeData?.let {
+            view?.showTraineeInfo(it)
+        }
     }
+
 
 //    fun getGender(radioButtonId: Int): String? {
 //        val radioButton: RadioButton = view.find

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        style="@style/InfoTextStyle"
+        style="@style/InfoLabelTextStyle"
         android:text="@string/trainee_number_label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         style="@style/InfoTextStyle"
-        android:text="@string/trainee_number"
         app:layout_constraintBottom_toBottomOf="@+id/traineeNumberLabelTextView"
         app:layout_constraintStart_toEndOf="@+id/traineeNumberLabelTextView"
         app:layout_constraintTop_toTopOf="@+id/traineeNumberLabelTextView" />
@@ -35,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        style="@style/InfoTextStyle"
+        style="@style/InfoLabelTextStyle"
         android:text="@string/full_name"
         app:layout_constraintStart_toStartOf="@+id/traineeNumberLabelTextView"
         app:layout_constraintTop_toBottomOf="@+id/traineeNumberLabelTextView" />
@@ -44,7 +43,7 @@
         android:id="@+id/genderInfoLabelTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/InfoTextStyle"
+        style="@style/InfoLabelTextStyle"
         android:text="@string/gender"
         app:layout_constraintStart_toStartOf="@+id/fullNameLabelInfoTextView"
         app:layout_constraintTop_toBottomOf="@+id/fullNameLabelInfoTextView" />
@@ -55,7 +54,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         style="@style/InfoTextStyle"
-        android:text="@string/full_name_sample"
         app:layout_constraintBottom_toBottomOf="@+id/fullNameLabelInfoTextView"
         app:layout_constraintStart_toEndOf="@+id/fullNameLabelInfoTextView"
         app:layout_constraintTop_toTopOf="@+id/fullNameLabelInfoTextView" />
@@ -66,7 +64,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         style="@style/InfoTextStyle"
-        android:text="@string/gender_man"
         app:layout_constraintBottom_toBottomOf="@+id/genderInfoLabelTextView"
         app:layout_constraintStart_toEndOf="@+id/genderInfoLabelTextView"
         app:layout_constraintTop_toTopOf="@+id/genderInfoLabelTextView" />
@@ -75,7 +72,7 @@
         android:id="@+id/providedLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/InfoTextStyle"
+        style="@style/InfoLabelTextStyle"
         android:text="@string/provided_label"
         app:layout_constraintStart_toStartOf="@+id/genderInfoLabelTextView"
         app:layout_constraintTop_toBottomOf="@+id/genderInfoLabelTextView" />
@@ -85,15 +82,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/InfoTextStyle"
+        android:visibility="gone"
         android:text="@string/alpha_account"
         app:layout_constraintStart_toStartOf="@+id/providedLabel"
         app:layout_constraintTop_toBottomOf="@+id/providedLabel" />
 
     <TextView
-        android:id="@+id/SigmaAccountInfoTextView"
+        android:id="@+id/sigmaAccountInfoTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/InfoTextStyle"
+        android:visibility="gone"
         android:text="@string/sigma_account"
         app:layout_constraintStart_toStartOf="@+id/alphaAccountInfoTextView"
         app:layout_constraintTop_toBottomOf="@+id/alphaAccountInfoTextView" />
@@ -103,7 +102,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/InfoTextStyle"
+        android:visibility="gone"
         android:text="@string/work_computer"
-        app:layout_constraintStart_toStartOf="@+id/SigmaAccountInfoTextView"
-        app:layout_constraintTop_toBottomOf="@+id/SigmaAccountInfoTextView" />
+        app:layout_constraintStart_toStartOf="@+id/sigmaAccountInfoTextView"
+        app:layout_constraintTop_toBottomOf="@+id/sigmaAccountInfoTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

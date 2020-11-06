@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mvp.TraineeActivity">
+    tools:context=".view.TraineeActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/headerInput"
@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/fullNameEditText"
+            android:id="@+id/editTextFullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -38,12 +38,12 @@
             app:layout_constraintTop_toTopOf="@+id/fullNameLabel" />
 
         <RadioGroup
-            android:id="@+id/radioGroup"
+            android:id="@+id/radioGroupGender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="@+id/fullNameLabel"
-            app:layout_constraintTop_toBottomOf="@+id/fullNameEditText">
+            app:layout_constraintTop_toBottomOf="@+id/editTextFullName">
 
             <TextView
                 android:id="@+id/genderRadioLabel"
@@ -66,48 +66,47 @@
         </RadioGroup>
 
         <CheckBox
-            android:id="@+id/alphaAccountCheckBox"
+            android:id="@+id/checkBoxHasAlphaAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/alpha_account"
-            app:layout_constraintStart_toStartOf="@+id/radioGroup"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+            app:layout_constraintStart_toStartOf="@+id/radioGroupGender"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupGender" />
 
         <CheckBox
-            android:id="@+id/sigmaAccountCheckBox"
+            android:id="@+id/checkBoxHasSigmaAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sigma_account"
-            app:layout_constraintStart_toStartOf="@+id/alphaAccountCheckBox"
-            app:layout_constraintTop_toBottomOf="@+id/alphaAccountCheckBox" />
+            app:layout_constraintStart_toStartOf="@+id/checkBoxHasAlphaAccount"
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxHasAlphaAccount" />
 
         <CheckBox
-            android:id="@+id/computerProvidedCheckBox"
+            android:id="@+id/checkBoxHasComputer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/computer_provided"
-            app:layout_constraintStart_toStartOf="@+id/sigmaAccountCheckBox"
-            app:layout_constraintTop_toBottomOf="@+id/sigmaAccountCheckBox" />
+            app:layout_constraintStart_toStartOf="@+id/checkBoxHasSigmaAccount"
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxHasSigmaAccount" />
 
         <Button
-            android:id="@+id/addTraineeButton"
+            android:id="@+id/buttonAddTrainee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
             android:text="@string/add_trainee"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/computerProvidedCheckBox"
-            app:layout_constraintTop_toBottomOf="@+id/computerProvidedCheckBox" />
+            app:layout_constraintStart_toStartOf="@+id/checkBoxHasComputer"
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxHasComputer" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/traineeViewPager"
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerInput" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

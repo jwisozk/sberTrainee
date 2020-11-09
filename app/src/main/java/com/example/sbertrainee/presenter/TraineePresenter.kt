@@ -2,7 +2,7 @@ package com.example.sbertrainee.presenter
 
 import com.example.sbertrainee.common.Contract
 import com.example.sbertrainee.R
-import com.example.sbertrainee.model.TraineesCell
+import com.example.sbertrainee.model.TraineeData
 
 class TraineePresenter : Contract.Presenter {
     private var view: Contract.View? = null
@@ -13,8 +13,8 @@ class TraineePresenter : Contract.Presenter {
     }
 
     enum class GenderType(val value: Int) {
-        MAN (R.id.radioGenderMan),
-        WOMAN (R.id.radioGenderWoman)
+        MAN(R.id.radioGenderMan),
+        WOMAN(R.id.radioGenderWoman)
     }
 
     fun attachView(view: Contract.View) {
@@ -27,23 +27,35 @@ class TraineePresenter : Contract.Presenter {
 
     override fun onButtonWasClicked() {
         view?.let { v ->
-            val fullName = v.getFullName()
-            if (fullName.isEmpty()) {
-                v.showErrorMessage(ErrorType.FULL_NAME_ABSENT.value)
-                return
-            }
-            val gender = when(GenderType.values().singleOrNull { it.value == v.getGenderId()}) {
-                GenderType.MAN -> MAN
-                GenderType.WOMAN -> WOMAN
-                else -> null
-            }
-            if (gender == null) {
-                v.showErrorMessage(ErrorType.GENDER_ABSENT.value)
-                return
-            }
-            val cell = TraineesCell(fullName, gender, v.hasAlphaAccount(), v.hasSigmaAccount(), v.hasComputer())
-            v.addTrainee(cell)
+            val pair = checkValid(v) ?: return
+            val (fullName, gender) = pair
+            val traineeData = TraineeData(
+                fullName,
+                gender,
+                v.hasAlphaAccount(),
+                v.hasSigmaAccount(),
+                v.hasComputer()
+            )
+            v.addTrainee(traineeData)
         }
+    }
+
+    private fun checkValid(view: Contract.View): Pair<String, String>? {
+        val fullName = view.getFullName()
+        if (fullName.isEmpty()) {
+            view.showErrorMessage(ErrorType.FULL_NAME_ABSENT.value)
+            return null
+        }
+        val gender = when (GenderType.values().singleOrNull { it.value == view.getGenderId() }) {
+            GenderType.MAN -> MAN
+            GenderType.WOMAN -> WOMAN
+            else -> null
+        }
+        if (gender == null) {
+            view.showErrorMessage(ErrorType.GENDER_ABSENT.value)
+            return null
+        }
+        return Pair(fullName, gender)
     }
 
     private enum class ErrorType(val value: Int) {

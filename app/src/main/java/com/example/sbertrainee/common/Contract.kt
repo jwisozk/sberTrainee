@@ -1,6 +1,6 @@
 package com.example.sbertrainee.common
 
-import com.example.sbertrainee.model.TraineesCell
+import com.example.sbertrainee.model.TraineeData
 
 interface Contract {
 
@@ -11,7 +11,7 @@ interface Contract {
         fun hasSigmaAccount(): Boolean
         fun hasComputer(): Boolean
         fun showErrorMessage(msgErrorId: Int)
-        fun addTrainee(cell: TraineesCell)
+        fun addTrainee(traineeData: TraineeData)
     }
 
     interface Presenter {

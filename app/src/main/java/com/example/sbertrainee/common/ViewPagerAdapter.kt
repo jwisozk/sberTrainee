@@ -5,15 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sbertrainee.R
-import com.example.sbertrainee.model.TraineesCell
+import com.example.sbertrainee.model.TraineeData
 import kotlinx.android.synthetic.main.trainee_fragment.view.*
 
 class ViewPagerAdapter(
-    var traineeList: List<TraineesCell>,
+    var traineeList: List<TraineeData>,
     private val inflater: LayoutInflater
 ) : RecyclerView.Adapter<ViewHolder>() {
 
-    fun submitList(newTraineeList: List<TraineesCell>) {
+    fun submitList(newTraineeList: List<TraineeData>) {
         traineeList = newTraineeList
         notifyDataSetChanged()
     }
@@ -29,12 +29,12 @@ class ViewPagerAdapter(
 }
 
 class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun bind(cell: TraineesCell) {
-        itemView.traineeNumberTextView.text = cell.id.toString()
-        itemView.fullNameSampleInfoTextView.text = cell.fullName
-        itemView.genderInfoTextView.text = cell.gender
-        Util.changeVisible(itemView.alphaAccountInfoTextView, cell.hasAlphaAccount)
-        Util.changeVisible(itemView.sigmaAccountInfoTextView, cell.hasSigmaAccount)
-        Util.changeVisible(itemView.workComputerInfoTextView, cell.hasComputer)
+    fun bind(traineeData: TraineeData) {
+        itemView.traineeNumberTextView.text = traineeData.id.toString()
+        itemView.fullNameSampleInfoTextView.text = traineeData.fullName
+        itemView.genderInfoTextView.text = traineeData.gender
+        Util.changeVisible(itemView.alphaAccountInfoTextView, traineeData.hasAlphaAccount)
+        Util.changeVisible(itemView.sigmaAccountInfoTextView, traineeData.hasSigmaAccount)
+        Util.changeVisible(itemView.workComputerInfoTextView, traineeData.hasComputer)
     }
 }

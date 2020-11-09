@@ -1,6 +1,6 @@
 package com.example.sbertrainee.model
 
-data class TraineesCell(
+data class TraineeData(
     val fullName: String,
     val gender: String,
     val hasAlphaAccount: Boolean = false,

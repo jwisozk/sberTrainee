@@ -28,6 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:autofillHints="@string/full_name_sample"
             android:hint="@string/full_name_sample"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="@+id/fullNameLabel"
@@ -103,6 +104,5 @@
         android:id="@+id/viewPager"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1" />
 </LinearLayout>

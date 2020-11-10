@@ -1,65 +1,55 @@
 package com.example.sbertrainee.presenter
 
 import com.example.sbertrainee.common.Contract
-import com.example.sbertrainee.R
 import com.example.sbertrainee.model.TraineeData
 
-class TraineePresenter : Contract.Presenter {
-    private var view: Contract.View? = null
+class TraineePresenter(
+    private var view: Contract.View?,
+    private val viewModel: Contract.ViewModel
+) : Contract.Presenter {
 
-    companion object {
-        private const val MAN = "м"
-        private const val WOMAN = "ж"
+    override fun onTextChanged(s: CharSequence?) {
+        viewModel.setFullName(s)
     }
 
-    enum class GenderType(val value: Int) {
-        MAN(R.id.radioGenderMan),
-        WOMAN(R.id.radioGenderWoman)
+    override fun onGenderCheckedChange(checkId: Int) {
+        val gender = viewModel.getGenderById(checkId)
+        viewModel.setGender(gender)
     }
 
-    fun attachView(view: Contract.View) {
-        this.view = view
+    override fun onHasAlphaCheckedChange(isChecked: Boolean) {
+        viewModel.setHasAlphaAccount(isChecked)
     }
 
-    fun detachView() {
-        view = null
+    override fun onHasSigmaCheckedChange(isChecked: Boolean) {
+        viewModel.setHasSigmaAccount((isChecked))
     }
 
-    override fun onButtonWasClicked() {
+    override fun onHasComputerCheckedChange(isChecked: Boolean) {
+        viewModel.setHasComputer(isChecked)
+    }
+
+    override fun onButtonClicked() {
         view?.let { v ->
-            val pair = checkValid(v) ?: return
-            val (fullName, gender) = pair
+            val errorId = viewModel.checkValid()
+            if (errorId != null) {
+                v.showErrorMessage(errorId)
+                return
+            }
             val traineeData = TraineeData(
-                fullName,
-                gender,
-                v.hasAlphaAccount(),
-                v.hasSigmaAccount(),
-                v.hasComputer()
+                viewModel.getFullName().toString(),
+                viewModel.getGender()!!,
+                viewModel.getHasAlphaAccount(),
+                viewModel.getHasSigmaAccount(),
+                viewModel.getHasComputer()
             )
-            v.addTrainee(traineeData)
+            v.showTrainee(traineeData)
+            v.clear()
+            viewModel.clear()
         }
     }
 
-    private fun checkValid(view: Contract.View): Pair<String, String>? {
-        val fullName = view.getFullName()
-        if (fullName.isEmpty()) {
-            view.showErrorMessage(ErrorType.FULL_NAME_ABSENT.value)
-            return null
-        }
-        val gender = when (GenderType.values().singleOrNull { it.value == view.getGenderId() }) {
-            GenderType.MAN -> MAN
-            GenderType.WOMAN -> WOMAN
-            else -> null
-        }
-        if (gender == null) {
-            view.showErrorMessage(ErrorType.GENDER_ABSENT.value)
-            return null
-        }
-        return Pair(fullName, gender)
-    }
-
-    private enum class ErrorType(val value: Int) {
-        FULL_NAME_ABSENT(R.string.full_name_absent),
-        GENDER_ABSENT(R.string.gender_absent)
+    override fun detachView() {
+        view = null
     }
 }

@@ -5,16 +5,36 @@ import com.example.sbertrainee.model.TraineeData
 interface Contract {
 
     interface View {
-        fun getFullName(): String
-        fun getGenderId(): Int
-        fun hasAlphaAccount(): Boolean
-        fun hasSigmaAccount(): Boolean
-        fun hasComputer(): Boolean
-        fun showErrorMessage(msgErrorId: Int)
-        fun addTrainee(traineeData: TraineeData)
+        fun showErrorMessage(errorId: Int)
+        fun showTrainee(traineeData: TraineeData)
+        fun clear()
     }
 
     interface Presenter {
-        fun onButtonWasClicked()
+        fun onTextChanged(s: CharSequence?)
+        fun onGenderCheckedChange(checkId: Int)
+        fun onHasAlphaCheckedChange(isChecked: Boolean)
+        fun onHasSigmaCheckedChange(isChecked: Boolean)
+        fun onHasComputerCheckedChange(isChecked: Boolean)
+        fun onButtonClicked()
+        fun detachView()
+    }
+
+    interface ViewModel {
+        fun addTrainee(traineeData: TraineeData)
+        fun getTraineeList(): MutableList<TraineeData>
+        fun getFullName(): CharSequence?
+        fun setFullName(s: CharSequence?)
+        fun getGender(): String?
+        fun setGender(s: String?)
+        fun getGenderById(id: Int): String?
+        fun setHasAlphaAccount(isChecked: Boolean)
+        fun getHasAlphaAccount() : Boolean
+        fun setHasSigmaAccount(isChecked: Boolean)
+        fun getHasSigmaAccount() : Boolean
+        fun setHasComputer(isChecked: Boolean)
+        fun getHasComputer() : Boolean
+        fun checkValid(): Int?
+        fun clear()
     }
 }

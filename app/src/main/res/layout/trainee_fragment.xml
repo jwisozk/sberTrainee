@@ -8,100 +8,101 @@
 
     <TextView
         android:id="@+id/traineeNumberLabelTextView"
+        style="@style/InfoLabelTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        style="@style/InfoLabelTextStyle"
         android:text="@string/trainee_number_label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/traineeNumberTextView"
+        style="@style/InfoTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        style="@style/InfoTextStyle"
         app:layout_constraintBottom_toBottomOf="@+id/traineeNumberLabelTextView"
         app:layout_constraintStart_toEndOf="@+id/traineeNumberLabelTextView"
         app:layout_constraintTop_toTopOf="@+id/traineeNumberLabelTextView" />
 
     <TextView
         android:id="@+id/fullNameLabelInfoTextView"
+        style="@style/InfoLabelTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        style="@style/InfoLabelTextStyle"
         android:text="@string/full_name"
         app:layout_constraintStart_toStartOf="@+id/traineeNumberLabelTextView"
         app:layout_constraintTop_toBottomOf="@+id/traineeNumberLabelTextView" />
 
     <TextView
         android:id="@+id/genderInfoLabelTextView"
+        style="@style/InfoLabelTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/InfoLabelTextStyle"
         android:text="@string/gender"
         app:layout_constraintStart_toStartOf="@+id/fullNameLabelInfoTextView"
         app:layout_constraintTop_toBottomOf="@+id/fullNameLabelInfoTextView" />
 
     <TextView
         android:id="@+id/fullNameSampleInfoTextView"
+        style="@style/InfoTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        style="@style/InfoTextStyle"
         app:layout_constraintBottom_toBottomOf="@+id/fullNameLabelInfoTextView"
         app:layout_constraintStart_toEndOf="@+id/fullNameLabelInfoTextView"
         app:layout_constraintTop_toTopOf="@+id/fullNameLabelInfoTextView" />
 
     <TextView
         android:id="@+id/genderInfoTextView"
+        style="@style/InfoTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        style="@style/InfoTextStyle"
         app:layout_constraintBottom_toBottomOf="@+id/genderInfoLabelTextView"
         app:layout_constraintStart_toEndOf="@+id/genderInfoLabelTextView"
         app:layout_constraintTop_toTopOf="@+id/genderInfoLabelTextView" />
 
     <TextView
         android:id="@+id/providedLabel"
+        style="@style/InfoLabelTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/InfoLabelTextStyle"
         android:text="@string/provided_label"
         app:layout_constraintStart_toStartOf="@+id/genderInfoLabelTextView"
         app:layout_constraintTop_toBottomOf="@+id/genderInfoLabelTextView" />
 
     <TextView
         android:id="@+id/alphaAccountInfoTextView"
+        style="@style/InfoTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/InfoTextStyle"
-        android:visibility="gone"
         android:text="@string/alpha_account"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/providedLabel"
         app:layout_constraintTop_toBottomOf="@+id/providedLabel" />
 
     <TextView
         android:id="@+id/sigmaAccountInfoTextView"
+        style="@style/InfoTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/InfoTextStyle"
-        android:visibility="gone"
         android:text="@string/sigma_account"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/alphaAccountInfoTextView"
         app:layout_constraintTop_toBottomOf="@+id/alphaAccountInfoTextView" />
 
     <TextView
         android:id="@+id/workComputerInfoTextView"
+        style="@style/InfoTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/InfoTextStyle"
-        android:visibility="gone"
         android:text="@string/work_computer"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/sigmaAccountInfoTextView"
         app:layout_constraintTop_toBottomOf="@+id/sigmaAccountInfoTextView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

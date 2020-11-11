@@ -1,13 +1,10 @@
 package com.example.sbertrainee.presenter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sbertrainee.R
-import com.example.sbertrainee.common.Util
 import com.example.sbertrainee.model.TraineeData
-import kotlinx.android.synthetic.main.trainee_fragment.view.*
 
 class ViewPagerAdapter(
     var traineeList: List<TraineeData>,

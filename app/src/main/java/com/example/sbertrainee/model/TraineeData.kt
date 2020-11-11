@@ -7,13 +7,14 @@ data class TraineeData(
     val hasSigmaAccount: Boolean = false,
     val hasComputer: Boolean = false,
 ) {
-    companion object {
-        private var mutableId = 0
-    }
 
     init {
         mutableId++
     }
 
     val id = mutableId
+
+    companion object {
+        private var mutableId = 0
+    }
 }

@@ -1,58 +1,56 @@
 package com.example.sbertrainee.presenter
 
 import com.example.sbertrainee.common.Contract
+import com.example.sbertrainee.model.Model
 import com.example.sbertrainee.model.TraineeData
 
 class TraineePresenter(
-    private var view: Contract.View?,
-    private val viewModel: Contract.ViewModel
+    private val view: Contract.View?,
+    private val model: Model
 ) : Contract.Presenter {
 
     override fun onTextChanged(s: CharSequence?) {
-        viewModel.setFullName(s)
+        model.setFullName(s)
     }
 
     override fun onGenderCheckedChange(checkId: Int) {
-        val gender = viewModel.getGenderById(checkId)
-        viewModel.setGender(gender)
+        val gender = model.getGenderById(checkId)
+        model.setGender(gender)
     }
 
     override fun onHasAlphaCheckedChange(isChecked: Boolean) {
-        viewModel.setHasAlphaAccount(isChecked)
+        model.setHasAlphaAccount(isChecked)
     }
 
     override fun onHasSigmaCheckedChange(isChecked: Boolean) {
-        viewModel.setHasSigmaAccount((isChecked))
+        model.setHasSigmaAccount((isChecked))
     }
 
     override fun onHasComputerCheckedChange(isChecked: Boolean) {
-        viewModel.setHasComputer(isChecked)
+        model.setHasComputer(isChecked)
     }
 
-    override fun onButtonClicked() {
+    override fun onAddButtonClicked() {
         view?.let { v ->
-            val errorId = viewModel.checkValid()
+            val errorId = model.checkValid()
             if (errorId != null) {
                 v.showErrorMessage(errorId)
                 return
             }
             val traineeData = TraineeData(
-                viewModel.getFullName().toString(),
-                viewModel.getGender()!!,
-                viewModel.getHasAlphaAccount(),
-                viewModel.getHasSigmaAccount(),
-                viewModel.getHasComputer()
+                model.getFullName().toString(),
+                model.getGender(),
+                model.getHasAlphaAccount(),
+                model.getHasSigmaAccount(),
+                model.getHasComputer()
             )
-            viewModel.addTrainee(traineeData)
-            v.showTrainee(viewModel.getTraineeList())
+            model.addTrainee(traineeData)
+            v.showTrainee(model.getTraineeList())
             v.clear()
-            viewModel.clear()
+            model.clear()
         }
     }
 
-    override fun getCurrentItemViewPager(): Int = viewModel.getTraineeList().size - 1
-
-    override fun detachView() {
-        view = null
-    }
+    override fun getCurrentItemViewPager(): Int
+            = model.getTraineeList().size - 1
 }

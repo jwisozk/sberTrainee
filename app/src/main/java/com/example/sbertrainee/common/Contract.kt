@@ -6,7 +6,7 @@ interface Contract {
 
     interface View {
         fun showErrorMessage(errorId: Int)
-        fun showTrainee(traineeData: TraineeData)
+        fun showTrainee(traineeList: List<TraineeData>)
         fun clear()
     }
 
@@ -18,6 +18,7 @@ interface Contract {
         fun onHasComputerCheckedChange(isChecked: Boolean)
         fun onButtonClicked()
         fun detachView()
+        fun getCurrentItemViewPager(): Int
     }
 
     interface ViewModel {
@@ -29,11 +30,11 @@ interface Contract {
         fun setGender(s: String?)
         fun getGenderById(id: Int): String?
         fun setHasAlphaAccount(isChecked: Boolean)
-        fun getHasAlphaAccount() : Boolean
+        fun getHasAlphaAccount(): Boolean
         fun setHasSigmaAccount(isChecked: Boolean)
-        fun getHasSigmaAccount() : Boolean
+        fun getHasSigmaAccount(): Boolean
         fun setHasComputer(isChecked: Boolean)
-        fun getHasComputer() : Boolean
+        fun getHasComputer(): Boolean
         fun checkValid(): Int?
         fun clear()
     }

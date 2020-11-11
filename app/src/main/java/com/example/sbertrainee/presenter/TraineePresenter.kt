@@ -43,11 +43,14 @@ class TraineePresenter(
                 viewModel.getHasSigmaAccount(),
                 viewModel.getHasComputer()
             )
-            v.showTrainee(traineeData)
+            viewModel.addTrainee(traineeData)
+            v.showTrainee(viewModel.getTraineeList())
             v.clear()
             viewModel.clear()
         }
     }
+
+    override fun getCurrentItemViewPager(): Int = viewModel.getTraineeList().size - 1
 
     override fun detachView() {
         view = null

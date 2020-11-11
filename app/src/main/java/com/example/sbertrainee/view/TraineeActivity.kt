@@ -47,7 +47,7 @@ class TraineeActivity : AppCompatActivity(), Contract.View {
         checkBoxHasSigmaAccount.setOnCheckedChangeListener { _, isChecked ->
             traineePresenter.onHasSigmaCheckedChange(isChecked)
         }
-        checkBoxHasComputer.setOnCheckedChangeListener { _, isChecked ->  
+        checkBoxHasComputer.setOnCheckedChangeListener { _, isChecked ->
             traineePresenter.onHasComputerCheckedChange(isChecked)
         }
         buttonAddTrainee.setOnClickListener {
@@ -55,12 +55,10 @@ class TraineeActivity : AppCompatActivity(), Contract.View {
         }
     }
 
-    override fun showTrainee(traineeData: TraineeData) {
-        viewModel.addTrainee(traineeData)
-        val traineeList = viewModel.getTraineeList()
+    override fun showTrainee(traineeList: List<TraineeData>) {
         val viewPagerAdapter = viewPager.adapter as ViewPagerAdapter
         viewPagerAdapter.submitList(traineeList)
-        viewPager.currentItem = traineeList.size - 1
+        viewPager.currentItem = traineePresenter.getCurrentItemViewPager()
     }
 
     override fun showErrorMessage(errorId: Int) {
@@ -69,6 +67,7 @@ class TraineeActivity : AppCompatActivity(), Contract.View {
 
     override fun clear() {
         editTextFullName.editableText.clear()
+        editTextFullName.clearFocus()
         radioGroupGender.clearCheck()
         checkBoxHasAlphaAccount.isChecked = false
         checkBoxHasSigmaAccount.isChecked = false

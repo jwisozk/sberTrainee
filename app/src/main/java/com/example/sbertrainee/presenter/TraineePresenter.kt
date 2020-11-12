@@ -2,15 +2,14 @@ package com.example.sbertrainee.presenter
 
 import com.example.sbertrainee.common.Contract
 import com.example.sbertrainee.model.Model
-import com.example.sbertrainee.model.TraineeData
 
 class TraineePresenter(
-    private val view: Contract.View?,
+    private val view: Contract.View,
     private val model: Model
 ) : Contract.Presenter {
 
     override fun onTextChanged(s: CharSequence?) {
-        model.setFullName(s)
+        model.setFullName(s?.trim())
     }
 
     override fun onGenderCheckedChange(checkId: Int) {
@@ -31,26 +30,17 @@ class TraineePresenter(
     }
 
     override fun onAddButtonClicked() {
-        view?.let { v ->
-            val errorId = model.checkValid()
-            if (errorId != null) {
-                v.showErrorMessage(errorId)
-                return
-            }
-            val traineeData = TraineeData(
-                model.getFullName().toString(),
-                model.getGender(),
-                model.getHasAlphaAccount(),
-                model.getHasSigmaAccount(),
-                model.getHasComputer()
-            )
-            model.addTrainee(traineeData)
-            v.showTrainee(model.getTraineeList())
-            v.clear()
-            model.clear()
+        val errorId = model.checkValid()
+        if (errorId != null) {
+            view.showErrorMessage(errorId)
+            return
         }
+        val traineeData = model.getTraineeData()
+        model.addTrainee(traineeData)
+        view.showTrainee(model.getTraineeList())
+        view.clear()
+        model.clear()
     }
 
-    override fun getCurrentItemViewPager(): Int
-            = model.getTraineeList().size - 1
+    override fun getCurrentItemViewPager(): Int = model.getTraineeList().size - 1
 }

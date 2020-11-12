@@ -13,7 +13,8 @@
     <string name="add_trainee">Добавить</string>
     <string name="provided_label">Предоставлены:</string>
     <string name="work_computer">Рабочий компьютер</string>
-    <string name="data_not_received">"Данные не получены"</string>
-    <string name="full_name_absent">"Укажите ФИО"</string>
-    <string name="gender_absent">"Укажите пол"</string>
+    <string name="data_not_received">Данные не получены</string>
+    <string name="full_name_absent">Укажите ФИО</string>
+    <string name="gender_absent">Укажите пол</string>
+    <string name="edit_text_regexp">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
 </resources>

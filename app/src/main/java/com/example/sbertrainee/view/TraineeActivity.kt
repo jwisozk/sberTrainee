@@ -7,7 +7,7 @@ import com.example.sbertrainee.*
 import com.example.sbertrainee.common.App
 import com.example.sbertrainee.common.Contract
 import com.example.sbertrainee.common.SimpleTextWatcher
-import com.example.sbertrainee.presenter.ViewPagerAdapter
+import com.example.sbertrainee.presenter.adapter.TraineeAdapter
 import com.example.sbertrainee.model.TraineeData
 import com.example.sbertrainee.presenter.TraineePresenter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class TraineeActivity : AppCompatActivity(), Contract.View {
 
     private lateinit var traineePresenter: TraineePresenter
-    private val simpleTextWatcher = object: SimpleTextWatcher() {
+    private val simpleTextWatcher = object : SimpleTextWatcher() {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             traineePresenter.onTextChanged(s)
         }
@@ -30,7 +30,7 @@ class TraineeActivity : AppCompatActivity(), Contract.View {
 
     private fun init() {
         val model = App.model
-        viewPager.adapter = ViewPagerAdapter(model.getTraineeList(), layoutInflater)
+        viewPager.adapter = TraineeAdapter(model.getTraineeList())
         traineePresenter = TraineePresenter(this, model)
 
     }
@@ -55,7 +55,7 @@ class TraineeActivity : AppCompatActivity(), Contract.View {
     }
 
     override fun showTrainee(traineeList: List<TraineeData>) {
-        val viewPagerAdapter = viewPager.adapter as ViewPagerAdapter
+        val viewPagerAdapter = viewPager.adapter as TraineeAdapter
         viewPagerAdapter.submitList(traineeList)
         viewPager.currentItem = traineePresenter.getCurrentItemViewPager()
     }

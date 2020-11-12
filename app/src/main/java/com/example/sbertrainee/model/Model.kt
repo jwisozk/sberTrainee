@@ -46,6 +46,15 @@ class Model {
             else -> null
         }
 
+    fun getTraineeData(): TraineeData =
+        TraineeData(
+            getFullName().toString(),
+            getGender(),
+            getHasAlphaAccount(),
+            getHasSigmaAccount(),
+            getHasComputer()
+        )
+
     fun addTrainee(traineeData: TraineeData) {
         traineeList.add(traineeData)
     }

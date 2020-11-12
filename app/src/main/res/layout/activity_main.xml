@@ -29,8 +29,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:autofillHints="@string/full_name_sample"
             android:hint="@string/full_name_sample"
+            android:digits="@string/edit_text_regexp"
             android:inputType="textPersonName"
+            android:maxLines="1"
             app:layout_constraintBottom_toBottomOf="@+id/fullNameLabel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -50,7 +53,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/gender" />
-
 
             <RadioButton
                 android:id="@+id/radioGenderMan"

@@ -5,7 +5,7 @@ data class TraineeData(
     val gender: String,
     val hasAlphaAccount: Boolean = false,
     val hasSigmaAccount: Boolean = false,
-    val hasComputer: Boolean = false,
+    val hasComputer: Boolean = false
 ) {
 
     init {

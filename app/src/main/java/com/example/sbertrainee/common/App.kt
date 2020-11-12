@@ -12,5 +12,6 @@ class App: Application() {
 
     companion object {
         lateinit var model: Model
+            private set
     }
 }

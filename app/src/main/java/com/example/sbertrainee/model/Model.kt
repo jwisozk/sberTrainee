@@ -1,18 +1,9 @@
 package com.example.sbertrainee.model
 
-import com.example.sbertrainee.R
+import com.example.sbertrainee.common.ErrorType
+import com.example.sbertrainee.common.GenderType
 
 class Model {
-
-    private enum class GenderType(val value: Int) {
-        MAN(R.id.radioGenderMan),
-        WOMAN(R.id.radioGenderWoman)
-    }
-
-    private enum class ErrorType(val value: Int) {
-        FULL_NAME_ABSENT(R.string.full_name_absent),
-        GENDER_ABSENT(R.string.gender_absent)
-    }
 
     private val traineeList: MutableList<TraineeData> = ArrayList()
     private var fullName: CharSequence? = null
@@ -24,19 +15,19 @@ class Model {
     fun getTraineeList(): MutableList<TraineeData> =
         traineeList
 
-    fun getFullName(): CharSequence? =
+    private fun getFullName(): CharSequence? =
         fullName
 
-    fun getGender(): String =
+    private fun getGender(): String =
         gender ?: ""
 
-    fun getHasAlphaAccount(): Boolean =
+    private fun getHasAlphaAccount(): Boolean =
         hasAlphaAccount
 
-    fun getHasSigmaAccount(): Boolean =
+    private fun getHasSigmaAccount(): Boolean =
         hasSigmaAccount
 
-    fun getHasComputer(): Boolean =
+    private fun getHasComputer(): Boolean =
         hasComputer
 
     fun getGenderById(id: Int): String? =

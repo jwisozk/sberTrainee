@@ -4,8 +4,8 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@color/purple_700">
+    android:background="@color/purple_700"
+    android:padding="@dimen/view_pager_padding">
 
     <TextView
         android:id="@+id/traineeNumberLabelTextView"
@@ -21,9 +21,9 @@
         style="@style/InfoTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="@dimen/view_pager_margin_start"
         app:layout_constraintBottom_toBottomOf="@+id/traineeNumberLabelTextView"
-        app:layout_constraintStart_toEndOf="@+id/traineeNumberLabelTextView"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
         app:layout_constraintTop_toTopOf="@+id/traineeNumberLabelTextView" />
 
     <TextView
@@ -31,7 +31,7 @@
         style="@style/InfoLabelTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/view_pager_full_name_margin_top"
         android:text="@string/full_name"
         app:layout_constraintStart_toStartOf="@+id/traineeNumberLabelTextView"
         app:layout_constraintTop_toBottomOf="@+id/traineeNumberLabelTextView" />
@@ -50,8 +50,8 @@
         style="@style/InfoTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        app:layout_constraintStart_toEndOf="@+id/fullNameLabelInfoTextView"
+        android:layout_marginStart="@dimen/view_pager_margin_start"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
         app:layout_constraintTop_toTopOf="@+id/fullNameLabelInfoTextView" />
 
     <TextView
@@ -59,9 +59,9 @@
         style="@style/InfoTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="@dimen/view_pager_margin_start"
         app:layout_constraintBottom_toBottomOf="@+id/genderInfoLabelTextView"
-        app:layout_constraintStart_toEndOf="@+id/genderInfoLabelTextView"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
         app:layout_constraintTop_toTopOf="@+id/genderInfoLabelTextView" />
 
     <TextView
@@ -78,19 +78,21 @@
         style="@style/InfoTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/view_pager_margin_start"
         android:text="@string/alpha_account"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/providedLabel"
-        app:layout_constraintTop_toBottomOf="@+id/providedLabel" />
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toTopOf="@+id/providedLabel" />
 
     <TextView
         android:id="@+id/sigmaAccountInfoTextView"
         style="@style/InfoTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/view_pager_margin_start"
         android:text="@string/sigma_account"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/alphaAccountInfoTextView"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
         app:layout_constraintTop_toBottomOf="@+id/alphaAccountInfoTextView" />
 
     <TextView
@@ -98,9 +100,18 @@
         style="@style/InfoTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/view_pager_margin_start"
         android:text="@string/work_computer"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/sigmaAccountInfoTextView"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
         app:layout_constraintTop_toBottomOf="@+id/sigmaAccountInfoTextView" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="providedLabel"
+        app:layout_constraintStart_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

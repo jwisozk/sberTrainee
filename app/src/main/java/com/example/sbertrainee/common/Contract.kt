@@ -18,5 +18,6 @@ interface Contract {
         fun onHasComputerCheckedChange(isChecked: Boolean)
         fun onAddButtonClicked()
         fun getCurrentItemViewPager(): Int
+        fun getTraineeList(): MutableList<TraineeData>
     }
 }

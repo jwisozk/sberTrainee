@@ -2,6 +2,7 @@ package com.example.sbertrainee.presenter
 
 import com.example.sbertrainee.common.Contract
 import com.example.sbertrainee.model.Model
+import com.example.sbertrainee.model.TraineeData
 
 class TraineePresenter(
     private val view: Contract.View,
@@ -33,14 +34,18 @@ class TraineePresenter(
         val errorId = model.checkValid()
         if (errorId != null) {
             view.showErrorMessage(errorId)
-            return
+        } else {
+            val traineeData = model.getTraineeData()
+            model.addTrainee(traineeData)
+            view.showTrainee(model.getTraineeList())
+            view.clear()
+            model.clear()
         }
-        val traineeData = model.getTraineeData()
-        model.addTrainee(traineeData)
-        view.showTrainee(model.getTraineeList())
-        view.clear()
-        model.clear()
     }
 
-    override fun getCurrentItemViewPager(): Int = model.getTraineeList().size - 1
+    override fun getTraineeList(): MutableList<TraineeData> =
+        model.getTraineeList()
+
+    override fun getCurrentItemViewPager(): Int =
+        model.getTraineeList().size - 1
 }

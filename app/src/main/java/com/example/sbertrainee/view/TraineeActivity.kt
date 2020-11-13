@@ -30,9 +30,8 @@ class TraineeActivity : AppCompatActivity(), Contract.View {
 
     private fun init() {
         val model = App.model
-        viewPager.adapter = TraineeAdapter(model.getTraineeList())
         traineePresenter = TraineePresenter(this, model)
-
+        viewPager.adapter = TraineeAdapter(traineePresenter.getTraineeList())
     }
 
     private fun addListeners() {

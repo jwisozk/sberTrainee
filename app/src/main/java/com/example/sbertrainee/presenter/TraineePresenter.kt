@@ -9,7 +9,7 @@ class TraineePresenter(
 ) : Contract.Presenter {
 
     override fun onTextChanged(s: CharSequence?) {
-        model.setFullName(s?.trim())
+        model.setFullName(s)
     }
 
     override fun onGenderCheckedChange(checkId: Int) {

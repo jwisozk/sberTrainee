@@ -60,7 +60,7 @@ class Model {
     }
 
     fun setFullName(s: CharSequence?) {
-        fullName = s
+        fullName = s?.trim()
     }
 
     fun setGender(s: String?) {

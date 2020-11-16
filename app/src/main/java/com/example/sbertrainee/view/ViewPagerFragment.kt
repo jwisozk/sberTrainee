@@ -1,0 +1,34 @@
+package com.example.sbertrainee.view
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.example.sbertrainee.R
+import com.example.sbertrainee.common.Contract
+import com.example.sbertrainee.model.TraineeData
+import com.example.sbertrainee.presenter.adapter.TraineeAdapter
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_view_pager.*
+
+class ViewPagerFragment : Fragment(R.layout.fragment_view_pager), Contract.ViewPagerView {
+
+
+    override fun setAdapter(adapter: TraineeAdapter) {
+        viewPager.adapter = adapter
+    }
+
+    override fun showTrainee(traineeList: List<TraineeData>) {
+        val viewPagerAdapter = viewPager.adapter as TraineeAdapter
+        viewPagerAdapter.submitList(traineeList)
+//        viewPager?.currentItem = traineePresenter.getCurrentItemViewPager()
+    }
+
+    companion object {
+
+        @JvmStatic
+        fun newInstance() =
+            ViewPagerFragment()
+    }
+}

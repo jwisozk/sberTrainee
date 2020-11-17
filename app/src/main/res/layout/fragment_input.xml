@@ -32,23 +32,42 @@
                 android:id="@+id/fullNameLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="@string/full_name" />
 
-            <EditText
-                android:id="@+id/editTextFullName"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="@string/full_name_sample"
                 android:hint="@string/full_name_sample"
-                android:inputType="textPersonName|textCapWords"
-                android:maxLines="1"
+                app:endIconMode="clear_text"
                 app:layout_constraintBottom_toBottomOf="@+id/fullNameLabel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/fullNameLabel"
-                app:layout_constraintTop_toTopOf="@+id/fullNameLabel" />
-        </LinearLayout>
+                app:layout_constraintTop_toTopOf="@+id/fullNameLabel">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextFullName"
+                    android:inputType="textPersonName"
+                    android:backgroundTint="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--            <EditText-->
+<!--                android:id="@+id/editTextFullName"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:autofillHints="@string/full_name_sample"-->
+<!--                android:hint="@string/full_name_sample"-->
+<!--                android:inputType="textPersonName|textCapWords"-->
+<!--                android:maxLines="1"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/fullNameLabel"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.0"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/fullNameLabel"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/fullNameLabel" />-->
+        </LinearLayout>
 
         <RadioGroup
             android:id="@+id/radioGroupGender"

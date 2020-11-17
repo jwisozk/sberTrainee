@@ -2,6 +2,7 @@ package com.example.sbertrainee.view
 
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.sbertrainee.R
@@ -10,6 +11,7 @@ import com.example.sbertrainee.common.Contract
 import com.example.sbertrainee.common.SimpleTextWatcher
 import com.example.sbertrainee.presenter.InputPresenter
 import kotlinx.android.synthetic.main.fragment_input.*
+import kotlin.math.log
 
 class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
 
@@ -36,6 +38,11 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
 
     private fun addListeners() {
         editTextFullName.addTextChangedListener(simpleTextWatcher)
+        editTextFullName.apply {
+            onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                Log.d("TAG", "addListeners: $hasFocus")
+            }
+        }
         radioGroupGender.setOnCheckedChangeListener { _, checkedId ->
             inputPresenter.onGenderCheckedChange(checkedId)
         }
@@ -53,8 +60,13 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
         }
     }
 
+
     override fun setTextToEditText(text: String) {
         editTextFullName.setText(text)
+    }
+
+    override fun setSelection(index: Int) {
+        editTextFullName.setSelection(index)
     }
 
     override fun clear() {

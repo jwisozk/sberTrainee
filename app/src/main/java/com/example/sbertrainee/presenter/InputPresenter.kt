@@ -1,5 +1,7 @@
 package com.example.sbertrainee.presenter
 
+import android.text.InputFilter
+import android.text.Spanned
 import android.util.Log
 import com.example.sbertrainee.common.Contract
 import com.example.sbertrainee.model.Model
@@ -9,15 +11,17 @@ class InputPresenter(
     private val model: Model
 ) : Contract.InputPresenter {
 
-    override fun onTextChanged(s: CharSequence?) {
-        val result: String = s.toString().replace(Regex("[0-9]"), "")
-        Log.d(this.toString(), "result: $result")
-        if (result != s.toString()) {
-            view.setTextToEditText(result)
+    private val blockCharacters = "[\\d,.@#\$_&+()/*\"\':;!?%=|`~{}<>^]"
 
-//            Log.d(this.toString(), "result: $result")
-        } else
-            model.setFullName(result)
+    override fun onTextChanged(s: CharSequence?) {
+        val result: String = s.toString().trimStart().replace(Regex(blockCharacters), "")
+        when {
+            result != s.toString() -> {
+                view.setTextToEditText(result)
+                view.setSelection(result.length)
+            }
+            else ->  model.setFullName(result)
+        }
     }
 
     override fun onGenderCheckedChange(checkId: Int) {

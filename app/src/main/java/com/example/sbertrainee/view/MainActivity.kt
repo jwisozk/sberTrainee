@@ -1,11 +1,23 @@
 package com.example.sbertrainee.view
 
+import android.content.Context
+import android.graphics.Rect
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import com.example.sbertrainee.*
+import com.example.sbertrainee.R
+import com.example.sbertrainee.common.Contract
+import com.example.sbertrainee.presenter.InputPresenter
+import com.example.sbertrainee.presenter.MainPresenter
 
-class MainActivity : AppCompatActivity() {
 
+class MainActivity : AppCompatActivity(), Contract.MainView {
+
+    private lateinit var mainPresenter: MainPresenter
+    
 //    private lateinit var traineePresenter: TraineePresenter
 //    private val simpleTextWatcher = object : SimpleTextWatcher() {
 //        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -23,8 +35,28 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .add(R.id.fragmentViewPagerContainer, ViewPagerFragment.newInstance())
             .commitNow()
-//        init()
+        
+        
+        init()
 //        addListeners()
+    }
+
+
+    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            val v: View? = currentFocus
+            if (v is EditText) {
+                val outRect = Rect()
+                v.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                    v.clearFocus()
+                    val imm: InputMethodManager =
+                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0)
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event)
     }
 
 //    fun addViewPagerFragment() {
@@ -34,11 +66,11 @@ class MainActivity : AppCompatActivity() {
 //    }
 
 
-//    private fun init() {
+    private fun init() {
 //        val model = App.model
-//        traineePresenter = TraineePresenter(this, model)
+        mainPresenter = MainPresenter(this)
 //        viewPager.adapter = TraineeAdapter(traineePresenter.getTraineeList())
-//    }
+    }
 //
 //    private fun addListeners() {
 //        editTextFullName.addTextChangedListener(simpleTextWatcher)

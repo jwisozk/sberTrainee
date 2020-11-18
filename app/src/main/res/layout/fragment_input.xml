@@ -36,6 +36,7 @@
                 android:text="@string/full_name" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/full_name_sample"
@@ -48,7 +49,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextFullName"
-                    android:inputType="textPersonName"
+                    android:inputType="textPersonName|textCapWords"
                     android:backgroundTint="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>

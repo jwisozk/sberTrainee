@@ -19,6 +19,7 @@ interface Contract {
         fun clear()
         fun setTextToEditText(text: String)
         fun setSelection(position: Int)
+        fun setEnabledButton(value: Boolean)
 
     }
 
@@ -28,7 +29,7 @@ interface Contract {
     }
 
     interface MainPresenter {
-        fun onDispatchTouchEvent(event: MotionEvent)
+        fun onDispatchTouchEvent(event: MotionEvent, currentFocus: View?)
     }
     
     interface InputPresenter {
@@ -38,6 +39,8 @@ interface Contract {
         fun onHasSigmaCheckedChange(isChecked: Boolean)
         fun onHasComputerCheckedChange(isChecked: Boolean)
         fun onAddButtonClicked()
+        fun onEditTextFocusChange(view: View, hasFocus: Boolean, inputMethodManager: InputMethodManager?)
+        fun onEndIconClicked()
 //        fun getCurrentItemViewPager(): Int
 //        fun getTraineeList(): MutableList<TraineeData>
     }

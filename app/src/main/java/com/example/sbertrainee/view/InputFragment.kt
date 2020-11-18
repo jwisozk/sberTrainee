@@ -1,9 +1,11 @@
 package com.example.sbertrainee.view
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.example.sbertrainee.R
 import com.example.sbertrainee.common.App
@@ -38,11 +40,13 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
 
     private fun addListeners() {
         editTextFullName.addTextChangedListener(simpleTextWatcher)
-        editTextFullName.apply {
-            onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-                Log.d("TAG", "addListeners: $hasFocus")
-            }
+        editTextFullName.setOnFocusChangeListener { v, hasFocus ->
+            inputPresenter.onEditTextFocusChange(v, hasFocus, activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?)
         }
+        textInputLayout.setEndIconOnClickListener {
+            inputPresenter.onEndIconClicked()
+        }
+
         radioGroupGender.setOnCheckedChangeListener { _, checkedId ->
             inputPresenter.onGenderCheckedChange(checkedId)
         }
@@ -60,13 +64,16 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
         }
     }
 
-
     override fun setTextToEditText(text: String) {
         editTextFullName.setText(text)
     }
 
     override fun setSelection(index: Int) {
         editTextFullName.setSelection(index)
+    }
+
+    override fun setEnabledButton(value: Boolean) {
+        buttonAddTrainee.isEnabled = value
     }
 
     override fun clear() {

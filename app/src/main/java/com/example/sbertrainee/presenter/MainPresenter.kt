@@ -14,20 +14,14 @@ class MainPresenter(
     private val view: Contract.MainView
 ) : Contract.MainPresenter  {
 
-    override fun onDispatchTouchEvent(event: MotionEvent) {
-        val castView = view as MainActivity
-//            castView.apply {
-//                override di
-//            }
+    override fun onDispatchTouchEvent(event: MotionEvent, currentFocus: View?) {
         if (event.action == MotionEvent.ACTION_DOWN) {
-            val v: View? = castView.currentFocus
+            val v: View? = currentFocus
             if (v is EditText) {
                 val outRect = Rect()
                 v.getGlobalVisibleRect(outRect)
                 if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
                     v.clearFocus()
-                    val imm: InputMethodManager = castView.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0)
                 }
             }
         }

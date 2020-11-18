@@ -12,6 +12,7 @@ class Model {
     private var hasSigmaAccount: Boolean = false
     private var hasComputer: Boolean = false
 
+
     fun getTraineeList(): MutableList<TraineeData> =
         traineeList
 
@@ -75,6 +76,13 @@ class Model {
         gender == null -> ErrorType.GENDER_ABSENT.value
         else -> null
     }
+
+    fun isDataEnough(): Boolean =
+        when {
+            fullName.isNullOrEmpty() -> false
+            gender == null -> false
+            else -> true
+        }
 
     fun clear() {
         fullName = null

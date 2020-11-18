@@ -1,6 +1,5 @@
 package com.example.sbertrainee.view
 
-import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.MotionEvent
@@ -10,7 +9,6 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sbertrainee.R
 import com.example.sbertrainee.common.Contract
-import com.example.sbertrainee.presenter.InputPresenter
 import com.example.sbertrainee.presenter.MainPresenter
 
 
@@ -36,28 +34,21 @@ class MainActivity : AppCompatActivity(), Contract.MainView {
             .add(R.id.fragmentViewPagerContainer, ViewPagerFragment.newInstance())
             .commitNow()
         
-        
+
         init()
 //        addListeners()
     }
 
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-        if (event.action == MotionEvent.ACTION_DOWN) {
-            val v: View? = currentFocus
-            if (v is EditText) {
-                val outRect = Rect()
-                v.getGlobalVisibleRect(outRect)
-                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
-                    v.clearFocus()
-                    val imm: InputMethodManager =
-                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0)
-                }
-            }
-        }
+        mainPresenter.onDispatchTouchEvent(event, currentFocus)
         return super.dispatchTouchEvent(event)
     }
+
+//    fun hideKeyboard(view: View) {
+//        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+//        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+//    }
 
 //    fun addViewPagerFragment() {
 //        supportFragmentManager.beginTransaction()
@@ -67,6 +58,7 @@ class MainActivity : AppCompatActivity(), Contract.MainView {
 
 
     private fun init() {
+
 //        val model = App.model
         mainPresenter = MainPresenter(this)
 //        viewPager.adapter = TraineeAdapter(traineePresenter.getTraineeList())

@@ -3,6 +3,9 @@ package com.example.sbertrainee.presenter
 import android.text.InputFilter
 import android.text.Spanned
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import com.example.sbertrainee.common.Contract
 import com.example.sbertrainee.model.Model
 
@@ -22,11 +25,19 @@ class InputPresenter(
             }
             else ->  model.setFullName(result)
         }
+        view.setEnabledButton(model.isDataEnough())
     }
 
     override fun onGenderCheckedChange(checkId: Int) {
         val gender = model.getGenderById(checkId)
         model.setGender(gender)
+        view.setEnabledButton(model.isDataEnough())
+    }
+
+    override fun onEndIconClicked() {
+        model.setFullName("")
+        view.setTextToEditText("")
+        view.setEnabledButton(model.isDataEnough())
     }
 
     override fun onHasAlphaCheckedChange(isChecked: Boolean) {
@@ -54,7 +65,20 @@ class InputPresenter(
         }
     }
 
-//    override fun getTraineeList(): MutableList<TraineeData> =
+    override fun onEditTextFocusChange(
+        view: View,
+        hasFocus: Boolean,
+        inputMethodManager: InputMethodManager?
+    ) {
+        if (!hasFocus)
+            hideKeyboard(view, inputMethodManager)
+    }
+
+    private fun hideKeyboard(view: View, inputMethodManager: InputMethodManager?) {
+        inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    //    override fun getTraineeList(): MutableList<TraineeData> =
 //        model.getTraineeList()
 //
 //    override fun getCurrentItemViewPager(): Int =

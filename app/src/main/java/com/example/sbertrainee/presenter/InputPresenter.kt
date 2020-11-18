@@ -1,11 +1,7 @@
 package com.example.sbertrainee.presenter
 
-import android.text.InputFilter
-import android.text.Spanned
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.app.AppCompatActivity
 import com.example.sbertrainee.common.Contract
 import com.example.sbertrainee.model.Model
 
@@ -58,7 +54,7 @@ class InputPresenter(
 //            view.showErrorMessage(errorId)
         } else {
             val traineeData = model.getTraineeData()
-            model.addTrainee(traineeData)
+//            inputModel.addTrainee(traineeData)
 //            view.showTrainee(model.getTraineeList())
             view.clear()
             model.clear()
@@ -78,8 +74,8 @@ class InputPresenter(
         inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    //    override fun getTraineeList(): MutableList<TraineeData> =
-//        model.getTraineeList()
+//    override fun getTraineeList(): MutableList<TraineeData> =
+//        inputModel.getTraineeList()
 //
 //    override fun getCurrentItemViewPager(): Int =
 //        model.getTraineeList().size - 1

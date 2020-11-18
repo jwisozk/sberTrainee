@@ -39,6 +39,11 @@ class MainActivity : AppCompatActivity(), Contract.MainView {
 //        addListeners()
     }
 
+//    fun addViewPagerFragment() {
+//        supportFragmentManager.beginTransaction()
+//            .add(R.id.fragmentViewPagerContainer, ViewPagerFragment.newInstance())
+//            .commitNow()
+//    }
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
         mainPresenter.onDispatchTouchEvent(event, currentFocus)

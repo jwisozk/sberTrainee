@@ -7,4 +7,5 @@ class ViewPagerPresenter(
     private val view: Contract.ViewPagerView,
     private val model: Model
 ) : Contract.ViewPagerPresenter {
+
 }

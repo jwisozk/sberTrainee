@@ -2,8 +2,6 @@ package com.example.sbertrainee.view
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.text.Editable
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
@@ -13,7 +11,6 @@ import com.example.sbertrainee.common.Contract
 import com.example.sbertrainee.common.SimpleTextWatcher
 import com.example.sbertrainee.presenter.InputPresenter
 import kotlinx.android.synthetic.main.fragment_input.*
-import kotlin.math.log
 
 class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
 

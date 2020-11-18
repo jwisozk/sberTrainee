@@ -6,15 +6,19 @@ import com.example.sbertrainee.common.GenderType
 class Model {
 
     private val traineeList: MutableList<TraineeData> = ArrayList()
+
+    fun getTraineeList(): MutableList<TraineeData> =
+        traineeList
+
+    fun addTrainee(traineeData: TraineeData) {
+        traineeList.add(traineeData)
+    }
+
     private var fullName: CharSequence? = null
     private var gender: String? = null
     private var hasAlphaAccount: Boolean = false
     private var hasSigmaAccount: Boolean = false
     private var hasComputer: Boolean = false
-
-
-    fun getTraineeList(): MutableList<TraineeData> =
-        traineeList
 
     private fun getFullName(): CharSequence? =
         fullName
@@ -46,10 +50,6 @@ class Model {
             getHasSigmaAccount(),
             getHasComputer()
         )
-
-    fun addTrainee(traineeData: TraineeData) {
-        traineeList.add(traineeData)
-    }
 
     fun setFullName(s: CharSequence?) {
         fullName = s?.trim()

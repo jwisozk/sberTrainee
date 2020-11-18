@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="24dp"
     android:elevation="4dp"
     tools:context=".view.InputFragment">
 
@@ -24,6 +23,7 @@
             android:layout_marginTop="@dimen/view_pager_full_name_margin_top"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/radioGroupGender"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed">
@@ -49,25 +49,25 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextFullName"
-                    android:inputType="textPersonName|textCapWords"
-                    android:backgroundTint="@android:color/transparent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/transparent"
+                    android:inputType="textPersonName|textCapWords" />
 
             </com.google.android.material.textfield.TextInputLayout>
             <!--            <EditText-->
-<!--                android:id="@+id/editTextFullName"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:autofillHints="@string/full_name_sample"-->
-<!--                android:hint="@string/full_name_sample"-->
-<!--                android:inputType="textPersonName|textCapWords"-->
-<!--                android:maxLines="1"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/fullNameLabel"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintHorizontal_bias="0.0"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/fullNameLabel"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/fullNameLabel" />-->
+            <!--                android:id="@+id/editTextFullName"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:autofillHints="@string/full_name_sample"-->
+            <!--                android:hint="@string/full_name_sample"-->
+            <!--                android:inputType="textPersonName|textCapWords"-->
+            <!--                android:maxLines="1"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/fullNameLabel"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintHorizontal_bias="0.0"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/fullNameLabel"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/fullNameLabel" />-->
         </LinearLayout>
 
         <RadioGroup

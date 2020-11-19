@@ -6,9 +6,7 @@ import android.view.View
 import android.widget.EditText
 import com.example.sbertrainee.common.Contract
 
-class MainPresenter(
-    private val view: Contract.MainView
-) : Contract.MainPresenter  {
+class MainPresenter : Contract.MainPresenter  {
 
     override fun onDispatchTouchEvent(event: MotionEvent, currentFocus: View?) {
         if (event.action == MotionEvent.ACTION_DOWN) {

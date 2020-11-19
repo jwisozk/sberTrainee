@@ -1,18 +1,34 @@
 package com.example.sbertrainee.model
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.sbertrainee.common.ErrorType
 import com.example.sbertrainee.common.GenderType
+import com.example.sbertrainee.common.SingleEventLiveData
 
 class Model {
 
-    private val traineeList: MutableList<TraineeData> = ArrayList()
+    private val _traineeListLiveData = SingleEventLiveData<MutableList<TraineeData>>()
+    val traineeListLiveData: LiveData<MutableList<TraineeData>>
+        get() = _traineeListLiveData
 
-    fun getTraineeList(): MutableList<TraineeData> =
-        traineeList
+    init {
+        _traineeListLiveData.value = ArrayList()
+    }
 
     fun addTrainee(traineeData: TraineeData) {
-        traineeList.add(traineeData)
+        _traineeListLiveData.value?.add(traineeData)
+        _traineeListLiveData.notifyObserver()
     }
+
+//    private val traineeList: MutableList<TraineeData> = ArrayList()
+
+//    fun getTraineeList(): MutableList<TraineeData> =
+//        traineeList
+//
+//    fun addTrainee(traineeData: TraineeData) {
+//        traineeList.add(traineeData)
+//    }
 
     private var fullName: CharSequence? = null
     private var gender: String? = null
@@ -90,6 +106,10 @@ class Model {
         hasAlphaAccount = false
         hasSigmaAccount = false
         hasComputer = false
+    }
+
+    fun <T> MutableLiveData<T>.notifyObserver() {
+        this.value = this.value
     }
 
     companion object {

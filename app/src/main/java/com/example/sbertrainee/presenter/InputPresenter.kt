@@ -54,7 +54,7 @@ class InputPresenter(
 //            view.showErrorMessage(errorId)
         } else {
             val traineeData = model.getTraineeData()
-//            inputModel.addTrainee(traineeData)
+            model.addTrainee(traineeData)
 //            view.showTrainee(model.getTraineeList())
             view.clear()
             model.clear()

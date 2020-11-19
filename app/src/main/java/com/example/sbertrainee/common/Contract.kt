@@ -9,23 +9,16 @@ import com.example.sbertrainee.presenter.adapter.TraineeAdapter
 
 interface Contract {
 
-    interface MainView {
-//        fun getFocus(): View?
-//        fun getInputMethodManager(): InputMethodManager
-//        fun dispatchTouchEvent(event: MotionEvent): Boolean
-    }
-    
     interface InputView {
         fun clear()
         fun setTextToEditText(text: String)
         fun setSelection(position: Int)
         fun setEnabledButton(value: Boolean)
-
     }
 
     interface ViewPagerView {
         fun setAdapter(adapter: TraineeAdapter)
-        fun showTrainee(traineeList: List<TraineeData>)
+        fun setCurrentPage(num: Int)
     }
 
     interface MainPresenter {
@@ -41,8 +34,6 @@ interface Contract {
         fun onAddButtonClicked()
         fun onEditTextFocusChange(view: View, hasFocus: Boolean, inputMethodManager: InputMethodManager?)
         fun onEndIconClicked()
-//        fun getCurrentItemViewPager(): Int
-//        fun getTraineeList(): MutableList<TraineeData>
     }
 
     interface ViewPagerPresenter {

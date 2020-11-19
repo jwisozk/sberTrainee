@@ -12,7 +12,7 @@ import com.example.sbertrainee.common.Contract
 import com.example.sbertrainee.presenter.MainPresenter
 
 
-class MainActivity : AppCompatActivity(), Contract.MainView {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var mainPresenter: MainPresenter
     
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity(), Contract.MainView {
     private fun init() {
 
 //        val model = App.model
-        mainPresenter = MainPresenter(this)
+        mainPresenter = MainPresenter()
 //        viewPager.adapter = TraineeAdapter(traineePresenter.getTraineeList())
     }
 //

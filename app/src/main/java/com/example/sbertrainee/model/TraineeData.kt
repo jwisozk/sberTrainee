@@ -1,20 +1,10 @@
 package com.example.sbertrainee.model
 
 data class TraineeData(
-    val fullName: String,
-    val gender: String,
-    val hasAlphaAccount: Boolean = false,
-    val hasSigmaAccount: Boolean = false,
-    val hasComputer: Boolean = false
-) {
-
-    init {
-        mutableId++
-    }
-
-    val id = mutableId
-
-    companion object {
-        private var mutableId = 0
-    }
-}
+    var id: Int = 0,
+    var fullName: String? = null,
+    var gender: String? = null,
+    var hasAlphaAccount: Boolean = false,
+    var hasSigmaAccount: Boolean = false,
+    var hasComputer: Boolean = false
+)

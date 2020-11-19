@@ -2,7 +2,7 @@ package com.example.sbertrainee.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.sbertrainee.common.ErrorType
+import com.example.sbertrainee.R
 import com.example.sbertrainee.common.GenderType
 import com.example.sbertrainee.common.SingleEventLiveData
 
@@ -21,99 +21,62 @@ class Model {
         _traineeListLiveData.notifyObserver()
     }
 
-//    private val traineeList: MutableList<TraineeData> = ArrayList()
+    private var traineeData: TraineeData? = null
 
-//    fun getTraineeList(): MutableList<TraineeData> =
-//        traineeList
-//
-//    fun addTrainee(traineeData: TraineeData) {
-//        traineeList.add(traineeData)
-//    }
+    private var counterId = 0
 
-    private var fullName: CharSequence? = null
-    private var gender: String? = null
-    private var hasAlphaAccount: Boolean = false
-    private var hasSigmaAccount: Boolean = false
-    private var hasComputer: Boolean = false
-
-    private fun getFullName(): CharSequence? =
-        fullName
-
-    private fun getGender(): String =
-        gender ?: ""
-
-    private fun getHasAlphaAccount(): Boolean =
-        hasAlphaAccount
-
-    private fun getHasSigmaAccount(): Boolean =
-        hasSigmaAccount
-
-    private fun getHasComputer(): Boolean =
-        hasComputer
-
-    fun getGenderById(id: Int): String? =
-        when (GenderType.values().singleOrNull { it.value == id }) {
-            GenderType.MAN -> MAN
-            GenderType.WOMAN -> WOMAN
-            else -> null
-        }
-
-    fun getTraineeData(): TraineeData =
-        TraineeData(
-            getFullName().toString(),
-            getGender(),
-            getHasAlphaAccount(),
-            getHasSigmaAccount(),
-            getHasComputer()
-        )
-
-    fun setFullName(s: CharSequence?) {
-        fullName = s?.trim()
+    fun getGender(id: Int): Int? = when (id) {
+        R.id.radioGenderMan -> GenderType.MAN.value
+        R.id.radioGenderWoman -> GenderType.WOMAN.value
+        else -> null
     }
 
-    fun setGender(s: String?) {
-        gender = s
+    fun getTraineeData(): TraineeData? =
+        traineeData?.apply {
+            this.id = ++counterId
+        }
+
+    fun setFullName(s: CharSequence?) {
+        s?.let {
+            val fullName = it.trim().toString()
+            traineeData = traineeData?.copy(fullName = fullName) ?:
+                    TraineeData(fullName = fullName)
+        }
+    }
+
+    fun setGender(s: String) {
+        traineeData = traineeData?.copy(gender = s) ?:
+                TraineeData(gender = s)
     }
 
     fun setHasAlphaAccount(isChecked: Boolean) {
-        hasAlphaAccount = isChecked
+        traineeData = traineeData?.copy(hasAlphaAccount = isChecked) ?:
+                TraineeData(hasAlphaAccount = isChecked)
     }
 
     fun setHasSigmaAccount(isChecked: Boolean) {
-        hasSigmaAccount = isChecked
+        traineeData = traineeData?.copy(hasSigmaAccount = isChecked) ?:
+                TraineeData(hasSigmaAccount = isChecked)
     }
 
     fun setHasComputer(isChecked: Boolean) {
-        hasComputer = isChecked
-    }
-
-    fun checkValid(): Int? = when {
-        fullName.isNullOrEmpty() -> ErrorType.FULL_NAME_ABSENT.value
-        gender == null -> ErrorType.GENDER_ABSENT.value
-        else -> null
+        traineeData =
+            traineeData?.copy(hasComputer = isChecked) ?:
+                    TraineeData(hasComputer = isChecked)
     }
 
     fun isDataEnough(): Boolean =
         when {
-            fullName.isNullOrEmpty() -> false
-            gender == null -> false
+            traineeData?.fullName.isNullOrEmpty() -> false
+            traineeData?.gender == null -> false
             else -> true
         }
 
     fun clear() {
-        fullName = null
-        gender = null
-        hasAlphaAccount = false
-        hasSigmaAccount = false
-        hasComputer = false
+        traineeData = TraineeData()
     }
 
-    fun <T> MutableLiveData<T>.notifyObserver() {
+    private fun <T> MutableLiveData<T>.notifyObserver() {
         this.value = this.value
-    }
-
-    companion object {
-        private const val MAN = "м"
-        private const val WOMAN = "ж"
     }
 }

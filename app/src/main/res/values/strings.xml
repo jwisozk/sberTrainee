@@ -16,6 +16,7 @@
     <string name="data_not_received">Данные не получены</string>
     <string name="full_name_absent">Укажите ФИО</string>
     <string name="gender_absent">Укажите пол</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="man">м</string>
+    <string name="woman">ж</string>
+
 </resources>

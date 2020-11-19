@@ -1,8 +1,9 @@
 package com.example.sbertrainee.common
 
+import androidx.annotation.StringRes
 import com.example.sbertrainee.R
 
-enum class GenderType(val value: Int) {
-    MAN(R.id.radioGenderMan),
-    WOMAN(R.id.radioGenderWoman)
+enum class GenderType(@StringRes val value: Int) {
+    MAN(R.string.man),
+    WOMAN(R.string.woman)
 }

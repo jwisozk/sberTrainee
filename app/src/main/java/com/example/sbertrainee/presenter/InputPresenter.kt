@@ -1,5 +1,6 @@
 package com.example.sbertrainee.presenter
 
+import android.content.res.Resources
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.example.sbertrainee.common.Contract
@@ -7,7 +8,8 @@ import com.example.sbertrainee.model.Model
 
 class InputPresenter(
     private val view: Contract.InputView,
-    private val model: Model
+    private val model: Model,
+    private val resources: Resources
 ) : Contract.InputPresenter {
 
     private val blockCharacters = "[\\d,.@#\$_&+()/*\"\':;!?%=|`~{}<>^]"
@@ -19,15 +21,17 @@ class InputPresenter(
                 view.setTextToEditText(result)
                 view.setSelection(result.length)
             }
-            else ->  model.setFullName(result)
+            else -> model.setFullName(result)
         }
         view.setEnabledButton(model.isDataEnough())
     }
 
     override fun onGenderCheckedChange(checkId: Int) {
-        val gender = model.getGenderById(checkId)
-        model.setGender(gender)
-        view.setEnabledButton(model.isDataEnough())
+        val genderRes = model.getGender(checkId)
+        genderRes?.let {
+            model.setGender(resources.getString(it))
+            view.setEnabledButton(model.isDataEnough())
+        }
     }
 
     override fun onEndIconClicked() {
@@ -49,13 +53,9 @@ class InputPresenter(
     }
 
     override fun onAddButtonClicked() {
-        val errorId = model.checkValid()
-        if (errorId != null) {
-//            view.showErrorMessage(errorId)
-        } else {
-            val traineeData = model.getTraineeData()
-            model.addTrainee(traineeData)
-//            view.showTrainee(model.getTraineeList())
+        val traineeData = model.getTraineeData()
+        traineeData?.let {
+            model.addTrainee(it)
             view.clear()
             model.clear()
         }
@@ -73,10 +73,4 @@ class InputPresenter(
     private fun hideKeyboard(view: View, inputMethodManager: InputMethodManager?) {
         inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
     }
-
-//    override fun getTraineeList(): MutableList<TraineeData> =
-//        inputModel.getTraineeList()
-//
-//    override fun getCurrentItemViewPager(): Int =
-//        model.getTraineeList().size - 1
 }

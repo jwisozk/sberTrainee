@@ -31,8 +31,7 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
         val activity = requireActivity() as MainActivity
         val app = activity.applicationContext as App
         val model = app.model
-        inputPresenter = InputPresenter(this, model)
-//        viewPager.adapter = TraineeAdapter(traineePresenter.getTraineeList())
+        inputPresenter = InputPresenter(this, model, resources)
     }
 
     private fun addListeners() {
@@ -65,8 +64,8 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
         editTextFullName.setText(text)
     }
 
-    override fun setSelection(index: Int) {
-        editTextFullName.setSelection(index)
+    override fun setSelection(position: Int) {
+        editTextFullName.setSelection(position)
     }
 
     override fun setEnabledButton(value: Boolean) {

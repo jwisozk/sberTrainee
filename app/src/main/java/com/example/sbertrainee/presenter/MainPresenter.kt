@@ -4,9 +4,33 @@ import android.graphics.Rect
 import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
-import com.example.sbertrainee.common.Contract
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LifecycleOwner
+import com.example.sbertrainee.R
+import com.example.sbertrainee.inrerface.Contract
+import com.example.sbertrainee.model.Model
+import com.example.sbertrainee.view.ViewPagerFragment
 
-class MainPresenter : Contract.MainPresenter  {
+class MainPresenter(
+    model: Model,
+    private val fragmentManager: FragmentManager,
+    viewLifecycleOwner: LifecycleOwner
+) : Contract.MainPresenter {
+
+    init {
+        model.isAddedViewPagerFragmentLiveData.observe(viewLifecycleOwner) { value ->
+            if (value == null)
+                return@observe
+            if (value)
+                addViewPagerFragment()
+        }
+    }
+
+    private fun addViewPagerFragment() {
+        fragmentManager.beginTransaction()
+            .add(R.id.fragmentViewPagerContainer, ViewPagerFragment.newInstance())
+            .commitNow()
+    }
 
     override fun onDispatchTouchEvent(event: MotionEvent, currentFocus: View?) {
         if (event.action == MotionEvent.ACTION_DOWN) {

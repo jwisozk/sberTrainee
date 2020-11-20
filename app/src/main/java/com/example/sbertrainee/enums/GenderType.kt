@@ -1,4 +1,4 @@
-package com.example.sbertrainee.common
+package com.example.sbertrainee.enums
 
 import androidx.annotation.StringRes
 import com.example.sbertrainee.R

@@ -9,133 +9,23 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentInputContainer"
+        android:name="com.example.sbertrainee.view.InputFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_margin="24dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fragmentViewPagerContainer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentViewPagerContainer"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_margin="24dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fragmentInputContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toEndOf="@+id/fragmentInputContainer"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!--    <include layout="@layout/fragment_input"/>-->
-    <!--    <include layout="@layout/fragment_view_pager"/>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:orientation="horizontal"-->
-<!--    tools:context=".view.MainActivity">-->
-
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/headerInput"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_weight="1">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/fullNameLabel"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="@dimen/text_view_full_name_margin"-->
-<!--            android:layout_marginTop="@dimen/text_view_full_name_margin"-->
-<!--            android:text="@string/full_name"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/editTextFullName"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:ems="10"-->
-<!--            android:autofillHints="@string/full_name_sample"-->
-<!--            android:hint="@string/full_name_sample"-->
-<!--            android:digits="@string/edit_text_regexp"-->
-<!--            android:maxLines="1"-->
-<!--            android:scrollHorizontally="true"-->
-<!--            android:inputType="textPersonName"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/fullNameLabel"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.0"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/fullNameLabel"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/fullNameLabel" />-->
-
-<!--        <RadioGroup-->
-<!--            android:id="@+id/radioGroupGender"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/fullNameLabel"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/editTextFullName">-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/genderRadioLabel"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/gender" />-->
-
-
-<!--            <RadioButton-->
-<!--                android:id="@+id/radioGenderMan"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/gender_man" />-->
-
-<!--            <RadioButton-->
-<!--                android:id="@+id/radioGenderWoman"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/gender_woman" />-->
-<!--        </RadioGroup>-->
-
-<!--        <CheckBox-->
-<!--            android:id="@+id/checkBoxHasAlphaAccount"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/alpha_account"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/radioGroupGender"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/radioGroupGender" />-->
-
-<!--        <CheckBox-->
-<!--            android:id="@+id/checkBoxHasSigmaAccount"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/sigma_account"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/checkBoxHasAlphaAccount"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/checkBoxHasAlphaAccount" />-->
-
-<!--        <CheckBox-->
-<!--            android:id="@+id/checkBoxHasComputer"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/computer_provided"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/checkBoxHasSigmaAccount"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/checkBoxHasSigmaAccount" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/buttonAddTrainee"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginBottom="@dimen/button_margin_bottom"-->
-<!--            android:text="@string/add_trainee"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/checkBoxHasComputer"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/checkBoxHasComputer" />-->
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--    <androidx.viewpager2.widget.ViewPager2-->
-<!--        android:id="@+id/viewPager"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_weight="1" />-->
-<!--</LinearLayout>-->

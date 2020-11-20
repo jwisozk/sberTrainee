@@ -1,36 +1,40 @@
 package com.example.sbertrainee.presenter
 
-import android.util.Log
 import androidx.lifecycle.LifecycleOwner
-import com.example.sbertrainee.common.Contract
+import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.model.Model
-import com.example.sbertrainee.model.TraineeData
+import com.example.sbertrainee.model.Trainee
 import com.example.sbertrainee.presenter.adapter.TraineeAdapter
-import kotlinx.android.synthetic.main.fragment_view_pager.*
-import java.util.*
+import com.google.android.material.tabs.TabLayout
 import kotlin.collections.ArrayList
 
 class ViewPagerPresenter(
     private val view: Contract.ViewPagerView,
     private val model: Model,
-    private val viewLifecycleOwner: LifecycleOwner
+    viewLifecycleOwner: LifecycleOwner
 ) : Contract.ViewPagerPresenter {
 
     private val traineeAdapter: TraineeAdapter
 
     init {
-        val traineeList = model.traineeListLiveData.value ?: ArrayList()
+        val traineeList = model.traineeListLive.value ?: ArrayList()
         traineeAdapter = TraineeAdapter(traineeList)
         view.setAdapter(traineeAdapter)
-        model.traineeListLiveData.observe(viewLifecycleOwner) { value ->
+        model.traineeListLive.observe(viewLifecycleOwner) { value ->
             if (value == null)
                 return@observe
             showLastTrainee(value)
-            Log.d("ViewPagerPresenter", "Here")
         }
     }
 
-    private fun showLastTrainee(traineeList: List<TraineeData>) {
+    override fun onTabLayoutMediatorAttach(tab: TabLayout.Tab, position: Int) {
+        val trainee = model.getTraineeFromList(position)
+        trainee?.let { t ->
+            tab.text = "${(t.id)}.${t.fullName?.takeWhile { it.isLetter() }}"
+        }
+    }
+
+    private fun showLastTrainee(traineeList: List<Trainee>) {
         traineeAdapter.submitList(traineeList)
         view.setCurrentPage(traineeList.size - 1)
     }

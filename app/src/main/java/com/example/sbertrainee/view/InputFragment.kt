@@ -6,9 +6,9 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.example.sbertrainee.R
-import com.example.sbertrainee.common.App
-import com.example.sbertrainee.common.Contract
-import com.example.sbertrainee.common.SimpleTextWatcher
+import com.example.sbertrainee.App
+import com.example.sbertrainee.inrerface.Contract
+import com.example.sbertrainee.util.SimpleTextWatcher
 import com.example.sbertrainee.presenter.InputPresenter
 import kotlinx.android.synthetic.main.fragment_input.*
 
@@ -37,7 +37,11 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
     private fun addListeners() {
         editTextFullName.addTextChangedListener(simpleTextWatcher)
         editTextFullName.setOnFocusChangeListener { v, hasFocus ->
-            inputPresenter.onEditTextFocusChange(v, hasFocus, activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?)
+            inputPresenter.onEditTextFocusChange(
+                v,
+                hasFocus,
+                activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
+            )
         }
         textInputLayout.setEndIconOnClickListener {
             inputPresenter.onEndIconClicked()
@@ -79,10 +83,5 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
         checkBoxHasAlphaAccount.isChecked = false
         checkBoxHasSigmaAccount.isChecked = false
         checkBoxHasComputer.isChecked = false
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = InputFragment()
     }
 }

@@ -1,11 +1,10 @@
-package com.example.sbertrainee.common
+package com.example.sbertrainee.inrerface
 
-import android.text.Editable
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.example.sbertrainee.model.TraineeData
 import com.example.sbertrainee.presenter.adapter.TraineeAdapter
+import com.google.android.material.tabs.TabLayout
 
 interface Contract {
 
@@ -24,7 +23,7 @@ interface Contract {
     interface MainPresenter {
         fun onDispatchTouchEvent(event: MotionEvent, currentFocus: View?)
     }
-    
+
     interface InputPresenter {
         fun onTextChanged(s: CharSequence?)
         fun onGenderCheckedChange(checkId: Int)
@@ -32,11 +31,16 @@ interface Contract {
         fun onHasSigmaCheckedChange(isChecked: Boolean)
         fun onHasComputerCheckedChange(isChecked: Boolean)
         fun onAddButtonClicked()
-        fun onEditTextFocusChange(view: View, hasFocus: Boolean, inputMethodManager: InputMethodManager?)
+        fun onEditTextFocusChange(
+            view: View,
+            hasFocus: Boolean,
+            inputMethodManager: InputMethodManager?
+        )
+
         fun onEndIconClicked()
     }
 
     interface ViewPagerPresenter {
-//        fun setAdapter(adapter: TraineeAdapter)
+        fun onTabLayoutMediatorAttach(tab: TabLayout.Tab, position: Int)
     }
 }

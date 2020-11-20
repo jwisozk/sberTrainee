@@ -1,4 +1,4 @@
-package com.example.sbertrainee.common
+package com.example.sbertrainee.util
 
 import android.text.Editable
 import android.text.TextWatcher

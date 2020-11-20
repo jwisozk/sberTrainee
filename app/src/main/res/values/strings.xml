@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Новобранцы</string>
+    <string name="app_name">Стажеры</string>
     <string name="trainee_number_label">Стажер №</string>
     <string name="trainee_number">1</string>
     <string name="full_name">ФИО:</string>
@@ -18,5 +18,4 @@
     <string name="gender_absent">Укажите пол</string>
     <string name="man">м</string>
     <string name="woman">ж</string>
-
 </resources>

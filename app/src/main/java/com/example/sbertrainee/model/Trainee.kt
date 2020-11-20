@@ -1,6 +1,6 @@
 package com.example.sbertrainee.model
 
-data class TraineeData(
+data class Trainee(
     var id: Int = 0,
     var fullName: String? = null,
     var gender: String? = null,

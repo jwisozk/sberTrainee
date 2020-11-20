@@ -1,19 +1,14 @@
 package com.example.sbertrainee.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.example.sbertrainee.R
-import com.example.sbertrainee.common.App
-import com.example.sbertrainee.common.Contract
-import com.example.sbertrainee.model.TraineeData
-import com.example.sbertrainee.presenter.InputPresenter
+import com.example.sbertrainee.App
+import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.presenter.ViewPagerPresenter
 import com.example.sbertrainee.presenter.adapter.TraineeAdapter
-import kotlinx.android.synthetic.main.activity_main.*
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_view_pager.*
 
 class ViewPagerFragment : Fragment(R.layout.fragment_view_pager), Contract.ViewPagerView {
@@ -30,6 +25,9 @@ class ViewPagerFragment : Fragment(R.layout.fragment_view_pager), Contract.ViewP
         val app = activity.applicationContext as App
         val model = app.model
         viewPagerPresenter = ViewPagerPresenter(this, model, viewLifecycleOwner)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            viewPagerPresenter.onTabLayoutMediatorAttach(tab, position)
+        }.attach()
     }
 
     override fun setAdapter(adapter: TraineeAdapter) {
@@ -41,7 +39,6 @@ class ViewPagerFragment : Fragment(R.layout.fragment_view_pager), Contract.ViewP
     }
 
     companion object {
-
         @JvmStatic
         fun newInstance() =
             ViewPagerFragment()

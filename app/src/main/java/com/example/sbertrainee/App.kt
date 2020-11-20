@@ -1,9 +1,9 @@
-package com.example.sbertrainee.common
+package com.example.sbertrainee
 
 import android.app.Application
 import com.example.sbertrainee.model.Model
 
-class App: Application() {
+class App : Application() {
 
     lateinit var model: Model
         private set
@@ -12,9 +12,4 @@ class App: Application() {
         super.onCreate()
         model = Model()
     }
-
-//    companion object {
-//        lateinit var model: Model
-//            private set
-//    }
 }

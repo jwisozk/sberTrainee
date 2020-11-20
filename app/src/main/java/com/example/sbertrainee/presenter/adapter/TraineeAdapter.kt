@@ -5,14 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sbertrainee.R
-import com.example.sbertrainee.model.TraineeData
+import com.example.sbertrainee.model.Trainee
 import com.example.sbertrainee.presenter.adapter.holder.TraineeViewHolder
 
 class TraineeAdapter(
-    var traineeList: List<TraineeData>
+    var traineeList: List<Trainee>
 ) : RecyclerView.Adapter<TraineeViewHolder>() {
 
-    fun submitList(newTraineeList: List<TraineeData>) {
+    fun submitList(newTraineeList: List<Trainee>) {
         traineeList = newTraineeList
         notifyDataSetChanged()
     }
@@ -23,19 +23,19 @@ class TraineeAdapter(
     }
 
     override fun onBindViewHolder(holderTrainee: TraineeViewHolder, position: Int) {
-        val traineeData = traineeList[position]
-        holderTrainee.traineeNumberTextView.text = traineeData.id.toString()
-        holderTrainee.fullNameSampleInfoTextView.text = traineeData.fullName
-        holderTrainee.genderInfoTextView.text = traineeData.gender
-        holderTrainee.alphaAccountInfoTextView.updateVisibility(traineeData.hasAlphaAccount)
-        holderTrainee.sigmaAccountInfoTextView.updateVisibility(traineeData.hasSigmaAccount)
-        holderTrainee.workComputerInfoTextView.updateVisibility(traineeData.hasComputer)
+        val trainee = traineeList[position]
+        holderTrainee.traineeNumberTextView.text = trainee.id.toString()
+        holderTrainee.fullNameSampleInfoTextView.text = trainee.fullName
+        holderTrainee.genderInfoTextView.text = trainee.gender
+        holderTrainee.alphaAccountInfoTextView.updateVisibility(trainee.hasAlphaAccount)
+        holderTrainee.sigmaAccountInfoTextView.updateVisibility(trainee.hasSigmaAccount)
+        holderTrainee.workComputerInfoTextView.updateVisibility(trainee.hasComputer)
     }
 
     override fun getItemCount(): Int = traineeList.size
 
     private fun View.updateVisibility(isVisible: Boolean) {
-       when (isVisible) {
+        when (isVisible) {
             true -> this.visibility = View.VISIBLE
             false -> this.visibility = View.GONE
         }

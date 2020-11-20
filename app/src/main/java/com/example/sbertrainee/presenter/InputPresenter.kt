@@ -3,7 +3,7 @@ package com.example.sbertrainee.presenter
 import android.content.res.Resources
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.example.sbertrainee.common.Contract
+import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.model.Model
 
 class InputPresenter(
@@ -53,11 +53,13 @@ class InputPresenter(
     }
 
     override fun onAddButtonClicked() {
-        val traineeData = model.getTraineeData()
-        traineeData?.let {
+        val trainee = model.newTrainee()
+        trainee?.let {
             model.addTrainee(it)
             view.clear()
             model.clear()
+            if (model.isAddedViewPagerFragmentLiveData.value == null)
+                model.setIsAddedViewPagerFragment(true)
         }
     }
 

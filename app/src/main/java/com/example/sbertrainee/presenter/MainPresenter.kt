@@ -18,6 +18,8 @@ class MainPresenter(
 ) : Contract.MainPresenter {
 
     init {
+        if (model.isAddedViewPagerFragmentLiveData.value == true)
+            addViewPagerFragment()
         model.isAddedViewPagerFragmentLiveData.observe(viewLifecycleOwner) { value ->
             if (value == null)
                 return@observe

@@ -12,7 +12,7 @@ class Model {
     val isAddedViewPagerFragmentLiveData: LiveData<Boolean> = _isAddedViewPagerFragmentLiveData
 
     private val _traineeListLiveData = SingleEventLiveData<MutableList<Trainee>>()
-    val traineeListLive: LiveData<MutableList<Trainee>> = _traineeListLiveData
+    val traineeListLiveData: LiveData<MutableList<Trainee>> = _traineeListLiveData
 
     init {
         _traineeListLiveData.value = ArrayList()
@@ -36,7 +36,7 @@ class Model {
     fun newTrainee(): Trainee? =
         trainee?.let { it ->
             val id = counterId + 1
-            return when (traineeListLive.value?.find { it.id == id }) {
+            return when (traineeListLiveData.value?.find { it.id == id }) {
                 null -> {
                     counterId = id
                     it.apply {
@@ -48,7 +48,7 @@ class Model {
         }
 
     fun getTraineeFromList(position: Int): Trainee? {
-        val trainee = traineeListLive.value
+        val trainee = traineeListLiveData.value
         trainee?.let {
             return when (position) {
                 in 0 until it.size -> it[position]

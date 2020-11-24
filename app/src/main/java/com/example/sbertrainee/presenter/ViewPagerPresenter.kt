@@ -17,10 +17,10 @@ class ViewPagerPresenter(
     private val traineeAdapter: TraineeAdapter
 
     init {
-        val traineeList = model.traineeListLive.value ?: ArrayList()
+        val traineeList = model.traineeListLiveData.value ?: ArrayList()
         traineeAdapter = TraineeAdapter(traineeList)
         view.setAdapter(traineeAdapter)
-        model.traineeListLive.observe(viewLifecycleOwner) { value ->
+        model.traineeListLiveData.observe(viewLifecycleOwner) { value ->
             if (value == null)
                 return@observe
             showLastTrainee(value)

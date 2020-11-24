@@ -1,6 +1,7 @@
 package com.example.sbertrainee
 
 import android.app.Application
+import android.util.Log
 import com.example.sbertrainee.model.Model
 
 class App : Application() {

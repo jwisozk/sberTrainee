@@ -27,7 +27,7 @@ class InputPresenter(
     }
 
     override fun onGenderCheckedChange(checkId: Int) {
-        val genderRes = model.getGender(checkId)
+        val genderRes = model.getGenderRes(checkId)
         genderRes?.let {
             model.setGender(resources.getString(it))
             view.setEnabledButton(model.isDataEnough())

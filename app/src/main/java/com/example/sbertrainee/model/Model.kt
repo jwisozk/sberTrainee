@@ -1,5 +1,6 @@
 package com.example.sbertrainee.model
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.sbertrainee.R
@@ -14,8 +15,17 @@ class Model {
     private val _traineeListLiveData = SingleEventLiveData<MutableList<Trainee>>()
     val traineeListLiveData: LiveData<MutableList<Trainee>> = _traineeListLiveData
 
+    private var counterId = 0
+
+    @VisibleForTesting
+    var trainee: Trainee? = null
+
     init {
         _traineeListLiveData.value = ArrayList()
+    }
+
+    private fun <T> MutableLiveData<T>.notifyObserver() {
+        this.value = this.value
     }
 
     fun addTrainee(trainee: Trainee) {
@@ -23,11 +33,7 @@ class Model {
         _traineeListLiveData.notifyObserver()
     }
 
-    private var trainee: Trainee? = null
-
-    private var counterId = 0
-
-    fun getGender(id: Int): Int? = when (id) {
+    fun getGenderRes(id: Int): Int? = when (id) {
         R.id.radioGenderMan -> GenderType.MAN.value
         R.id.radioGenderWoman -> GenderType.WOMAN.value
         else -> null
@@ -58,10 +64,6 @@ class Model {
         return null
     }
 
-    fun setIsAddedViewPagerFragment(value: Boolean) {
-        _isAddedViewPagerFragmentLiveData.value = value
-    }
-
     fun setFullName(s: CharSequence?) {
         s?.let {
             val fullName = it.trim().toString()
@@ -86,6 +88,10 @@ class Model {
             trainee?.copy(hasComputer = isChecked) ?: Trainee(hasComputer = isChecked)
     }
 
+    fun setIsAddedViewPagerFragment(value: Boolean) {
+        _isAddedViewPagerFragmentLiveData.value = value
+    }
+
     fun isDataEnough(): Boolean =
         when {
             trainee?.fullName.isNullOrEmpty() -> false
@@ -95,9 +101,5 @@ class Model {
 
     fun clear() {
         trainee = null
-    }
-
-    private fun <T> MutableLiveData<T>.notifyObserver() {
-        this.value = this.value
     }
 }

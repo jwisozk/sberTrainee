@@ -32,12 +32,13 @@ class TraineeAdapter(
         holderTrainee.workComputerInfoTextView.updateVisibility(trainee.hasComputer)
     }
 
-    override fun getItemCount(): Int = traineeList.size
+    override fun getItemCount(): Int =
+        traineeList.size
 
-    private fun View.updateVisibility(isVisible: Boolean) {
+    private fun View.updateVisibility(isVisible: Boolean) =
         when (isVisible) {
             true -> this.visibility = View.VISIBLE
             false -> this.visibility = View.GONE
+
         }
-    }
 }

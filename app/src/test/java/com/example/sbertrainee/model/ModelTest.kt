@@ -3,10 +3,9 @@ package com.example.sbertrainee.model
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import org.junit.Before
 import org.junit.Test
-
+import org.junit.Rule
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
-import org.junit.Rule
 
 class ModelTest {
 
@@ -17,7 +16,7 @@ class ModelTest {
     private lateinit var model: Model
 
     @Before
-    fun prepare() {
+    fun setUp() {
         MockKAnnotations.init(this)
         model = Model()
     }

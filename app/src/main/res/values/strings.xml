@@ -9,10 +9,10 @@
     <string name="gender_woman">ж</string>
     <string name="alpha_account">Альфа аккаунт</string>
     <string name="sigma_account">Сигма аккаунт</string>
+    <string name="work_computer">Рабочий компьютер</string>
     <string name="computer_provided">Компьтер предоставлен</string>
     <string name="add_trainee">Добавить</string>
     <string name="provided_label">Предоставлены:</string>
-    <string name="work_computer">Рабочий компьютер</string>
     <string name="data_not_received">Данные не получены</string>
     <string name="full_name_absent">Укажите ФИО</string>
     <string name="gender_absent">Укажите пол</string>

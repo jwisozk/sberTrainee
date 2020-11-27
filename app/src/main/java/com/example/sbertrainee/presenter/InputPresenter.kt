@@ -60,6 +60,7 @@ class InputPresenter(
             model.clear()
             if (model.isAddedViewPagerFragmentLiveData.value == null)
                 model.setIsAddedViewPagerFragment(true)
+
         }
     }
 

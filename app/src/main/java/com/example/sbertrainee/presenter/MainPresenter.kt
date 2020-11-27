@@ -30,7 +30,7 @@ class MainPresenter(
 
     private fun addViewPagerFragment() {
         fragmentManager.beginTransaction()
-            .add(R.id.fragmentViewPagerContainer, ViewPagerFragment.newInstance())
+            .replace(R.id.fragmentViewPagerContainer, ViewPagerFragment.newInstance())
             .commitNow()
     }
 
@@ -46,5 +46,4 @@ class MainPresenter(
             }
         }
     }
-
 }

@@ -20,6 +20,9 @@ class ViewPagerPresenter(
         val traineeList = model.traineeListLiveData.value ?: ArrayList()
         traineeAdapter = TraineeAdapter(traineeList)
         view.setAdapter(traineeAdapter)
+        model.viewPagerCurrentItemLiveData.value?.let {
+            view.setCurrentPage(it)
+        }
         model.traineeListLiveData.observe(viewLifecycleOwner) { value ->
             if (value == null)
                 return@observe
@@ -37,5 +40,9 @@ class ViewPagerPresenter(
     private fun showLastTrainee(traineeList: List<Trainee>) {
         traineeAdapter.submitList(traineeList)
         view.setCurrentPage(traineeList.size - 1)
+    }
+
+    override fun onPageSelected(position: Int) {
+        model.setViewPagerCurrentItemLiveData(position)
     }
 }

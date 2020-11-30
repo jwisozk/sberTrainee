@@ -3,6 +3,7 @@ package com.example.sbertrainee.view
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.viewpager2.widget.ViewPager2
 import com.example.sbertrainee.R
 import com.example.sbertrainee.App
 import com.example.sbertrainee.inrerface.Contract
@@ -28,6 +29,11 @@ class ViewPagerFragment : Fragment(R.layout.fragment_view_pager), Contract.ViewP
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             viewPagerPresenter.onTabLayoutMediatorAttach(tab, position)
         }.attach()
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                viewPagerPresenter.onPageSelected(position)
+            }
+        })
     }
 
     override fun setAdapter(adapter: TraineeAdapter) {

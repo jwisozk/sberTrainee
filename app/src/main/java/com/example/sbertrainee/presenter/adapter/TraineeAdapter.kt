@@ -39,6 +39,5 @@ class TraineeAdapter(
         when (isVisible) {
             true -> this.visibility = View.VISIBLE
             false -> this.visibility = View.GONE
-
         }
 }

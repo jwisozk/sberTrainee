@@ -42,5 +42,6 @@ interface Contract {
 
     interface ViewPagerPresenter {
         fun onTabLayoutMediatorAttach(tab: TabLayout.Tab, position: Int)
+        fun onPageSelected(position: Int)
     }
 }

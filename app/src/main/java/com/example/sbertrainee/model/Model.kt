@@ -15,7 +15,7 @@ class Model {
     private val _traineeListLiveData = SingleEventLiveData<MutableList<Trainee>>()
     val traineeListLiveData: LiveData<MutableList<Trainee>> = _traineeListLiveData
 
-    private val _viewPagerCurrentItemLiveData = SingleEventLiveData<Int>()
+    private val _viewPagerCurrentItemLiveData = MutableLiveData<Int>()
     val viewPagerCurrentItemLiveData: LiveData<Int> = _viewPagerCurrentItemLiveData
 
     private var counterId = 0

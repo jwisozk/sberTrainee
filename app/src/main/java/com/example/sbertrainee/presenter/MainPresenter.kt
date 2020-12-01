@@ -21,16 +21,16 @@ class MainPresenter(
         if (model.isAddedViewPagerFragmentLiveData.value == true)
             addViewPagerFragment()
         model.isAddedViewPagerFragmentLiveData.observe(viewLifecycleOwner) { value ->
-            if (value == null)
-                return@observe
-            if (value)
+            if (value) {
                 addViewPagerFragment()
+            }
         }
     }
 
     private fun addViewPagerFragment() {
+        val fragment = ViewPagerFragment.newInstance()
         fragmentManager.beginTransaction()
-            .replace(R.id.fragmentViewPagerContainer, ViewPagerFragment.newInstance())
+            .replace(R.id.fragmentViewPagerContainer, fragment)
             .commitNow()
     }
 

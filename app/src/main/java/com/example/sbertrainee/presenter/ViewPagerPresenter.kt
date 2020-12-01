@@ -1,5 +1,6 @@
 package com.example.sbertrainee.presenter
 
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.model.Model
@@ -20,12 +21,12 @@ class ViewPagerPresenter(
         val traineeList = model.traineeListLiveData.value ?: ArrayList()
         traineeAdapter = TraineeAdapter(traineeList)
         view.setAdapter(traineeAdapter)
+        Log.d("TAG", "init  ")
         model.viewPagerCurrentItemLiveData.value?.let {
+            Log.d("TAG", "viewPagerCurrentItemLiveData ${it} ")
             view.setCurrentPage(it)
         }
         model.traineeListLiveData.observe(viewLifecycleOwner) { value ->
-            if (value == null)
-                return@observe
             showLastTrainee(value)
         }
     }
@@ -39,6 +40,7 @@ class ViewPagerPresenter(
 
     private fun showLastTrainee(traineeList: List<Trainee>) {
         traineeAdapter.submitList(traineeList)
+        Log.d("TAG", "showLastTrainee  ")
         view.setCurrentPage(traineeList.size - 1)
     }
 

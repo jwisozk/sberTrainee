@@ -26,7 +26,7 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             tools:context=".view.ViewPagerFragment"
-            tools:listitem="@layout/page" />
+            tools:listitem="@layout/list_item_trainee" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

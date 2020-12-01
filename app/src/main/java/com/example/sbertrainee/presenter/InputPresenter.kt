@@ -58,9 +58,9 @@ class InputPresenter(
             model.addTrainee(it)
             view.clear()
             model.clear()
-            if (model.isAddedViewPagerFragmentLiveData.value == null)
+            if (model.isAddedViewPagerFragmentLiveData.value == null) {
                 model.setIsAddedViewPagerFragment(true)
-
+            }
         }
     }
 
@@ -69,8 +69,9 @@ class InputPresenter(
         hasFocus: Boolean,
         inputMethodManager: InputMethodManager?
     ) {
-        if (!hasFocus)
+        if (!hasFocus) {
             hideKeyboard(view, inputMethodManager)
+        }
     }
 
     private fun hideKeyboard(view: View, inputMethodManager: InputMethodManager?) {

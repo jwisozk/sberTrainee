@@ -19,7 +19,7 @@ class TraineeAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TraineeViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return TraineeViewHolder(inflater.inflate(R.layout.page, parent, false))
+        return TraineeViewHolder(inflater.inflate(R.layout.list_item_trainee, parent, false))
     }
 
     override fun onBindViewHolder(holderTrainee: TraineeViewHolder, position: Int) {

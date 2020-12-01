@@ -1,7 +1,6 @@
 package com.example.sbertrainee.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
@@ -42,7 +41,6 @@ class ViewPagerFragment : Fragment(R.layout.fragment_view_pager), Contract.ViewP
     }
 
     override fun setCurrentPage(num: Int) {
-        Log.d("TAG", "setCurrentPage ${num} ")
         viewPager.currentItem = num
     }
 

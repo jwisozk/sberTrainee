@@ -14,42 +14,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/fullName"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/full_name_label"
+            app:endIconMode="clear_text"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="@dimen/view_pager_full_name_margin_top"
-            android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/radioGroupGender"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="4dp"
-                android:text="@string/full_name" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextFullName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/full_name_sample"
-                app:endIconMode="clear_text">
+                android:backgroundTint="@android:color/transparent"
+                android:inputType="textPersonName|textCapWords" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextFullName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/transparent"
-                    android:inputType="textPersonName|textCapWords" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+        <TextView
+            android:id="@+id/genderLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="@string/gender"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+            app:layout_constraintBottom_toTopOf="@+id/checkBoxHasAlphaAccount"/>
 
         <RadioGroup
             android:id="@+id/radioGroupGender"
@@ -57,14 +53,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/checkBoxHasAlphaAccount"
-            app:layout_constraintStart_toStartOf="@+id/fullName"
-            app:layout_constraintTop_toBottomOf="@+id/fullName">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:text="@string/gender" />
+            app:layout_constraintStart_toEndOf="@+id/genderLabel"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
             <RadioButton
                 android:id="@+id/radioGenderMan"

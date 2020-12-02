@@ -2,7 +2,7 @@
     <string name="app_name">Стажеры</string>
     <string name="trainee_number_label">Стажер №</string>
     <string name="full_name">ФИО:</string>
-    <string name="full_name_sample">Иванов Иван Иваныч</string>
+    <string name="full_name_label">ФИО</string>
     <string name="gender">Пол:</string>
     <string name="gender_man">м</string>
     <string name="gender_woman">ж</string>

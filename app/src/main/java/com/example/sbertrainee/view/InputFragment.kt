@@ -7,13 +7,15 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.example.sbertrainee.R
 import com.example.sbertrainee.App
+import com.example.sbertrainee.databinding.FragmentInputBinding
 import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.util.SimpleTextWatcher
 import com.example.sbertrainee.presenter.InputPresenter
-import kotlinx.android.synthetic.main.fragment_input.*
 
 class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
 
+    private var fragmentInputBinding: FragmentInputBinding? = null
+    private lateinit var binding: FragmentInputBinding
     private lateinit var inputPresenter: InputPresenter
     private val simpleTextWatcher = object : SimpleTextWatcher() {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -23,6 +25,8 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentInputBinding.bind(view)
+        fragmentInputBinding = binding
         init()
         addListeners()
     }
@@ -35,53 +39,58 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
     }
 
     private fun addListeners() {
-        editTextFullName.addTextChangedListener(simpleTextWatcher)
-        editTextFullName.setOnFocusChangeListener { v, hasFocus ->
+        binding.editTextFullName.addTextChangedListener(simpleTextWatcher)
+        binding.editTextFullName.setOnFocusChangeListener { v, hasFocus ->
             inputPresenter.onEditTextFocusChange(
                 v,
                 hasFocus,
                 activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
             )
         }
-        textInputLayout.setEndIconOnClickListener {
+        binding.textInputLayout.setEndIconOnClickListener {
             inputPresenter.onEndIconClicked()
         }
 
-        radioGroupGender.setOnCheckedChangeListener { _, checkedId ->
+        binding.radioGroupGender.setOnCheckedChangeListener { _, checkedId ->
             inputPresenter.onGenderCheckedChange(checkedId)
         }
-        checkBoxHasAlphaAccount.setOnCheckedChangeListener { _, isChecked ->
+        binding.checkBoxHasAlphaAccount.setOnCheckedChangeListener { _, isChecked ->
             inputPresenter.onHasAlphaCheckedChange(isChecked)
         }
-        checkBoxHasSigmaAccount.setOnCheckedChangeListener { _, isChecked ->
+        binding.checkBoxHasSigmaAccount.setOnCheckedChangeListener { _, isChecked ->
             inputPresenter.onHasSigmaCheckedChange(isChecked)
         }
-        checkBoxHasComputer.setOnCheckedChangeListener { _, isChecked ->
+        binding.checkBoxHasComputer.setOnCheckedChangeListener { _, isChecked ->
             inputPresenter.onHasComputerCheckedChange(isChecked)
         }
-        buttonAddTrainee.setOnClickListener {
+        binding.buttonAddTrainee.setOnClickListener {
             inputPresenter.onAddButtonClicked()
         }
     }
 
     override fun setTextToEditText(text: String) {
-        editTextFullName.setText(text)
+        binding.editTextFullName.setText(text)
     }
 
     override fun setSelection(position: Int) {
-        editTextFullName.setSelection(position)
+        binding.editTextFullName.setSelection(position)
     }
 
     override fun setEnabledButton(value: Boolean) {
-        buttonAddTrainee.isEnabled = value
+        binding.buttonAddTrainee.isEnabled = value
     }
 
     override fun clear() {
-        editTextFullName.editableText?.clear()
-        editTextFullName.clearFocus()
-        radioGroupGender.clearCheck()
-        checkBoxHasAlphaAccount.isChecked = false
-        checkBoxHasSigmaAccount.isChecked = false
-        checkBoxHasComputer.isChecked = false
+        binding.editTextFullName.editableText?.clear()
+        binding.editTextFullName.clearFocus()
+        binding.radioGroupGender.clearCheck()
+        binding.checkBoxHasAlphaAccount.isChecked = false
+        binding.checkBoxHasSigmaAccount.isChecked = false
+        binding.checkBoxHasComputer.isChecked = false
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        fragmentInputBinding = null
     }
 }

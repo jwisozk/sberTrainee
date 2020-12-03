@@ -11,8 +11,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/trainee_number_label"
+        app:layout_constraintBottom_toTopOf="@+id/fullNameLabelInfoTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fullNameLabelInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/full_name"
+        app:layout_constraintBottom_toTopOf="@+id/genderInfoLabelTextView"
+        app:layout_constraintStart_toStartOf="@+id/traineeNumberLabelTextView"
+        app:layout_constraintTop_toBottomOf="@+id/traineeNumberLabelTextView" />
+
+    <TextView
+        android:id="@+id/genderInfoLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gender"
+        app:layout_constraintBottom_toTopOf="@+id/providedLabel"
+        app:layout_constraintStart_toStartOf="@+id/fullNameLabelInfoTextView"
+        app:layout_constraintTop_toBottomOf="@+id/fullNameLabelInfoTextView" />
+
+    <TextView
+        android:id="@+id/providedLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="@string/provided_label"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/genderInfoLabelTextView"
+        app:layout_constraintTop_toBottomOf="@+id/genderInfoLabelTextView" />
 
     <TextView
         android:id="@+id/traineeNumberTextView"
@@ -23,23 +52,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/traineeNumberLabelTextView"
         app:layout_constraintStart_toEndOf="@+id/barrier"
         app:layout_constraintTop_toTopOf="@+id/traineeNumberLabelTextView" />
-
-    <TextView
-        android:id="@+id/fullNameLabelInfoTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/view_pager_full_name_margin_top"
-        android:text="@string/full_name"
-        app:layout_constraintStart_toStartOf="@+id/traineeNumberLabelTextView"
-        app:layout_constraintTop_toBottomOf="@+id/traineeNumberLabelTextView" />
-
-    <TextView
-        android:id="@+id/genderInfoLabelTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/gender"
-        app:layout_constraintStart_toStartOf="@+id/fullNameLabelInfoTextView"
-        app:layout_constraintTop_toBottomOf="@+id/fullNameSampleInfoTextView" />
 
     <TextView
         android:id="@+id/fullNameSampleInfoTextView"
@@ -59,14 +71,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/genderInfoLabelTextView"
         app:layout_constraintStart_toEndOf="@+id/barrier"
         app:layout_constraintTop_toTopOf="@+id/genderInfoLabelTextView" />
-
-    <TextView
-        android:id="@+id/providedLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/provided_label"
-        app:layout_constraintStart_toStartOf="@+id/genderInfoLabelTextView"
-        app:layout_constraintTop_toBottomOf="@+id/genderInfoLabelTextView" />
 
     <TextView
         android:id="@+id/alphaAccountInfoTextView"
@@ -105,11 +109,5 @@
         app:barrierDirection="end"
         app:constraint_referenced_ids="providedLabel"
         app:layout_constraintStart_toEndOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="146dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

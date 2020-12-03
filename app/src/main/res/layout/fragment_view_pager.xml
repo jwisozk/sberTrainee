@@ -6,45 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".view.ViewPagerFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-<!--        <com.google.android.material.tabs.TabLayout-->
-<!--            android:id="@+id/tabLayout"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="?attr/colorPrimary"-->
-<!--            app:tabBackground="@drawable/tab_selector"-->
-<!--            app:tabGravity="center"-->
-<!--            app:tabIndicatorHeight="0dp"-->
-<!--            app:tabMode="auto"-->
-<!--            app:tabSelectedTextColor="@color/white"-->
-<!--            app:tabTextColor="@color/gray_light" />-->
+        android:layout_height="match_parent">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
-            app:tabMode="fixed"
+            app:layout_constraintBottom_toTopOf="@+id/viewPager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
             app:tabBackground="@drawable/background_amber_dot_3dp"
-            app:tabIndicatorColor="@color/yellow"
             app:tabGravity="center"
-            app:tabIndicatorGravity="center"
             app:tabIndicator="@drawable/background_tab_indicator"
-            app:tabPaddingStart="6dp"
-            app:tabPaddingEnd="6dp"/>
+            app:tabIndicatorColor="@color/yellow"
+            app:tabIndicatorGravity="center"
+            app:tabMode="fixed"
+            app:tabPaddingEnd="6dp"
+            app:tabPaddingStart="6dp" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout"
             tools:context=".view.ViewPagerFragment"
             tools:listitem="@layout/list_item_trainee" />
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
 

@@ -20,6 +20,10 @@ interface Contract {
         fun setCurrentPage(num: Int)
     }
 
+    interface MainView {
+        fun setViewPagerFragmentVisible()
+    }
+
     interface MainPresenter {
         fun onDispatchTouchEvent(event: MotionEvent, currentFocus: View?)
     }
@@ -41,7 +45,7 @@ interface Contract {
     }
 
     interface ViewPagerPresenter {
-        fun onTabLayoutMediatorAttach(tab: TabLayout.Tab, position: Int)
+//        fun onTabLayoutMediatorAttach(tab: TabLayout.Tab, position: Int)
         fun onPageSelected(position: Int)
     }
 }

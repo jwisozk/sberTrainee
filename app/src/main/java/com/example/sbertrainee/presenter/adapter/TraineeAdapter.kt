@@ -9,7 +9,7 @@ import com.example.sbertrainee.model.Trainee
 import com.example.sbertrainee.presenter.adapter.holder.TraineeViewHolder
 
 class TraineeAdapter(
-    private var traineeList: List<Trainee>
+    var traineeList: List<Trainee>
 ) : RecyclerView.Adapter<TraineeViewHolder>() {
 
     fun submitList(newTraineeList: List<Trainee>) {

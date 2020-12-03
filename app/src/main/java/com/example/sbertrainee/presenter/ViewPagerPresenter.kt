@@ -28,12 +28,12 @@ class ViewPagerPresenter(
         }
     }
 
-    override fun onTabLayoutMediatorAttach(tab: TabLayout.Tab, position: Int) {
-        val trainee = model.getTraineeFromList(position)
-        trainee?.let { t ->
-            tab.text = "${(t.id)}.${t.fullName?.takeWhile { it.isLetter() }}"
-        }
-    }
+//    override fun onTabLayoutMediatorAttach(tab: TabLayout.Tab, position: Int) {
+//        val trainee = model.getTraineeFromList(position)
+//        trainee?.let { t ->
+////            tab.text = "${(t.id)}.${t.fullName?.takeWhile { it.isLetter() }}"
+//        }
+//    }
 
     private fun showLastTrainee(traineeList: List<Trainee>) {
         traineeAdapter.submitList(traineeList)

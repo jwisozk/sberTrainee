@@ -12,17 +12,21 @@ import com.example.sbertrainee.model.Model
 import com.example.sbertrainee.view.ViewPagerFragment
 
 class MainPresenter(
+    private val view: Contract.MainView,
     model: Model,
     private val fragmentManager: FragmentManager,
     viewLifecycleOwner: LifecycleOwner
 ) : Contract.MainPresenter {
 
     init {
-        if (model.isAddedViewPagerFragmentLiveData.value == true)
-            addViewPagerFragment()
+        if (model.isAddedViewPagerFragmentLiveData.value == true) {
+            view.setViewPagerFragmentVisible()
+        }
+//            addViewPagerFragment()
         model.isAddedViewPagerFragmentLiveData.observe(viewLifecycleOwner) { value ->
             if (value) {
-                addViewPagerFragment()
+//                addViewPagerFragment()
+                view.setViewPagerFragmentVisible()
             }
         }
     }

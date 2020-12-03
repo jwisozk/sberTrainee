@@ -1,6 +1,7 @@
 package com.example.sbertrainee.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
@@ -10,6 +11,7 @@ import com.example.sbertrainee.databinding.FragmentViewPagerBinding
 import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.presenter.ViewPagerPresenter
 import com.example.sbertrainee.presenter.adapter.TraineeAdapter
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ViewPagerFragment : Fragment(R.layout.fragment_view_pager), Contract.ViewPagerView {
@@ -23,6 +25,7 @@ class ViewPagerFragment : Fragment(R.layout.fragment_view_pager), Contract.ViewP
         binding = FragmentViewPagerBinding.bind(view)
         fragmentViewPagerBinding = binding
         init()
+        listeners()
     }
 
     private fun init() {
@@ -30,14 +33,16 @@ class ViewPagerFragment : Fragment(R.layout.fragment_view_pager), Contract.ViewP
         val app = activity.applicationContext as App
         val model = app.model
         viewPagerPresenter = ViewPagerPresenter(this, model, viewLifecycleOwner)
-        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            viewPagerPresenter.onTabLayoutMediatorAttach(tab, position)
-        }.attach()
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 viewPagerPresenter.onPageSelected(position)
             }
         })
+    }
+
+    private fun listeners() {
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { _, _ ->
+        }.attach()
     }
 
     override fun setAdapter(adapter: TraineeAdapter) {

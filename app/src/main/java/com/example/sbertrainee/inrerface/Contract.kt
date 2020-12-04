@@ -9,8 +9,12 @@ import com.google.android.material.tabs.TabLayout
 interface Contract {
 
     interface InputView {
-        fun clear()
-        fun setTextToEditText(text: String)
+        fun clearEditTextFullName()
+        fun clearRadioGroupGender()
+        fun clearCheckBoxHasAlphaAccount()
+        fun clearCheckBoxHasSigmaAccount()
+        fun clearCheckBoxHasComputer()
+        fun setInputName(name: String)
         fun setSelection(position: Int)
         fun setEnabledButton(value: Boolean)
     }
@@ -35,17 +39,10 @@ interface Contract {
         fun onHasSigmaCheckedChange(isChecked: Boolean)
         fun onHasComputerCheckedChange(isChecked: Boolean)
         fun onAddButtonClicked()
-        fun onEditTextFocusChange(
-            view: View,
-            hasFocus: Boolean,
-            inputMethodManager: InputMethodManager?
-        )
-
-        fun onEndIconClicked()
+        fun onClearButtonClicked()
     }
 
     interface ViewPagerPresenter {
-//        fun onTabLayoutMediatorAttach(tab: TabLayout.Tab, position: Int)
         fun onPageSelected(position: Int)
     }
 }

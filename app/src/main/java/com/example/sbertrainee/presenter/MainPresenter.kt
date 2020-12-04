@@ -9,7 +9,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.example.sbertrainee.R
 import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.model.Model
-import com.example.sbertrainee.view.ViewPagerFragment
+import com.example.sbertrainee.view.TraineeCatalogFragment
 
 class MainPresenter(
     private val view: Contract.MainView,
@@ -32,9 +32,9 @@ class MainPresenter(
     }
 
     private fun addViewPagerFragment() {
-        val fragment = ViewPagerFragment.newInstance()
+        val fragment = TraineeCatalogFragment.newInstance()
         fragmentManager.beginTransaction()
-            .replace(R.id.fragmentViewPagerContainer, fragment)
+            .replace(R.id.fragmentTraineeCatalogContainer, fragment)
             .commitNow()
     }
 

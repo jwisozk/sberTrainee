@@ -1,10 +1,11 @@
 package com.example.sbertrainee.presenter
 
 import android.content.res.Resources
-import android.view.View
-import android.view.inputmethod.InputMethodManager
+import androidx.annotation.VisibleForTesting
+import com.example.sbertrainee.R
 import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.model.Model
+import com.example.sbertrainee.model.Trainee
 
 class InputPresenter(
     private val view: Contract.InputView,
@@ -13,68 +14,78 @@ class InputPresenter(
 ) : Contract.InputPresenter {
 
     private val blockCharacters = "[\\d,.@#\$_&+()/*\"\':;!?%=|`~{}<>^]"
+    @VisibleForTesting
+    var traineeTmp: Trainee? = null
+    private var counterId = 0
 
     override fun onTextChanged(s: CharSequence?) {
         val result: String = s.toString().trimStart().replace(Regex(blockCharacters), "")
         when {
             result != s.toString() -> {
-                view.setTextToEditText(result)
+                view.setInputName(result)
                 view.setSelection(result.length)
             }
-            else -> model.setFullName(result)
+            else -> {
+                val fullName = result.trim()
+                traineeTmp = traineeTmp?.copy(fullName = fullName) ?: Trainee(fullName = fullName)
+            }
         }
-        view.setEnabledButton(model.isDataEnough())
+        view.setEnabledButton(isDataEnough())
     }
 
     override fun onGenderCheckedChange(checkId: Int) {
-        val genderRes = model.getGenderRes(checkId)
+        val genderRes = getGenderRes(checkId)
         genderRes?.let {
-            model.setGender(resources.getString(it))
-            view.setEnabledButton(model.isDataEnough())
+            val gender = resources.getString(it)
+            traineeTmp = traineeTmp?.copy(gender = gender) ?: Trainee(gender = gender)
+            view.setEnabledButton(isDataEnough())
         }
     }
 
-    override fun onEndIconClicked() {
-        model.setFullName("")
-        view.setTextToEditText("")
-        view.setEnabledButton(model.isDataEnough())
+    override fun onClearButtonClicked() {
+        traineeTmp = traineeTmp?.copy(fullName = "")
+        view.setInputName("")
+        view.setEnabledButton(isDataEnough())
     }
 
     override fun onHasAlphaCheckedChange(isChecked: Boolean) {
-        model.setHasAlphaAccount(isChecked)
+        traineeTmp = traineeTmp?.copy(hasAlphaAccount = isChecked) ?: Trainee(hasAlphaAccount = isChecked)
     }
 
     override fun onHasSigmaCheckedChange(isChecked: Boolean) {
-        model.setHasSigmaAccount((isChecked))
+        traineeTmp = traineeTmp?.copy(hasSigmaAccount = isChecked) ?: Trainee(hasSigmaAccount = isChecked)
     }
 
     override fun onHasComputerCheckedChange(isChecked: Boolean) {
-        model.setHasComputer(isChecked)
+        traineeTmp = traineeTmp?.copy(hasComputer = isChecked) ?: Trainee(hasComputer = isChecked)
     }
 
     override fun onAddButtonClicked() {
-        val trainee = model.newTrainee()
-        trainee?.let {
-            model.addTrainee(it)
-            view.clear()
-            model.clear()
+        traineeTmp?.let {
+            model.addTrainee(it.apply { id = ++counterId })
+            view.clearEditTextFullName()
+            view.clearRadioGroupGender()
+            view.clearCheckBoxHasAlphaAccount()
+            view.clearCheckBoxHasSigmaAccount()
+            view.clearCheckBoxHasComputer()
+            traineeTmp = null
             if (model.isAddedViewPagerFragmentLiveData.value == null) {
                 model.setIsAddedViewPagerFragment(true)
             }
         }
     }
 
-    override fun onEditTextFocusChange(
-        view: View,
-        hasFocus: Boolean,
-        inputMethodManager: InputMethodManager?
-    ) {
-        if (!hasFocus) {
-            hideKeyboard(view, inputMethodManager)
+    private fun isDataEnough(): Boolean =
+        when {
+            traineeTmp?.fullName.isNullOrEmpty() -> false
+            traineeTmp?.gender == null -> false
+            else -> true
         }
+
+    private fun getGenderRes(id: Int): Int? = when (id) {
+        R.id.radioGenderMan -> R.string.gender_man
+        R.id.radioGenderWoman -> R.string.gender_woman
+        else -> null
     }
 
-    private fun hideKeyboard(view: View, inputMethodManager: InputMethodManager?) {
-        inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
-    }
 }

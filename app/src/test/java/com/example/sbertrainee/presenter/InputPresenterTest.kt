@@ -47,7 +47,7 @@ class InputPresenterTest {
 
     @Test
     fun `onEndIconClicked if call return empty fullName`() {
-        presenter.onEndIconClicked()
+        presenter.onClearButtonClicked()
         val value = model.trainee?.fullName
         Truth.assertThat(value).isEqualTo(STR_TEST_EMPTY)
     }

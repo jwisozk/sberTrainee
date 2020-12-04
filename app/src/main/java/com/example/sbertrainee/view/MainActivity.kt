@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), Contract.MainView {
     }
 
     override fun setViewPagerFragmentVisible() {
-        binding.fragmentViewPagerContainer.visibility = View.VISIBLE
+        binding.fragmentTraineeCatalogContainer.visibility = View.VISIBLE
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity(), Contract.MainView {
                 bottomMargin = Constants.FRAGMENT_MARGIN_ZERO
                 rightMargin = convertDpToPixel(Constants.FRAGMENT_MARGIN_VALUE)
             }
-            binding.fragmentViewPagerContainer.updateLayoutParams<LinearLayout.LayoutParams> {
+            binding.fragmentTraineeCatalogContainer.updateLayoutParams<LinearLayout.LayoutParams> {
                 topMargin = Constants.FRAGMENT_MARGIN_ZERO
                 leftMargin = convertDpToPixel(Constants.FRAGMENT_MARGIN_VALUE)
             }
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(), Contract.MainView {
                 bottomMargin = convertDpToPixel(Constants.FRAGMENT_MARGIN_VALUE)
                 rightMargin = Constants.FRAGMENT_MARGIN_ZERO
             }
-            binding.fragmentViewPagerContainer.updateLayoutParams<LinearLayout.LayoutParams> {
+            binding.fragmentTraineeCatalogContainer.updateLayoutParams<LinearLayout.LayoutParams> {
                 topMargin = convertDpToPixel(Constants.FRAGMENT_MARGIN_VALUE)
                 leftMargin = Constants.FRAGMENT_MARGIN_ZERO
             }

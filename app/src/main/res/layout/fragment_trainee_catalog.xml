@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ViewPagerFragment">
+    tools:context=".view.TraineeCatalogFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
@@ -39,7 +39,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tabLayout"
-            tools:context=".view.ViewPagerFragment"
+            tools:context=".view.TraineeCatalogFragment"
             tools:listitem="@layout/list_item_trainee" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

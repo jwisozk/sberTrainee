@@ -2,11 +2,13 @@ package com.example.sbertrainee.view
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.example.sbertrainee.R
 import com.example.sbertrainee.App
+import com.example.sbertrainee.Constants
 import com.example.sbertrainee.databinding.FragmentInputBinding
 import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.util.SimpleTextWatcher
@@ -41,14 +43,13 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
     private fun addListeners() {
         binding.editTextFullName.addTextChangedListener(simpleTextWatcher)
         binding.editTextFullName.setOnFocusChangeListener { v, hasFocus ->
-            inputPresenter.onEditTextFocusChange(
-                v,
-                hasFocus,
-                activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
-            )
+            if (!hasFocus) {
+                val inputMethodManager = activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
+                inputMethodManager?.hideSoftInputFromWindow(v.windowToken, 0)
+            }
         }
         binding.textInputLayout.setEndIconOnClickListener {
-            inputPresenter.onEndIconClicked()
+            inputPresenter.onClearButtonClicked()
         }
 
         binding.radioGroupGender.setOnCheckedChangeListener { _, checkedId ->
@@ -68,8 +69,8 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
         }
     }
 
-    override fun setTextToEditText(text: String) {
-        binding.editTextFullName.setText(text)
+    override fun setInputName(name: String) {
+        binding.editTextFullName.setText(name)
     }
 
     override fun setSelection(position: Int) {
@@ -78,14 +79,30 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
 
     override fun setEnabledButton(value: Boolean) {
         binding.buttonAddTrainee.isEnabled = value
+        binding.buttonAddTrainee.alpha = when (value) {
+            true -> Constants.ADD_TRAINEE_BUTTON_ALPHA_FULL
+            else -> Constants.ADD_TRAINEE_BUTTON_ALPHA_MEDIUM
+        }
+
     }
 
-    override fun clear() {
+    override fun clearEditTextFullName() {
         binding.editTextFullName.editableText?.clear()
-        binding.editTextFullName.clearFocus()
+    }
+
+    override fun clearRadioGroupGender() {
         binding.radioGroupGender.clearCheck()
+    }
+
+    override fun clearCheckBoxHasAlphaAccount() {
         binding.checkBoxHasAlphaAccount.isChecked = false
+    }
+
+    override fun clearCheckBoxHasSigmaAccount() {
         binding.checkBoxHasSigmaAccount.isChecked = false
+    }
+
+    override fun clearCheckBoxHasComputer() {
         binding.checkBoxHasComputer.isChecked = false
     }
 

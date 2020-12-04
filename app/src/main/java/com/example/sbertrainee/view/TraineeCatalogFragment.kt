@@ -1,29 +1,27 @@
 package com.example.sbertrainee.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
 import com.example.sbertrainee.R
 import com.example.sbertrainee.App
-import com.example.sbertrainee.databinding.FragmentViewPagerBinding
+import com.example.sbertrainee.databinding.FragmentTraineeCatalogBinding
 import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.presenter.ViewPagerPresenter
 import com.example.sbertrainee.presenter.adapter.TraineeAdapter
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class ViewPagerFragment : Fragment(R.layout.fragment_view_pager), Contract.ViewPagerView {
+class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog), Contract.ViewPagerView {
 
     private lateinit var viewPagerPresenter: ViewPagerPresenter
-    private var fragmentViewPagerBinding: FragmentViewPagerBinding? = null
-    private lateinit var binding: FragmentViewPagerBinding
+    private var fragmentTraineeCatalogBinding: FragmentTraineeCatalogBinding? = null
+    private lateinit var binding: FragmentTraineeCatalogBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentViewPagerBinding.bind(view)
-        fragmentViewPagerBinding = binding
+        binding = FragmentTraineeCatalogBinding.bind(view)
+        fragmentTraineeCatalogBinding = binding
         init()
         listeners()
     }
@@ -50,17 +48,17 @@ class ViewPagerFragment : Fragment(R.layout.fragment_view_pager), Contract.ViewP
     }
 
     override fun setCurrentPage(num: Int) {
-        binding.viewPager.currentItem = num
+        binding.viewPager.setCurrentItem(num, false)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        fragmentViewPagerBinding = null
+        fragmentTraineeCatalogBinding = null
     }
 
     companion object {
         @JvmStatic
         fun newInstance() =
-            ViewPagerFragment()
+            TraineeCatalogFragment()
     }
 }

@@ -83,7 +83,6 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
             true -> Constants.ADD_TRAINEE_BUTTON_ALPHA_FULL
             else -> Constants.ADD_TRAINEE_BUTTON_ALPHA_MEDIUM
         }
-
     }
 
     override fun clearEditTextFullName() {

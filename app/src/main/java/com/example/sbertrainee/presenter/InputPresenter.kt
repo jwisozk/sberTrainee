@@ -17,7 +17,7 @@ class InputPresenter(
     @VisibleForTesting
     var traineeTmp: Trainee? = null
     private var counterId = 0
-
+ 
     override fun onTextChanged(s: CharSequence?) {
         val result: String = s.toString().trimStart().replace(Regex(blockCharacters), "")
         when {

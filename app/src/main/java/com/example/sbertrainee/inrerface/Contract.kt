@@ -8,6 +8,10 @@ import com.google.android.material.tabs.TabLayout
 
 interface Contract {
 
+    interface MainView {
+        fun setTraineeCatalogFragmentVisible()
+    }
+
     interface InputView {
         fun clearEditTextFullName()
         fun clearRadioGroupGender()
@@ -19,13 +23,9 @@ interface Contract {
         fun setEnabledButton(value: Boolean)
     }
 
-    interface ViewPagerView {
+    interface TraineeCatalogView {
         fun setAdapter(adapter: TraineeAdapter)
         fun setCurrentPage(num: Int)
-    }
-
-    interface MainView {
-        fun setViewPagerFragmentVisible()
     }
 
     interface MainPresenter {
@@ -42,7 +42,7 @@ interface Contract {
         fun onClearButtonClicked()
     }
 
-    interface ViewPagerPresenter {
+    interface TraineeCatalogPresenter {
         fun onPageSelected(position: Int)
     }
 }

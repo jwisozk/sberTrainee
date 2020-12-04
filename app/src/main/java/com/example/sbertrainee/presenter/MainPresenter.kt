@@ -20,13 +20,13 @@ class MainPresenter(
 
     init {
         if (model.isAddedViewPagerFragmentLiveData.value == true) {
-            view.setViewPagerFragmentVisible()
+            view.setTraineeCatalogFragmentVisible()
         }
 //            addViewPagerFragment()
         model.isAddedViewPagerFragmentLiveData.observe(viewLifecycleOwner) { value ->
             if (value) {
 //                addViewPagerFragment()
-                view.setViewPagerFragmentVisible()
+                view.setTraineeCatalogFragmentVisible()
             }
         }
     }

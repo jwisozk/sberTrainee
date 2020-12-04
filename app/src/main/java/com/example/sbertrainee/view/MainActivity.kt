@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), Contract.MainView {
         return super.dispatchTouchEvent(event)
     }
 
-    override fun setViewPagerFragmentVisible() {
+    override fun setTraineeCatalogFragmentVisible() {
         binding.fragmentTraineeCatalogContainer.visibility = View.VISIBLE
     }
 

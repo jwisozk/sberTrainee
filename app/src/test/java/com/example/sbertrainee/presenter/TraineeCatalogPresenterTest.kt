@@ -13,17 +13,17 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class ViewPagerPresenterTest {
+class TraineeCatalogPresenterTest {
 
     @Rule
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var presenter: ViewPagerPresenter
+    private lateinit var presenter: TraineeCatalogPresenter
     private lateinit var model: Model
     private lateinit var tab: TabLayout.Tab
     @RelaxedMockK
-    private lateinit var view: Contract.ViewPagerView
+    private lateinit var view: Contract.TraineeCatalogView
     @RelaxedMockK
     private lateinit var viewLifecycleOwner: LifecycleOwner
 
@@ -32,7 +32,7 @@ class ViewPagerPresenterTest {
     fun setUp() {
         MockKAnnotations.init(this)
         model = Model()
-        presenter = ViewPagerPresenter(view, model, viewLifecycleOwner)
+        presenter = TraineeCatalogPresenter(view, model, viewLifecycleOwner)
         tab = TabLayout.Tab()
     }
 

@@ -5,14 +5,13 @@ import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.model.Model
 import com.example.sbertrainee.model.Trainee
 import com.example.sbertrainee.presenter.adapter.TraineeAdapter
-import com.google.android.material.tabs.TabLayout
 import kotlin.collections.ArrayList
 
-class ViewPagerPresenter(
-    private val view: Contract.ViewPagerView,
+class TraineeCatalogPresenter(
+    private val view: Contract.TraineeCatalogView,
     private val model: Model,
     viewLifecycleOwner: LifecycleOwner
-) : Contract.ViewPagerPresenter {
+) : Contract.TraineeCatalogPresenter {
 
     private val traineeAdapter: TraineeAdapter
 

@@ -1,10 +1,12 @@
 package com.example.sbertrainee.view
 
 import android.content.res.Configuration
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.View
+import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.updateLayoutParams
@@ -19,6 +21,7 @@ class MainActivity : AppCompatActivity(), Contract.MainView {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainPresenter: MainPresenter
+    private lateinit var keyboardResetByClickOutside: KeyboardResetByClickOutside
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +36,11 @@ class MainActivity : AppCompatActivity(), Contract.MainView {
         val app = applicationContext as App
         val model = app.model
         mainPresenter = MainPresenter(this, model, supportFragmentManager, this)
+        keyboardResetByClickOutside = KeyboardResetByClickOutside()
     }
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-        mainPresenter.onDispatchTouchEvent(event, currentFocus)
+        keyboardResetByClickOutside.onDispatchTouchEvent(event, currentFocus)
         return super.dispatchTouchEvent(event)
     }
 
@@ -78,6 +82,21 @@ class MainActivity : AppCompatActivity(), Contract.MainView {
             val resources = resources
             val metrics = resources.displayMetrics
             (dp * (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
+        }
+    }
+
+    private class KeyboardResetByClickOutside {
+        fun onDispatchTouchEvent(event: MotionEvent, currentFocus: View?) {
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                val v: View? = currentFocus
+                if (v is EditText) {
+                    val outRect = Rect()
+                    v.getGlobalVisibleRect(outRect)
+                    if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                        v.clearFocus()
+                    }
+                }
+            }
         }
     }
 }

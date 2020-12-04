@@ -20,7 +20,7 @@ interface Contract {
         fun clearCheckBoxHasComputer()
         fun setInputName(name: String)
         fun setSelection(position: Int)
-        fun setEnabledButton(value: Boolean)
+        fun setEnabledAddButton(value: Boolean)
     }
 
     interface TraineeCatalogView {
@@ -29,12 +29,12 @@ interface Contract {
     }
 
     interface MainPresenter {
-        fun onDispatchTouchEvent(event: MotionEvent, currentFocus: View?)
     }
 
     interface InputPresenter {
         fun onTextChanged(s: CharSequence?)
-        fun onGenderCheckedChange(checkId: Int)
+        fun onMaleGenderChecked()
+        fun onFemaleGenderChecked()
         fun onHasAlphaCheckedChange(isChecked: Boolean)
         fun onHasSigmaCheckedChange(isChecked: Boolean)
         fun onHasComputerCheckedChange(isChecked: Boolean)

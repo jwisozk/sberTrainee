@@ -17,7 +17,7 @@ class InputPresenter(
     @VisibleForTesting
     var traineeTmp: Trainee? = null
     private var counterId = 0
- 
+
     override fun onTextChanged(s: CharSequence?) {
         val result: String = s.toString().trimStart().replace(Regex(blockCharacters), "")
         when {
@@ -30,22 +30,28 @@ class InputPresenter(
                 traineeTmp = traineeTmp?.copy(fullName = fullName) ?: Trainee(fullName = fullName)
             }
         }
-        view.setEnabledButton(isDataEnough())
+        view.setEnabledAddButton(isDataEnough())
     }
 
-    override fun onGenderCheckedChange(checkId: Int) {
-        val genderRes = getGenderRes(checkId)
-        genderRes?.let {
-            val gender = resources.getString(it)
-            traineeTmp = traineeTmp?.copy(gender = gender) ?: Trainee(gender = gender)
-            view.setEnabledButton(isDataEnough())
-        }
+    override fun onMaleGenderChecked() {
+        val gender = resources.getString(R.string.gender_male)
+        setGender(gender)
+    }
+
+    override fun onFemaleGenderChecked() {
+        val gender = resources.getString(R.string.gender_female)
+        setGender(gender)
+    }
+
+    private fun setGender(gender: String) {
+        traineeTmp = traineeTmp?.copy(gender = gender) ?: Trainee(gender = gender)
+        view.setEnabledAddButton(isDataEnough())
     }
 
     override fun onClearButtonClicked() {
         traineeTmp = traineeTmp?.copy(fullName = "")
         view.setInputName("")
-        view.setEnabledButton(isDataEnough())
+        view.setEnabledAddButton(isDataEnough())
     }
 
     override fun onHasAlphaCheckedChange(isChecked: Boolean) {
@@ -81,11 +87,4 @@ class InputPresenter(
             traineeTmp?.gender == null -> false
             else -> true
         }
-
-    private fun getGenderRes(id: Int): Int? = when (id) {
-        R.id.radioGenderMan -> R.string.gender_man
-        R.id.radioGenderWoman -> R.string.gender_woman
-        else -> null
-    }
-
 }

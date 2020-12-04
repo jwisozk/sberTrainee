@@ -4,8 +4,8 @@
     <string name="full_name">ФИО:</string>
     <string name="full_name_label">ФИО</string>
     <string name="gender">Пол:</string>
-    <string name="gender_man">♂</string>
-    <string name="gender_woman">♀</string>
+    <string name="gender_male">♂</string>
+    <string name="gender_female">♀</string>
     <string name="alpha_account">Альфа аккаунт</string>
     <string name="sigma_account">Сигма аккаунт</string>
     <string name="work_computer">Рабочий компьютер</string>

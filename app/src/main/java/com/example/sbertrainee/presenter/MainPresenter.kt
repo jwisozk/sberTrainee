@@ -31,23 +31,23 @@ class MainPresenter(
         }
     }
 
-    private fun addViewPagerFragment() {
-        val fragment = TraineeCatalogFragment.newInstance()
-        fragmentManager.beginTransaction()
-            .replace(R.id.fragmentTraineeCatalogContainer, fragment)
-            .commitNow()
-    }
+//    private fun addViewPagerFragment() {
+//        val fragment = TraineeCatalogFragment.newInstance()
+//        fragmentManager.beginTransaction()
+//            .replace(R.id.fragmentTraineeCatalogContainer, fragment)
+//            .commitNow()
+//    }
 
-    override fun onDispatchTouchEvent(event: MotionEvent, currentFocus: View?) {
-        if (event.action == MotionEvent.ACTION_DOWN) {
-            val v: View? = currentFocus
-            if (v is EditText) {
-                val outRect = Rect()
-                v.getGlobalVisibleRect(outRect)
-                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
-                    v.clearFocus()
-                }
-            }
-        }
-    }
+//    override fun onDispatchTouchEvent(event: MotionEvent, currentFocus: View?) {
+//        if (event.action == MotionEvent.ACTION_DOWN) {
+//            val v: View? = currentFocus
+//            if (v is EditText) {
+//                val outRect = Rect()
+//                v.getGlobalVisibleRect(outRect)
+//                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+//                    v.clearFocus()
+//                }
+//            }
+//        }
+//    }
 }

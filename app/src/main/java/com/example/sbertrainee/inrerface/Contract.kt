@@ -19,8 +19,8 @@ interface Contract {
         fun clearCheckBoxHasSigmaAccount()
         fun clearCheckBoxHasComputer()
         fun setInputName(name: String)
-        fun setSelection(position: Int)
         fun setEnabledAddButton(value: Boolean)
+        fun notifyTraineeCatalogFragment()
     }
 
     interface TraineeCatalogView {
@@ -44,5 +44,6 @@ interface Contract {
 
     interface TraineeCatalogPresenter {
         fun onPageSelected(position: Int)
+        fun onAddButtonClicked()
     }
 }

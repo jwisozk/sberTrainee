@@ -1,45 +1,34 @@
 package com.example.sbertrainee.presenter
 
-import androidx.lifecycle.LifecycleOwner
 import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.model.Model
-import com.example.sbertrainee.model.Trainee
 import com.example.sbertrainee.presenter.adapter.TraineeAdapter
-import kotlin.collections.ArrayList
 
 class TraineeCatalogPresenter(
     private val view: Contract.TraineeCatalogView,
-    private val model: Model,
-    viewLifecycleOwner: LifecycleOwner
+    private val model: Model
 ) : Contract.TraineeCatalogPresenter {
 
     private val traineeAdapter: TraineeAdapter
 
     init {
-        val traineeList = model.traineeListLiveData.value ?: ArrayList()
+        val traineeList = model.getTraineeList()
         traineeAdapter = TraineeAdapter(traineeList)
         view.setAdapter(traineeAdapter)
-        model.viewPagerCurrentItemLiveData.value?.let {
-            view.setCurrentPage(it)
-        }
-        model.traineeListLiveData.observe(viewLifecycleOwner) { value ->
-            showLastTrainee(value)
-        }
+        view.setCurrentPage(model.getViewPagerCurrentItem())
     }
 
-//    override fun onTabLayoutMediatorAttach(tab: TabLayout.Tab, position: Int) {
-//        val trainee = model.getTraineeFromList(position)
-//        trainee?.let { t ->
-////            tab.text = "${(t.id)}.${t.fullName?.takeWhile { it.isLetter() }}"
-//        }
-//    }
+    override fun onAddButtonClicked() {
+        showLastTrainee()
+    }
 
-    private fun showLastTrainee(traineeList: List<Trainee>) {
+    private fun showLastTrainee() {
+        val traineeList = model.getTraineeList()
         traineeAdapter.submitList(traineeList)
         view.setCurrentPage(traineeList.size - 1)
     }
 
     override fun onPageSelected(position: Int) {
-        model.setViewPagerCurrentItemLiveData(position)
+        model.setViewPagerCurrentItem(position)
     }
 }

@@ -23,7 +23,6 @@ class InputPresenter(
         when {
             result != s.toString() -> {
                 view.setInputName(result)
-                view.setSelection(result.length)
             }
             else -> {
                 val fullName = result.trim()
@@ -75,9 +74,7 @@ class InputPresenter(
             view.clearCheckBoxHasSigmaAccount()
             view.clearCheckBoxHasComputer()
             traineeTmp = null
-            if (model.isAddedViewPagerFragmentLiveData.value == null) {
-                model.setIsAddedViewPagerFragment(true)
-            }
+            view.notifyTraineeCatalogFragment()
         }
     }
 

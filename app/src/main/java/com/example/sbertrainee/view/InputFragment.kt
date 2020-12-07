@@ -2,11 +2,10 @@ package com.example.sbertrainee.view
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import com.example.sbertrainee.R
 import com.example.sbertrainee.App
 import com.example.sbertrainee.Constants
@@ -53,10 +52,6 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
             inputPresenter.onClearButtonClicked()
         }
 
-//        binding.radioGroupGender.setOnCheckedChangeListener { _, checkedId ->
-//            inputPresenter.onGenderCheckedChange(checkedId)
-//        }
-
         binding.radioMale.setOnClickListener {
             inputPresenter.onMaleGenderChecked()
         }
@@ -64,7 +59,6 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
         binding.radioFemale.setOnClickListener {
             inputPresenter.onFemaleGenderChecked()
         }
-//        binding.onMaleGenderChecked()
 
         binding.checkBoxHasAlphaAccount.setOnCheckedChangeListener { _, isChecked ->
             inputPresenter.onHasAlphaCheckedChange(isChecked)
@@ -80,12 +74,13 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
         }
     }
 
-    override fun setInputName(name: String) {
-        binding.editTextFullName.setText(name)
+    override fun notifyTraineeCatalogFragment() {
+        setFragmentResult(Constants.REQUEST_INPUT_TRAINEE, Bundle())
     }
 
-    override fun setSelection(position: Int) {
-        binding.editTextFullName.setSelection(position)
+    override fun setInputName(name: String) {
+        binding.editTextFullName.setText(name)
+        binding.editTextFullName.setSelection(name.length)
     }
 
     override fun setEnabledAddButton(value: Boolean) {

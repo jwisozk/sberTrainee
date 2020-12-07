@@ -10,17 +10,14 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.updateLayoutParams
-import com.example.sbertrainee.App
 import com.example.sbertrainee.Constants
 import com.example.sbertrainee.databinding.ActivityMainBinding
 import com.example.sbertrainee.inrerface.Contract
-import com.example.sbertrainee.presenter.MainPresenter
 
 
 class MainActivity : AppCompatActivity(), Contract.MainView {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var mainPresenter: MainPresenter
     private lateinit var keyboardResetByClickOutside: KeyboardResetByClickOutside
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,9 +30,6 @@ class MainActivity : AppCompatActivity(), Contract.MainView {
     }
 
     private fun init() {
-        val app = applicationContext as App
-        val model = app.model
-        mainPresenter = MainPresenter(this, model, supportFragmentManager, this)
         keyboardResetByClickOutside = KeyboardResetByClickOutside()
     }
 

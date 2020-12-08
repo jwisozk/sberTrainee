@@ -30,7 +30,7 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
         binding = FragmentInputBinding.bind(view)
         fragmentInputBinding = binding
         init()
-        addListeners()
+        initListeners()
     }
 
     private fun init() {
@@ -40,7 +40,7 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
         inputPresenter = InputPresenter(this, model, resources)
     }
 
-    private fun addListeners() {
+    private fun initListeners() {
         binding.editTextFullName.addTextChangedListener(simpleTextWatcher)
         binding.editTextFullName.setOnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) {

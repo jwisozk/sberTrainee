@@ -67,11 +67,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun convertDpToPixel(): Int {
-        return run {
-            val dp = Constants.FRAGMENT_MARGIN_VALUE
-            val metrics = resources.displayMetrics
-            (dp * (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
-        }
+        val dp = Constants.FRAGMENT_MARGIN_VALUE
+        val metrics = resources.displayMetrics
+        return (dp * (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
     }
 
     private class KeyboardResetByClickOutside {

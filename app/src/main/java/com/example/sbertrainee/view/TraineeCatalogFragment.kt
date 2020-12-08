@@ -25,7 +25,6 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog), Cont
         binding = FragmentTraineeCatalogBinding.bind(view)
         fragmentTraineeCatalogBinding = binding
         init()
-        listeners()
     }
 
     private fun init() {
@@ -38,9 +37,6 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog), Cont
                 traineeCatalogPresenter.onItemPositionSelected(position)
             }
         })
-    }
-
-    private fun listeners() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { _, _ ->
         }.attach()
         setFragmentResultListener(Constants.REQUEST_INPUT_TRAINEE) { _, _ ->

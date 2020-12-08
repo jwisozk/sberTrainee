@@ -35,7 +35,7 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog), Cont
         traineeCatalogPresenter = TraineeCatalogPresenter(this, model)
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                traineeCatalogPresenter.onPageSelected(position)
+                traineeCatalogPresenter.onItemPositionSelected(position)
             }
         })
     }
@@ -44,10 +44,14 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog), Cont
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { _, _ ->
         }.attach()
         setFragmentResultListener(Constants.REQUEST_INPUT_TRAINEE) { _, _ ->
-            if (binding.root.visibility == View.INVISIBLE) {
-                binding.root.visibility = View.VISIBLE
-            }
+            setVisibleFragmentView()
             traineeCatalogPresenter.onAddButtonClicked()
+        }
+    }
+
+    override fun setVisibleFragmentView() {
+        if (binding.root.visibility == View.INVISIBLE) {
+            binding.root.visibility = View.VISIBLE
         }
     }
 
@@ -55,7 +59,7 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog), Cont
         binding.viewPager.adapter = adapter
     }
 
-    override fun setCurrentPage(num: Int) {
+    override fun setSelectedItemPosition(num: Int) {
         binding.viewPager.setCurrentItem(num, false)
     }
 

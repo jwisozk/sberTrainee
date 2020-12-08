@@ -6,5 +6,4 @@ object Constants {
     const val ADD_TRAINEE_BUTTON_ALPHA_MEDIUM = 0.5f
     const val ADD_TRAINEE_BUTTON_ALPHA_FULL = 1f
     const val REQUEST_INPUT_TRAINEE = "requestInputTrainee"
-    const val BUNDLE_INPUT_TRAINEE = "bundleInputTrainee"
 }

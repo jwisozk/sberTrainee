@@ -21,7 +21,7 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
     private lateinit var inputPresenter: InputPresenter
     private val simpleTextWatcher = object : SimpleTextWatcher() {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            inputPresenter.onTextChanged(s)
+            inputPresenter.onInputNameChanged(s)
         }
     }
 
@@ -53,21 +53,21 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
         }
 
         binding.radioMale.setOnClickListener {
-            inputPresenter.onMaleGenderChecked()
+            inputPresenter.onInputGenderMaleChecked()
         }
 
         binding.radioFemale.setOnClickListener {
-            inputPresenter.onFemaleGenderChecked()
+            inputPresenter.onInputGenderFemaleChecked()
         }
 
         binding.checkBoxHasAlphaAccount.setOnCheckedChangeListener { _, isChecked ->
-            inputPresenter.onHasAlphaCheckedChange(isChecked)
+            inputPresenter.onInputAlphaAccountChecked(isChecked)
         }
         binding.checkBoxHasSigmaAccount.setOnCheckedChangeListener { _, isChecked ->
-            inputPresenter.onHasSigmaCheckedChange(isChecked)
+            inputPresenter.onInputSigmaAccountChecked(isChecked)
         }
         binding.checkBoxHasComputer.setOnCheckedChangeListener { _, isChecked ->
-            inputPresenter.onHasComputerCheckedChange(isChecked)
+            inputPresenter.onInputComputerChecked(isChecked)
         }
         binding.buttonAddTrainee.setOnClickListener {
             inputPresenter.onAddButtonClicked()
@@ -91,23 +91,23 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
         }
     }
 
-    override fun clearEditTextFullName() {
+    override fun clearInputName() {
         binding.editTextFullName.editableText?.clear()
     }
 
-    override fun clearRadioGroupGender() {
+    override fun clearInputGender() {
         binding.radioGroupGender.clearCheck()
     }
 
-    override fun clearCheckBoxHasAlphaAccount() {
+    override fun clearInputAlphaAccount() {
         binding.checkBoxHasAlphaAccount.isChecked = false
     }
 
-    override fun clearCheckBoxHasSigmaAccount() {
+    override fun clearInputSigmaAccount() {
         binding.checkBoxHasSigmaAccount.isChecked = false
     }
 
-    override fun clearCheckBoxHasComputer() {
+    override fun clearInputComputer() {
         binding.checkBoxHasComputer.isChecked = false
     }
 

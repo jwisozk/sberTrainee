@@ -16,9 +16,8 @@ class InputPresenter(
     private val blockCharacters = "[\\d,.@#\$_&+()/*\"\':;!?%=|`~{}<>^]"
     @VisibleForTesting
     var traineeTmp: Trainee? = null
-    private var counterId = 0
 
-    override fun onTextChanged(s: CharSequence?) {
+    override fun onInputNameChanged(s: CharSequence?) {
         val result: String = s.toString().trimStart().replace(Regex(blockCharacters), "")
         when {
             result != s.toString() -> {
@@ -32,12 +31,12 @@ class InputPresenter(
         view.setEnabledAddButton(isDataEnough())
     }
 
-    override fun onMaleGenderChecked() {
+    override fun onInputGenderMaleChecked() {
         val gender = resources.getString(R.string.gender_male)
         setGender(gender)
     }
 
-    override fun onFemaleGenderChecked() {
+    override fun onInputGenderFemaleChecked() {
         val gender = resources.getString(R.string.gender_female)
         setGender(gender)
     }
@@ -53,32 +52,35 @@ class InputPresenter(
         view.setEnabledAddButton(isDataEnough())
     }
 
-    override fun onHasAlphaCheckedChange(isChecked: Boolean) {
+    override fun onInputAlphaAccountChecked(isChecked: Boolean) {
         traineeTmp = traineeTmp?.copy(hasAlphaAccount = isChecked) ?: Trainee(hasAlphaAccount = isChecked)
     }
 
-    override fun onHasSigmaCheckedChange(isChecked: Boolean) {
+    override fun onInputSigmaAccountChecked(isChecked: Boolean) {
         traineeTmp = traineeTmp?.copy(hasSigmaAccount = isChecked) ?: Trainee(hasSigmaAccount = isChecked)
     }
 
-    override fun onHasComputerCheckedChange(isChecked: Boolean) {
+    override fun onInputComputerChecked(isChecked: Boolean) {
         traineeTmp = traineeTmp?.copy(hasComputer = isChecked) ?: Trainee(hasComputer = isChecked)
     }
 
     override fun onAddButtonClicked() {
         traineeTmp?.let {
-            model.addTrainee(it.apply { id = ++counterId })
-            view.clearEditTextFullName()
-            view.clearRadioGroupGender()
-            view.clearCheckBoxHasAlphaAccount()
-            view.clearCheckBoxHasSigmaAccount()
-            view.clearCheckBoxHasComputer()
+            model.addNewTrainee(it.apply {
+                id = model.getTraineeList().size + 1
+            })
+            view.clearInputName()
+            view.clearInputGender()
+            view.clearInputAlphaAccount()
+            view.clearInputSigmaAccount()
+            view.clearInputComputer()
             traineeTmp = null
             view.notifyTraineeCatalogFragment()
         }
     }
 
-    private fun isDataEnough(): Boolean =
+    @VisibleForTesting
+    fun isDataEnough(): Boolean =
         when {
             traineeTmp?.fullName.isNullOrEmpty() -> false
             traineeTmp?.gender == null -> false

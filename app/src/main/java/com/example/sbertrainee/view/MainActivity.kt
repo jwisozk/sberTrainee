@@ -12,10 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.updateLayoutParams
 import com.example.sbertrainee.Constants
 import com.example.sbertrainee.databinding.ActivityMainBinding
-import com.example.sbertrainee.inrerface.Contract
 
 
-class MainActivity : AppCompatActivity(), Contract.MainView {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var keyboardResetByClickOutside: KeyboardResetByClickOutside
@@ -38,10 +37,6 @@ class MainActivity : AppCompatActivity(), Contract.MainView {
         return super.dispatchTouchEvent(event)
     }
 
-    override fun setTraineeCatalogFragmentVisible() {
-        binding.fragmentTraineeCatalogContainer.visibility = View.VISIBLE
-    }
-
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         changeLayoutConfiguration(newConfig.orientation)
@@ -52,28 +47,28 @@ class MainActivity : AppCompatActivity(), Contract.MainView {
             binding.rootLayout.orientation = LinearLayout.HORIZONTAL
             binding.fragmentInputContainer.updateLayoutParams<LinearLayout.LayoutParams> {
                 bottomMargin = Constants.FRAGMENT_MARGIN_ZERO
-                rightMargin = convertDpToPixel(Constants.FRAGMENT_MARGIN_VALUE)
+                rightMargin = convertDpToPixel()
             }
             binding.fragmentTraineeCatalogContainer.updateLayoutParams<LinearLayout.LayoutParams> {
                 topMargin = Constants.FRAGMENT_MARGIN_ZERO
-                leftMargin = convertDpToPixel(Constants.FRAGMENT_MARGIN_VALUE)
+                leftMargin = convertDpToPixel()
             }
         } else if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             binding.rootLayout.orientation = LinearLayout.VERTICAL
             binding.fragmentInputContainer.updateLayoutParams<LinearLayout.LayoutParams> {
-                bottomMargin = convertDpToPixel(Constants.FRAGMENT_MARGIN_VALUE)
+                bottomMargin = convertDpToPixel()
                 rightMargin = Constants.FRAGMENT_MARGIN_ZERO
             }
             binding.fragmentTraineeCatalogContainer.updateLayoutParams<LinearLayout.LayoutParams> {
-                topMargin = convertDpToPixel(Constants.FRAGMENT_MARGIN_VALUE)
+                topMargin = convertDpToPixel()
                 leftMargin = Constants.FRAGMENT_MARGIN_ZERO
             }
         }
     }
 
-    private fun convertDpToPixel(dp: Int): Int {
+    private fun convertDpToPixel(): Int {
         return run {
-            val resources = resources
+            val dp = Constants.FRAGMENT_MARGIN_VALUE
             val metrics = resources.displayMetrics
             (dp * (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
         }

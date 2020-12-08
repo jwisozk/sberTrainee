@@ -2,10 +2,11 @@ package com.example.sbertrainee.model
 
 class Model {
 
-    private var viewPagerCurrentItem = 0
+    private var selectedItemPosition = 0
     private val traineeList: MutableList<Trainee> = ArrayList()
+    var isTraineeCatalogFragmentAdded = false
 
-    fun addTrainee(trainee: Trainee) {
+    fun addNewTrainee(trainee: Trainee) {
         traineeList.add(trainee)
     }
 
@@ -13,11 +14,11 @@ class Model {
         return traineeList
     }
 
-    fun getViewPagerCurrentItem(): Int {
-        return viewPagerCurrentItem
+    fun getSelectedItemPosition(): Int {
+        return selectedItemPosition
     }
 
-    fun setViewPagerCurrentItem(position: Int) {
-        viewPagerCurrentItem = position
+    fun setSelectedItemPosition(position: Int) {
+        selectedItemPosition = position
     }
 }

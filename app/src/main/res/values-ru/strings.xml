@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Стажеры</string>
+    <string name="trainee_number_label">Стажер №</string>
+    <string name="full_name">ФИО:</string>
+    <string name="full_name_label">ФИО</string>
+    <string name="gender">Пол:</string>
+    <string name="gender_male">♂</string>
+    <string name="gender_female">♀</string>
+    <string name="alpha_account">Альфа аккаунт</string>
+    <string name="sigma_account">Сигма аккаунт</string>
+    <string name="work_computer">Рабочий компьютер</string>
+    <string name="computer_provided">Компьтер предоставлен</string>
+    <string name="add_trainee">Добавить</string>
+    <string name="provided_label">Предоставлены:</string>
+</resources>

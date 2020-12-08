@@ -12,23 +12,26 @@ class TraineeCatalogPresenter(
     private val traineeAdapter: TraineeAdapter
 
     init {
+        if (model.isTraineeCatalogFragmentAdded)
+            view.setVisibleFragmentView()
         val traineeList = model.getTraineeList()
         traineeAdapter = TraineeAdapter(traineeList)
         view.setAdapter(traineeAdapter)
-        view.setCurrentPage(model.getViewPagerCurrentItem())
+        view.setSelectedItemPosition(model.getSelectedItemPosition())
     }
 
     override fun onAddButtonClicked() {
+        model.isTraineeCatalogFragmentAdded = true
         showLastTrainee()
     }
 
     private fun showLastTrainee() {
         val traineeList = model.getTraineeList()
         traineeAdapter.submitList(traineeList)
-        view.setCurrentPage(traineeList.size - 1)
+        view.setSelectedItemPosition(traineeList.size - 1)
     }
 
-    override fun onPageSelected(position: Int) {
-        model.setViewPagerCurrentItem(position)
+    override fun onItemPositionSelected(position: Int) {
+        model.setSelectedItemPosition(position)
     }
 }

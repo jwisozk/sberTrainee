@@ -1,6 +1,6 @@
 package com.example.sbertrainee.inrerface
 
-import com.example.sbertrainee.presenter.adapter.TraineeAdapter
+import com.example.sbertrainee.model.Trainee
 
 interface Contract {
 
@@ -16,9 +16,10 @@ interface Contract {
     }
 
     interface TraineeCatalogView {
-        fun setAdapter(adapter: TraineeAdapter)
-        fun setSelectedItemPosition(num: Int)
+        fun setAdapter(traineeList: List<Trainee>)
+        fun setSelectedItemPosition(position: Int)
         fun setVisibleFragmentView()
+        fun updateTraineeList(traineeList: List<Trainee>)
     }
 
     interface InputPresenter {

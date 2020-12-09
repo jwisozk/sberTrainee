@@ -10,6 +10,7 @@ import com.example.sbertrainee.App
 import com.example.sbertrainee.Constants
 import com.example.sbertrainee.databinding.FragmentTraineeCatalogBinding
 import com.example.sbertrainee.inrerface.Contract
+import com.example.sbertrainee.model.Trainee
 import com.example.sbertrainee.presenter.TraineeCatalogPresenter
 import com.example.sbertrainee.presenter.adapter.TraineeAdapter
 import com.google.android.material.tabs.TabLayoutMediator
@@ -19,6 +20,7 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog), Cont
     private lateinit var traineeCatalogPresenter: TraineeCatalogPresenter
     private var fragmentTraineeCatalogBinding: FragmentTraineeCatalogBinding? = null
     private lateinit var binding: FragmentTraineeCatalogBinding
+    private var traineeAdapter: TraineeAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,12 +53,17 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog), Cont
         }
     }
 
-    override fun setAdapter(adapter: TraineeAdapter) {
-        binding.viewPager.adapter = adapter
+    override fun setAdapter(traineeList: List<Trainee>) {
+        traineeAdapter = TraineeAdapter(traineeList)
+        binding.viewPager.adapter = traineeAdapter
     }
 
-    override fun setSelectedItemPosition(num: Int) {
-        binding.viewPager.setCurrentItem(num, false)
+    override fun updateTraineeList(traineeList: List<Trainee>) {
+        traineeAdapter?.submitList(traineeList)
+    }
+
+    override fun setSelectedItemPosition(position: Int) {
+        binding.viewPager.setCurrentItem(position, false)
     }
 
     override fun onDestroy() {

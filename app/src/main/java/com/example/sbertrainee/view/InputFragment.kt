@@ -16,8 +16,7 @@ import com.example.sbertrainee.presenter.InputPresenter
 
 class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
 
-    private var fragmentInputBinding: FragmentInputBinding? = null
-    private lateinit var binding: FragmentInputBinding
+    private var binding: FragmentInputBinding? = null
     private lateinit var inputPresenter: InputPresenter
     private val simpleTextWatcher = object : SimpleTextWatcher() {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -28,7 +27,6 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentInputBinding.bind(view)
-        fragmentInputBinding = binding
         init()
         initListeners()
     }
@@ -41,37 +39,40 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
     }
 
     private fun initListeners() {
-        binding.editTextFullName.addTextChangedListener(simpleTextWatcher)
-        binding.editTextFullName.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) {
-                val inputMethodManager = activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
-                inputMethodManager?.hideSoftInputFromWindow(v.windowToken, 0)
+        binding?.let {
+            it.editTextFullName.addTextChangedListener(simpleTextWatcher)
+            it.editTextFullName.setOnFocusChangeListener { v, hasFocus ->
+                if (!hasFocus) {
+                    val inputMethodManager = activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
+                    inputMethodManager?.hideSoftInputFromWindow(v.windowToken, 0)
+                }
+            }
+            it.textInputLayout.setEndIconOnClickListener {
+                inputPresenter.onClearButtonClicked()
+            }
+
+            it.radioMale.setOnClickListener {
+                inputPresenter.onInputGenderMaleChecked()
+            }
+
+            it.radioFemale.setOnClickListener {
+                inputPresenter.onInputGenderFemaleChecked()
+            }
+
+            it.checkBoxHasAlphaAccount.setOnCheckedChangeListener { _, isChecked ->
+                inputPresenter.onInputAlphaAccountChecked(isChecked)
+            }
+            it.checkBoxHasSigmaAccount.setOnCheckedChangeListener { _, isChecked ->
+                inputPresenter.onInputSigmaAccountChecked(isChecked)
+            }
+            it.checkBoxHasComputer.setOnCheckedChangeListener { _, isChecked ->
+                inputPresenter.onInputComputerChecked(isChecked)
+            }
+            it.buttonAddTrainee.setOnClickListener {
+                inputPresenter.onAddButtonClicked()
             }
         }
-        binding.textInputLayout.setEndIconOnClickListener {
-            inputPresenter.onClearButtonClicked()
-        }
 
-        binding.radioMale.setOnClickListener {
-            inputPresenter.onInputGenderMaleChecked()
-        }
-
-        binding.radioFemale.setOnClickListener {
-            inputPresenter.onInputGenderFemaleChecked()
-        }
-
-        binding.checkBoxHasAlphaAccount.setOnCheckedChangeListener { _, isChecked ->
-            inputPresenter.onInputAlphaAccountChecked(isChecked)
-        }
-        binding.checkBoxHasSigmaAccount.setOnCheckedChangeListener { _, isChecked ->
-            inputPresenter.onInputSigmaAccountChecked(isChecked)
-        }
-        binding.checkBoxHasComputer.setOnCheckedChangeListener { _, isChecked ->
-            inputPresenter.onInputComputerChecked(isChecked)
-        }
-        binding.buttonAddTrainee.setOnClickListener {
-            inputPresenter.onAddButtonClicked()
-        }
     }
 
     override fun notifyTraineeCatalogFragment() {
@@ -79,40 +80,44 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
     }
 
     override fun setInputName(name: String) {
-        binding.editTextFullName.setText(name)
-        binding.editTextFullName.setSelection(name.length)
+        binding?.let {
+            it.editTextFullName.setText(name)
+            it.editTextFullName.setSelection(name.length)
+        }
     }
 
     override fun setEnabledAddButton(value: Boolean) {
-        binding.buttonAddTrainee.isEnabled = value
-        binding.buttonAddTrainee.alpha = when (value) {
-            true -> Constants.ADD_TRAINEE_BUTTON_ALPHA_FULL
-            else -> Constants.ADD_TRAINEE_BUTTON_ALPHA_MEDIUM
+        binding?.let {
+            it.buttonAddTrainee.isEnabled = value
+            it.buttonAddTrainee.alpha = when (value) {
+                true -> Constants.ADD_TRAINEE_BUTTON_ALPHA_FULL
+                else -> Constants.ADD_TRAINEE_BUTTON_ALPHA_MEDIUM
+            }
         }
     }
 
     override fun clearInputName() {
-        binding.editTextFullName.editableText?.clear()
+        binding?.editTextFullName?.editableText?.clear()
     }
 
     override fun clearInputGender() {
-        binding.radioGroupGender.clearCheck()
+        binding?.radioGroupGender?.clearCheck()
     }
 
     override fun clearInputAlphaAccount() {
-        binding.checkBoxHasAlphaAccount.isChecked = false
+        binding?.checkBoxHasAlphaAccount?.isChecked = false
     }
 
     override fun clearInputSigmaAccount() {
-        binding.checkBoxHasSigmaAccount.isChecked = false
+        binding?.checkBoxHasSigmaAccount?.isChecked = false
     }
 
     override fun clearInputComputer() {
-        binding.checkBoxHasComputer.isChecked = false
+        binding?.checkBoxHasComputer?.isChecked = false
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        fragmentInputBinding = null
+        binding = null
     }
 }

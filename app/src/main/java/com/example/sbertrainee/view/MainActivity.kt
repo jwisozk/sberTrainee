@@ -16,16 +16,19 @@ import com.example.sbertrainee.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private var binding: ActivityMainBinding? = null
     private lateinit var keyboardResetByClickOutside: KeyboardResetByClickOutside
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-        changeLayoutConfiguration(this.resources.configuration.orientation)
-        init()
+        binding?.let {
+            val view = it.root
+            setContentView(view)
+            changeLayoutConfiguration(this.resources.configuration.orientation)
+            init()
+        }
+
     }
 
     private fun init() {
@@ -44,22 +47,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun changeLayoutConfiguration(orientation: Int) {
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            binding.rootLayout.orientation = LinearLayout.HORIZONTAL
-            binding.fragmentInputContainer.updateLayoutParams<LinearLayout.LayoutParams> {
+            binding?.rootLayout?.orientation = LinearLayout.HORIZONTAL
+            binding?.fragmentInputContainer?.updateLayoutParams<LinearLayout.LayoutParams> {
                 bottomMargin = Constants.FRAGMENT_MARGIN_ZERO
                 rightMargin = convertDpToPixel()
             }
-            binding.fragmentTraineeCatalogContainer.updateLayoutParams<LinearLayout.LayoutParams> {
+            binding?.fragmentTraineeCatalogContainer?.updateLayoutParams<LinearLayout.LayoutParams> {
                 topMargin = Constants.FRAGMENT_MARGIN_ZERO
                 leftMargin = convertDpToPixel()
             }
         } else if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            binding.rootLayout.orientation = LinearLayout.VERTICAL
-            binding.fragmentInputContainer.updateLayoutParams<LinearLayout.LayoutParams> {
+            binding?.rootLayout?.orientation = LinearLayout.VERTICAL
+            binding?.fragmentInputContainer?.updateLayoutParams<LinearLayout.LayoutParams> {
                 bottomMargin = convertDpToPixel()
                 rightMargin = Constants.FRAGMENT_MARGIN_ZERO
             }
-            binding.fragmentTraineeCatalogContainer.updateLayoutParams<LinearLayout.LayoutParams> {
+            binding?.fragmentTraineeCatalogContainer?.updateLayoutParams<LinearLayout.LayoutParams> {
                 topMargin = convertDpToPixel()
                 leftMargin = Constants.FRAGMENT_MARGIN_ZERO
             }
@@ -85,5 +88,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }

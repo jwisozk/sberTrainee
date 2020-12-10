@@ -31,6 +31,10 @@ class InputPresenter(
         view.setEnabledAddButton(isDataEnough())
     }
 
+    override fun onClearInputNameButtonClicked() {
+        clearInputName()
+    }
+
     override fun onInputGenderMaleChecked() {
         val gender = resources.getString(R.string.gender_male)
         setGender(gender)
@@ -41,14 +45,12 @@ class InputPresenter(
         setGender(gender)
     }
 
-    private fun setGender(gender: String) {
-        traineeTmp = traineeTmp?.copy(gender = gender) ?: Trainee(gender = gender)
-        view.setEnabledAddButton(isDataEnough())
+    private fun setId(id: Int) {
+        traineeTmp = traineeTmp?.copy(id = id)
     }
 
-    override fun onClearButtonClicked() {
-        traineeTmp = traineeTmp?.copy(fullName = "")
-        view.setInputName("")
+    private fun setGender(gender: String) {
+        traineeTmp = traineeTmp?.copy(gender = gender) ?: Trainee(gender = gender)
         view.setEnabledAddButton(isDataEnough())
     }
 
@@ -64,19 +66,28 @@ class InputPresenter(
         traineeTmp = traineeTmp?.copy(hasComputer = isChecked) ?: Trainee(hasComputer = isChecked)
     }
 
+    private fun clearInputName() {
+        onInputNameChanged("")
+        view.setInputName("")
+    }
+
     override fun onAddButtonClicked() {
+        val id = model.getTraineeList().size + 1
+        setId(id)
         traineeTmp?.let {
-            model.addNewTrainee(it.apply {
-                id = model.getTraineeList().size + 1
-            })
-            view.clearInputName()
-            view.clearInputGender()
-            view.clearInputAlphaAccount()
-            view.clearInputSigmaAccount()
-            view.clearInputComputer()
-            traineeTmp = null
-            view.notifyTraineeCatalogFragment()
+            model.addNewTrainee(it)
+            view.notifyNewTraineeAdded()
+            clearInput()
         }
+    }
+
+    private fun clearInput() {
+        clearInputName()
+        view.clearInputGender()
+        view.clearInputAlphaAccount()
+        view.clearInputSigmaAccount()
+        view.clearInputComputer()
+        traineeTmp = null
     }
 
     @VisibleForTesting

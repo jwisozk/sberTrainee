@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="view_pager_margin_start" type="dimen">8dp</item>
-    <item name="view_pager_padding" type="dimen">16dp</item>
-    <item name="fragment_container_view_layout_margin_top" type="dimen">12dp</item>
+    <dimen name="view_pager_margin_start">8dp</dimen>
+    <dimen name="view_pager_padding">16dp</dimen>
+    <dimen name="fragment_input_container_view_layout_margin_bottom">12dp</dimen>
+    <dimen name="fragment_input_container_view_layout_margin_end">0dp</dimen>
+    <dimen name="fragment_trainee_catalog_container_view_layout_margin_top">12dp</dimen>
+    <dimen name="fragment_trainee_catalog_container_view_layout_margin_start">0dp</dimen>
 </resources>

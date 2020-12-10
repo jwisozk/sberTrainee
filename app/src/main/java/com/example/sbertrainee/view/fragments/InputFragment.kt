@@ -1,28 +1,24 @@
-package com.example.sbertrainee.view
+package com.example.sbertrainee.view.fragments
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import com.example.sbertrainee.R
 import com.example.sbertrainee.App
-import com.example.sbertrainee.Constants
 import com.example.sbertrainee.databinding.FragmentInputBinding
 import com.example.sbertrainee.inrerface.Contract
-import com.example.sbertrainee.util.SimpleTextWatcher
 import com.example.sbertrainee.presenter.InputPresenter
+import com.example.sbertrainee.view.activity.MainActivity
+import com.example.sbertrainee.view.fragments.constants.Constants
 
 class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
 
     private var binding: FragmentInputBinding? = null
     private lateinit var inputPresenter: InputPresenter
-    private val simpleTextWatcher = object : SimpleTextWatcher() {
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            inputPresenter.onInputNameChanged(s)
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,15 +36,18 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
 
     private fun initListeners() {
         binding?.let {
-            it.editTextFullName.addTextChangedListener(simpleTextWatcher)
+            it.editTextFullName.doOnTextChanged { text, _, _, _ ->
+                inputPresenter.onInputNameChanged(text)
+            }
             it.editTextFullName.setOnFocusChangeListener { v, hasFocus ->
                 if (!hasFocus) {
-                    val inputMethodManager = activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
+                    val inputMethodManager =
+                        activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
                     inputMethodManager?.hideSoftInputFromWindow(v.windowToken, 0)
                 }
             }
             it.textInputLayout.setEndIconOnClickListener {
-                inputPresenter.onClearButtonClicked()
+                inputPresenter.onClearInputNameButtonClicked()
             }
 
             it.radioMale.setOnClickListener {
@@ -75,29 +74,16 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
 
     }
 
-    override fun notifyTraineeCatalogFragment() {
+    override fun notifyNewTraineeAdded() {
         setFragmentResult(Constants.REQUEST_INPUT_TRAINEE, Bundle())
     }
 
     override fun setInputName(name: String) {
-        binding?.let {
-            it.editTextFullName.setText(name)
-            it.editTextFullName.setSelection(name.length)
-        }
+        binding?.editTextFullName?.setText(name)
     }
 
     override fun setEnabledAddButton(value: Boolean) {
-        binding?.let {
-            it.buttonAddTrainee.isEnabled = value
-            it.buttonAddTrainee.alpha = when (value) {
-                true -> Constants.ADD_TRAINEE_BUTTON_ALPHA_FULL
-                else -> Constants.ADD_TRAINEE_BUTTON_ALPHA_MEDIUM
-            }
-        }
-    }
-
-    override fun clearInputName() {
-        binding?.editTextFullName?.editableText?.clear()
+        binding?.buttonAddTrainee?.isEnabled = value
     }
 
     override fun clearInputGender() {

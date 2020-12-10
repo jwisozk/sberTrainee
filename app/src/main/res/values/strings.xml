@@ -5,8 +5,8 @@
     <string name="full_name">Full name:</string>
     <string name="full_name_label">Full name</string>
     <string name="gender">Gender:</string>
-    <string name="gender_male">♂</string>
-    <string name="gender_female">♀</string>
+    <string name="gender_male" translatable="false">♂</string>
+    <string name="gender_female" translatable="false">♀</string>
     <string name="alpha_account">Alpha account</string>
     <string name="sigma_account">Sigma account</string>
     <string name="work_computer">Work computer</string>

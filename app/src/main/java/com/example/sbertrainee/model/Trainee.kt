@@ -1,10 +1,10 @@
 package com.example.sbertrainee.model
 
 data class Trainee(
-    var id: Int = 0,
-    var fullName: String? = null,
-    var gender: String? = null,
-    var hasAlphaAccount: Boolean = false,
-    var hasSigmaAccount: Boolean = false,
-    var hasComputer: Boolean = false
+    val id: Int = 0,
+    val fullName: String? = null,
+    val gender: String? = null,
+    val hasAlphaAccount: Boolean = false,
+    val hasSigmaAccount: Boolean = false,
+    val hasComputer: Boolean = false
 )

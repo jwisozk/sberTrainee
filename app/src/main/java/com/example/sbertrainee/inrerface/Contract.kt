@@ -5,18 +5,17 @@ import com.example.sbertrainee.model.Trainee
 interface Contract {
 
     interface InputView {
-        fun clearInputName()
         fun clearInputGender()
         fun clearInputAlphaAccount()
         fun clearInputSigmaAccount()
         fun clearInputComputer()
         fun setInputName(name: String)
         fun setEnabledAddButton(value: Boolean)
-        fun notifyTraineeCatalogFragment()
+        fun notifyNewTraineeAdded()
     }
 
     interface TraineeCatalogView {
-        fun setAdapter(traineeList: List<Trainee>)
+        fun setTraineeList(traineeList: List<Trainee>)
         fun setSelectedItemPosition(position: Int)
         fun setVisibleFragmentView()
         fun updateTraineeList(traineeList: List<Trainee>)
@@ -29,12 +28,12 @@ interface Contract {
         fun onInputAlphaAccountChecked(isChecked: Boolean)
         fun onInputSigmaAccountChecked(isChecked: Boolean)
         fun onInputComputerChecked(isChecked: Boolean)
+        fun onClearInputNameButtonClicked()
         fun onAddButtonClicked()
-        fun onClearButtonClicked()
     }
 
     interface TraineeCatalogPresenter {
         fun onItemPositionSelected(position: Int)
-        fun onAddButtonClicked()
+        fun onNewTraineeAdded()
     }
 }

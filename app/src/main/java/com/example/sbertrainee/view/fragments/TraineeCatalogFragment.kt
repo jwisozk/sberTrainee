@@ -1,4 +1,4 @@
-package com.example.sbertrainee.view
+package com.example.sbertrainee.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,12 +7,13 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.viewpager2.widget.ViewPager2
 import com.example.sbertrainee.R
 import com.example.sbertrainee.App
-import com.example.sbertrainee.Constants
 import com.example.sbertrainee.databinding.FragmentTraineeCatalogBinding
 import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.model.Trainee
 import com.example.sbertrainee.presenter.TraineeCatalogPresenter
-import com.example.sbertrainee.presenter.adapter.TraineeAdapter
+import com.example.sbertrainee.adapter.holder.TraineeAdapter
+import com.example.sbertrainee.view.activity.MainActivity
+import com.example.sbertrainee.view.fragments.constants.Constants
 import com.google.android.material.tabs.TabLayoutMediator
 
 class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog), Contract.TraineeCatalogView {
@@ -42,7 +43,7 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog), Cont
             }.attach()
             setFragmentResultListener(Constants.REQUEST_INPUT_TRAINEE) { _, _ ->
                 setVisibleFragmentView()
-                traineeCatalogPresenter.onAddButtonClicked()
+                traineeCatalogPresenter.onNewTraineeAdded()
             }
         }
     }
@@ -53,7 +54,7 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog), Cont
         }
     }
 
-    override fun setAdapter(traineeList: List<Trainee>) {
+    override fun setTraineeList(traineeList: List<Trainee>) {
         traineeAdapter = TraineeAdapter(traineeList)
         binding?.viewPager?.adapter = traineeAdapter
     }

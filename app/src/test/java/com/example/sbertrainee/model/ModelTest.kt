@@ -29,14 +29,14 @@ class ModelTest {
 
     @Test
     fun `setSelectedItemPosition if position saved return this position`() {
-        model.setSelectedItemPosition(1)
-        val position = model.getSelectedItemPosition()
+        model.selectedItemPosition = 1
+        val position = model.selectedItemPosition
         assertThat(position).isEqualTo(1)
     }
 
     @Test
     fun `getSelectedItemPosition if position not saved return 0`() {
-        val position = model.getSelectedItemPosition()
+        val position = model.selectedItemPosition
         assertThat(position).isEqualTo(0)
     }
 

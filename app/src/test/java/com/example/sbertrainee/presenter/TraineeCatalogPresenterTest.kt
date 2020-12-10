@@ -3,7 +3,7 @@ package com.example.sbertrainee.presenter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.model.Model
-import com.example.sbertrainee.presenter.adapter.TraineeAdapter
+import com.example.sbertrainee.adapter.holder.TraineeAdapter
 import com.google.common.truth.Truth.assertThat
 import io.mockk.*
 import io.mockk.impl.annotations.RelaxedMockK
@@ -33,7 +33,7 @@ class TraineeCatalogPresenterTest {
     @Test
     fun `onItemPositionSelected if call return position`() {
         presenter.onItemPositionSelected(1)
-        val position = model.getSelectedItemPosition()
+        val position = model.selectedItemPosition
         assertThat(position).isEqualTo(1)
     }
 

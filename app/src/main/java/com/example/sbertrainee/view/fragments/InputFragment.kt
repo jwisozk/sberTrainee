@@ -71,7 +71,6 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
                 inputPresenter.onAddButtonClicked()
             }
         }
-
     }
 
     override fun notifyNewTraineeAdded() {

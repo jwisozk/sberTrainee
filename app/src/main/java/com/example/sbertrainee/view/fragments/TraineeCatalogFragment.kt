@@ -49,9 +49,7 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog), Cont
     }
 
     override fun setVisibleFragmentView() {
-        if (binding?.root?.visibility == View.INVISIBLE) {
-            binding?.root?.visibility = View.VISIBLE
-        }
+        binding?.root?.visibility = View.VISIBLE
     }
 
     override fun setTraineeList(traineeList: List<Trainee>) {

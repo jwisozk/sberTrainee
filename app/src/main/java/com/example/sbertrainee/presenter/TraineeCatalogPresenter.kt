@@ -18,8 +18,10 @@ class TraineeCatalogPresenter(
 
     override fun onNewTraineeAdded() {
         val traineeList = model.getTraineeList()
-        updateTraineeList(traineeList)
-        showLastTrainee(traineeList)
+        if (traineeList.isNotEmpty()) {
+            updateTraineeList(traineeList)
+            showLastTrainee(traineeList)
+        }
     }
 
     private fun updateTraineeList(traineeList: List<Trainee>) {

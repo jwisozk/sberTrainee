@@ -17,7 +17,7 @@ interface Contract {
     interface TraineeCatalogView {
         fun setTraineeList(traineeList: List<Trainee>)
         fun setSelectedItemPosition(position: Int)
-        fun setVisibleFragmentView()
+        fun setVisibilityFragmentView(value: Int)
         fun updateTraineeList(traineeList: List<Trainee>)
     }
 
@@ -34,6 +34,7 @@ interface Contract {
 
     interface TraineeCatalogPresenter {
         fun onItemPositionSelected(position: Int)
-        fun onNewTraineeAdded()
+        fun refreshTraineeList()
+        fun onRemoveButtonClicked()
     }
 }

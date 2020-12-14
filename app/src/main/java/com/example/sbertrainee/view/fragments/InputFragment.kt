@@ -14,6 +14,7 @@ import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.presenter.InputPresenter
 import com.example.sbertrainee.view.activity.MainActivity
 import com.example.sbertrainee.view.fragments.constants.Constants
+import java.lang.IllegalStateException
 
 class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
 
@@ -40,11 +41,8 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
                 inputPresenter.onInputNameChanged(text)
             }
             it.editTextFullName.setOnFocusChangeListener { v, hasFocus ->
-                if (!hasFocus) {
-                    val inputMethodManager =
-                        activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
-                    inputMethodManager?.hideSoftInputFromWindow(v.windowToken, 0)
-                }
+                if (!hasFocus)
+                    hideSoftInputFromWindow(v)
             }
             it.textInputLayout.setEndIconOnClickListener {
                 inputPresenter.onClearInputNameButtonClicked()
@@ -70,7 +68,13 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
             it.buttonAddTrainee.setOnClickListener {
                 inputPresenter.onAddButtonClicked()
             }
-        }
+        } ?: throw IllegalStateException()
+    }
+
+    private fun hideSoftInputFromWindow(v: View) {
+        val inputMethodManager =
+            activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
+        inputMethodManager?.hideSoftInputFromWindow(v.windowToken, 0)
     }
 
     override fun notifyNewTraineeAdded() {

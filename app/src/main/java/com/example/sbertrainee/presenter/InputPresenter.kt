@@ -14,6 +14,7 @@ class InputPresenter(
 ) : Contract.InputPresenter {
 
     private val blockCharacters = "[\\d,.@#\$_&+()/*\"\':;!?%=|`~{}<>^]"
+
     @VisibleForTesting
     var traineeTmp: Trainee? = null
 
@@ -55,11 +56,13 @@ class InputPresenter(
     }
 
     override fun onInputAlphaAccountChecked(isChecked: Boolean) {
-        traineeTmp = traineeTmp?.copy(hasAlphaAccount = isChecked) ?: Trainee(hasAlphaAccount = isChecked)
+        traineeTmp =
+            traineeTmp?.copy(hasAlphaAccount = isChecked) ?: Trainee(hasAlphaAccount = isChecked)
     }
 
     override fun onInputSigmaAccountChecked(isChecked: Boolean) {
-        traineeTmp = traineeTmp?.copy(hasSigmaAccount = isChecked) ?: Trainee(hasSigmaAccount = isChecked)
+        traineeTmp =
+            traineeTmp?.copy(hasSigmaAccount = isChecked) ?: Trainee(hasSigmaAccount = isChecked)
     }
 
     override fun onInputComputerChecked(isChecked: Boolean) {

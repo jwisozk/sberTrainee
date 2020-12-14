@@ -1,10 +1,13 @@
 package com.example.sbertrainee.view.fragments
 
+import android.animation.Animator
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.setFragmentResultListener
 import androidx.viewpager2.widget.ViewPager2
+import com.airbnb.lottie.LottieAnimationView
 import com.example.sbertrainee.R
 import com.example.sbertrainee.App
 import com.example.sbertrainee.databinding.FragmentTraineeCatalogBinding
@@ -14,9 +17,13 @@ import com.example.sbertrainee.presenter.TraineeCatalogPresenter
 import com.example.sbertrainee.adapter.holder.TraineeAdapter
 import com.example.sbertrainee.view.activity.MainActivity
 import com.example.sbertrainee.view.fragments.constants.Constants
+import com.example.sbertrainee.view.fragments.util.AnimatorListener
+import com.example.sbertrainee.view.fragments.util.DepthPageTransformer
 import com.google.android.material.tabs.TabLayoutMediator
+import java.lang.IllegalStateException
 
-class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog), Contract.TraineeCatalogView {
+class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog),
+    Contract.TraineeCatalogView {
 
     private lateinit var traineeCatalogPresenter: TraineeCatalogPresenter
     private var binding: FragmentTraineeCatalogBinding? = null
@@ -34,6 +41,7 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog), Cont
         val model = app.model
         traineeCatalogPresenter = TraineeCatalogPresenter(this, model)
         binding?.let {
+            it.viewPager.setPageTransformer(DepthPageTransformer())
             it.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     traineeCatalogPresenter.onItemPositionSelected(position)
@@ -42,14 +50,24 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog), Cont
             TabLayoutMediator(it.tabLayout, it.viewPager) { _, _ ->
             }.attach()
             setFragmentResultListener(Constants.REQUEST_INPUT_TRAINEE) { _, _ ->
-                setVisibleFragmentView()
-                traineeCatalogPresenter.onNewTraineeAdded()
+                setVisibilityFragmentView(View.VISIBLE)
+                traineeCatalogPresenter.refreshTraineeList()
             }
-        }
+            val removeTraineeLottieAnimationView = it.removeTraineeLottieAnimationView
+            removeTraineeLottieAnimationView.setOnClickListener {
+                removeTraineeLottieAnimationView.playAnimation()
+            }
+            removeTraineeLottieAnimationView.addAnimatorListener(object : AnimatorListener() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    removeTraineeLottieAnimationView.progress = PROGRESS_ANIMATION
+                    traineeCatalogPresenter.onRemoveButtonClicked()
+                }
+            })
+        } ?: throw IllegalStateException()
     }
 
-    override fun setVisibleFragmentView() {
-        binding?.root?.visibility = View.VISIBLE
+    override fun setVisibilityFragmentView(value: Int) {
+        binding?.root?.visibility = value
     }
 
     override fun setTraineeList(traineeList: List<Trainee>) {
@@ -68,5 +86,9 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog), Cont
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+    }
+
+    companion object {
+        private const val PROGRESS_ANIMATION = 0f
     }
 }

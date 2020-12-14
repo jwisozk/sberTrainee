@@ -1,5 +1,7 @@
 package com.example.sbertrainee.model
 
+import android.util.Log
+
 class Model {
 
     var selectedItemPosition = 0
@@ -11,5 +13,10 @@ class Model {
 
     fun getTraineeList(): List<Trainee> {
         return traineeList
+    }
+
+    fun removeCurrentTrainee() {
+        if (traineeList.isNotEmpty())
+            traineeList.removeAt(selectedItemPosition)
     }
 }

@@ -111,4 +111,14 @@
         fullNameLabelInfoTextView, genderInfoLabelTextView"
         app:layout_constraintStart_toEndOf="parent" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/removeTraineeLottieAnimationView"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="false"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/close" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

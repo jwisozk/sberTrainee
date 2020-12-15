@@ -6,8 +6,5 @@
     <color name="gray">#394854</color>
     <color name="gray_light">#b6c1cb</color>
     <color name="yellow">#ecae42</color>
-    <color name="yellow_disabled">#40ecae42</color>
-    <color name="black_light">#1a2629</color>
-    <color name="black_light_disabled">#401a2629</color>
     <color name="ic_launcher_background">@color/white</color>
 </resources>

@@ -18,4 +18,5 @@ class TraineeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val alphaAccountInfoTextView = binding?.alphaAccountInfoTextView
     val sigmaAccountInfoTextView = binding?.sigmaAccountInfoTextView
     val workComputerInfoTextView = binding?.workComputerInfoTextView
+    val removeTraineeLottieAnimationView = binding?.removeTraineeLottieAnimationView
 }

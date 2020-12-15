@@ -3,6 +3,7 @@ package com.example.sbertrainee.view.fragments.util
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.viewpager2.widget.ViewPager2
+import kotlin.math.abs
 
 @RequiresApi(21)
 class DepthPageTransformer : ViewPager2.PageTransformer {
@@ -33,7 +34,7 @@ class DepthPageTransformer : ViewPager2.PageTransformer {
                     translationZ = -1f
 
                     // Scale the page down (between MIN_SCALE and 1)
-                    val scaleFactor = (MIN_SCALE + (1 - MIN_SCALE) * (1 - Math.abs(position)))
+                    val scaleFactor = (MIN_SCALE + (1 - MIN_SCALE) * (1 - abs(position)))
                     scaleX = scaleFactor
                     scaleY = scaleFactor
                 }

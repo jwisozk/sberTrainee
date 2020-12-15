@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.setFragmentResultListener
 import androidx.viewpager2.widget.ViewPager2
+import com.airbnb.lottie.LottieAnimationView
 import com.example.sbertrainee.R
 import com.example.sbertrainee.App
 import com.example.sbertrainee.databinding.FragmentTraineeCatalogBinding
@@ -51,16 +52,6 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog),
                 setVisibilityFragmentView(View.VISIBLE)
                 traineeCatalogPresenter.refreshTraineeList()
             }
-            val removeTraineeLottieAnimationView = it.removeTraineeLottieAnimationView
-            removeTraineeLottieAnimationView.setOnClickListener {
-                removeTraineeLottieAnimationView.playAnimation()
-            }
-            removeTraineeLottieAnimationView.addAnimatorListener(object : AnimatorListener() {
-                override fun onAnimationEnd(animation: Animator?) {
-                    removeTraineeLottieAnimationView.progress = PROGRESS_ANIMATION
-                    traineeCatalogPresenter.onRemoveButtonClicked()
-                }
-            })
         } ?: throw IllegalStateException()
     }
 
@@ -69,7 +60,20 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog),
     }
 
     override fun setTraineeList(traineeList: List<Trainee>) {
-        traineeAdapter = TraineeAdapter(traineeList)
+        traineeAdapter = TraineeAdapter(traineeList, object : TraineeAdapter.Listener {
+            override fun onRemoveTraineeClickListener(lottieAnimationView: LottieAnimationView) {
+                lottieAnimationView.playAnimation()
+            }
+
+            override fun addAnimatorListener(lottieAnimationView: LottieAnimationView): AnimatorListener {
+                return object : AnimatorListener() {
+                    override fun onAnimationEnd(animation: Animator?) {
+                        lottieAnimationView.progress = PROGRESS_ANIMATION
+                        traineeCatalogPresenter.onRemoveButtonClicked()
+                    }
+                }
+            }
+        })
         binding?.viewPager?.adapter = traineeAdapter
     }
 

@@ -1,15 +1,8 @@
 package com.example.sbertrainee.view.activity
 
-import android.content.res.Configuration
-import android.graphics.Rect
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.MotionEvent
-import android.view.View
-import android.widget.EditText
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.updateLayoutParams
 import com.example.sbertrainee.databinding.ActivityMainBinding
 import com.example.sbertrainee.view.activity.util.KeyboardResetByClickOutside
 

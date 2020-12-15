@@ -46,9 +46,25 @@ class InputPresenter(
         setGender(gender)
     }
 
-    private fun setId(id: Int) {
+    private fun setTraineeId() {
+        val traineeList = model.traineeList
+        var id = traineeList.size + 1
+        if (traineeList.isNotEmpty()) {
+            val lastId = traineeList.last().id
+            if (traineeList.size != lastId) {
+                val list = ArrayList<Int>()
+                traineeList.forEach { list.add(it.id) }
+                for (i in 1 until lastId) {
+                    if (!list.contains(i)) {
+                        id = i
+                        break
+                    }
+                }
+            }
+        }
         traineeTmp = traineeTmp?.copy(id = id)
     }
+
 
     private fun setGender(gender: String) {
         traineeTmp = traineeTmp?.copy(gender = gender) ?: Trainee(gender = gender)
@@ -75,10 +91,10 @@ class InputPresenter(
     }
 
     override fun onAddButtonClicked() {
-        val id = model.getTraineeList().size + 1
-        setId(id)
+        setTraineeId()
         traineeTmp?.let {
             model.addNewTrainee(it)
+            model.sortTraineeList()
             view.notifyNewTraineeAdded()
             clearInput()
         }

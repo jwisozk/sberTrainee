@@ -1,22 +1,24 @@
 package com.example.sbertrainee.model
 
-import android.util.Log
-
 class Model {
 
     var selectedItemPosition = 0
-    private val traineeList: MutableList<Trainee> = ArrayList()
+    var traineeIdShow = 1
+    var traineeList: MutableList<Trainee> = ArrayList()
 
     fun addNewTrainee(trainee: Trainee) {
         traineeList.add(trainee)
+        traineeIdShow = trainee.id
     }
 
-    fun getTraineeList(): List<Trainee> {
-        return traineeList
+    fun sortTraineeList() {
+        traineeList = traineeList.sortedBy { it.id }.toMutableList()
     }
 
     fun removeCurrentTrainee() {
-        if (traineeList.isNotEmpty())
+        if (traineeList.isNotEmpty()) {
             traineeList.removeAt(selectedItemPosition)
+            traineeIdShow = selectedItemPosition + 1
+        }
     }
 }

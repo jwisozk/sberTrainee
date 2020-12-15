@@ -36,5 +36,6 @@ interface Contract {
         fun onItemPositionSelected(position: Int)
         fun refreshTraineeList()
         fun onRemoveButtonClicked()
+        fun onStop()
     }
 }

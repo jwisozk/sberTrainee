@@ -2,12 +2,10 @@ package com.example.sbertrainee.view.fragments
 
 import android.animation.Animator
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.setFragmentResultListener
 import androidx.viewpager2.widget.ViewPager2
-import com.airbnb.lottie.LottieAnimationView
 import com.example.sbertrainee.R
 import com.example.sbertrainee.App
 import com.example.sbertrainee.databinding.FragmentTraineeCatalogBinding
@@ -39,7 +37,7 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog),
         val activity = requireActivity() as MainActivity
         val app = activity.applicationContext as App
         val model = app.model
-        traineeCatalogPresenter = TraineeCatalogPresenter(this, model)
+        traineeCatalogPresenter = TraineeCatalogPresenter(this, model, requireContext().filesDir)
         binding?.let {
             it.viewPager.setPageTransformer(DepthPageTransformer())
             it.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -81,6 +79,11 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog),
 
     override fun setSelectedItemPosition(position: Int) {
         binding?.viewPager?.setCurrentItem(position, false)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        traineeCatalogPresenter.onStop()
     }
 
     override fun onDestroy() {

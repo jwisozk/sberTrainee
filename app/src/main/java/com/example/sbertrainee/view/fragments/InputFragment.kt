@@ -68,7 +68,7 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
             it.buttonAddTrainee.setOnClickListener {
                 inputPresenter.onAddButtonClicked()
             }
-        } ?: throw IllegalStateException()
+        } ?: throw IllegalStateException("Binding is null in InputFragment")
     }
 
     private fun hideSoftInputFromWindow(v: View) {

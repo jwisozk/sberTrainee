@@ -1,6 +1,7 @@
 package com.example.sbertrainee.presenter
 
 import android.view.View
+import androidx.annotation.VisibleForTesting
 import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.model.Model
 import com.example.sbertrainee.model.Trainee
@@ -8,7 +9,6 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
-import java.io.IOException
 
 
 class TraineeCatalogPresenter(
@@ -44,11 +44,13 @@ class TraineeCatalogPresenter(
         refreshTraineeList()
     }
 
-    private fun updateTraineeList(traineeList: List<Trainee>) {
+    @VisibleForTesting
+    fun updateTraineeList(traineeList: List<Trainee>) {
         view.updateTraineeList(traineeList)
     }
 
-    private fun showLastAddedTrainee() {
+    @VisibleForTesting
+    fun showLastAddedTrainee() {
         view.setSelectedItemPosition(model.traineeIdShow - 1)
     }
 
@@ -60,7 +62,7 @@ class TraineeCatalogPresenter(
         val traineeListJson = Json.encodeToString(traineeList)
         try {
             File(path, TRAINEE_LIST_FILE).bufferedWriter().use { out -> out.write(traineeListJson) }
-        } catch (e: IOException) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
@@ -70,7 +72,7 @@ class TraineeCatalogPresenter(
             val traineeListJson =
                 File(path, TRAINEE_LIST_FILE).bufferedReader().use { input -> input.readText() }
             return Json.decodeFromString(traineeListJson)
-        } catch (e: IOException) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
         return null

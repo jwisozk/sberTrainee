@@ -19,17 +19,20 @@ class InputPresenter(
     var traineeTmp: Trainee? = null
 
     override fun onInputNameChanged(s: CharSequence?) {
-        val result: String = s.toString().trimStart().replace(Regex(blockCharacters), "")
-        when {
-            result != s.toString() -> {
-                view.setInputName(result)
+        s?.let {
+            val result: String = it.toString().trimStart().replace(Regex(blockCharacters), "")
+            when {
+                result != it.toString() -> {
+                    view.setInputName(result)
+                }
+                else -> {
+                    val fullName = result.trim()
+                    traineeTmp =
+                        traineeTmp?.copy(fullName = fullName) ?: Trainee(fullName = fullName)
+                }
             }
-            else -> {
-                val fullName = result.trim()
-                traineeTmp = traineeTmp?.copy(fullName = fullName) ?: Trainee(fullName = fullName)
-            }
-        }
-        view.setEnabledAddButton(isDataEnough())
+            view.setEnabledAddButton(isDataEnough())
+        } ?: throw IllegalArgumentException("Argument 's' is null in onInputNameChanged method")
     }
 
     override fun onClearInputNameButtonClicked() {
@@ -45,26 +48,6 @@ class InputPresenter(
         val gender = resources.getString(R.string.gender_female)
         setGender(gender)
     }
-
-    private fun setTraineeId() {
-        val traineeList = model.traineeList
-        var id = traineeList.size + 1
-        if (traineeList.isNotEmpty()) {
-            val lastId = traineeList.last().id
-            if (traineeList.size != lastId) {
-                val list = ArrayList<Int>()
-                traineeList.forEach { list.add(it.id) }
-                for (i in 1 until lastId) {
-                    if (!list.contains(i)) {
-                        id = i
-                        break
-                    }
-                }
-            }
-        }
-        traineeTmp = traineeTmp?.copy(id = id)
-    }
-
 
     private fun setGender(gender: String) {
         traineeTmp = traineeTmp?.copy(gender = gender) ?: Trainee(gender = gender)
@@ -85,9 +68,30 @@ class InputPresenter(
         traineeTmp = traineeTmp?.copy(hasComputer = isChecked) ?: Trainee(hasComputer = isChecked)
     }
 
-    private fun clearInputName() {
+    @VisibleForTesting
+    fun clearInputName() {
         onInputNameChanged("")
         view.setInputName("")
+    }
+
+    @VisibleForTesting
+    fun setTraineeId() {
+        val traineeList = model.traineeList
+        var id = traineeList.size + 1
+        if (traineeList.isNotEmpty()) {
+            val lastId = traineeList.last().id
+            if (traineeList.size != lastId) {
+                val list = ArrayList<Int>()
+                traineeList.forEach { list.add(it.id) }
+                for (i in 1 until lastId) {
+                    if (!list.contains(i)) {
+                        id = i
+                        break
+                    }
+                }
+            }
+        }
+        traineeTmp = traineeTmp?.copy(id = id)
     }
 
     override fun onAddButtonClicked() {
@@ -100,7 +104,8 @@ class InputPresenter(
         }
     }
 
-    private fun clearInput() {
+    @VisibleForTesting
+    fun clearInput() {
         clearInputName()
         view.clearInputGender()
         view.clearInputAlphaAccount()

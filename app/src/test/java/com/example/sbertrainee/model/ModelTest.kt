@@ -14,43 +14,54 @@ class ModelTest {
     }
 
     @Test
-    fun `addNewTrainee if Trainee add return list size equal 1`() {
+    fun `addNewTrainee if list has Trainee return Trainee`() {
         model.addNewTrainee(TRAINEE)
-        val size = model.getTraineeList().size
-        assertThat(size).isEqualTo(1)
-    }
-
-    @Test
-    fun `getTraineeList if list has Trainee return Trainee`() {
-        model.addNewTrainee(TRAINEE)
-        val traineeList = model.getTraineeList()
+        val traineeList = model.traineeList
         assertThat(traineeList[0]).isEqualTo(TRAINEE)
     }
 
     @Test
-    fun `setSelectedItemPosition if position saved return this position`() {
-        model.selectedItemPosition = 1
-        val position = model.selectedItemPosition
-        assertThat(position).isEqualTo(1)
+    fun `addNewTrainee if traineeIdShow equals id added Trainee return true`() {
+        model.addNewTrainee(TRAINEE)
+        val traineeList = model.traineeList
+        assertThat(traineeList[0].id).isEqualTo(model.traineeIdShow)
     }
 
     @Test
-    fun `getSelectedItemPosition if position not saved return 0`() {
-        val position = model.selectedItemPosition
-        assertThat(position).isEqualTo(0)
+    fun `sortTraineeList if call return sorted items in ascending order`() {
+        model.addNewTrainee(TRAINEE.copy(id = 2))
+        model.addNewTrainee(TRAINEE.copy(id = 1))
+        model.sortTraineeList()
+        val traineeList = model.traineeList
+        assertThat(traineeList[0].id).isLessThan(traineeList[1].id)
+    }
+
+    @Test
+    fun `removeCurrentTrainee if call remove item equals selectedItemPosition`() {
+        model.selectedItemPosition = 0
+        model.addNewTrainee(TRAINEE)
+        model.removeCurrentTrainee()
+        val traineeList = model.traineeList
+        assertThat(traineeList.isEmpty()).isEqualTo(true)
+    }
+
+    @Test
+    fun `removeCurrentTrainee if traineeList is empty nothing to do`() {
+        model.removeCurrentTrainee()
+        val traineeList = model.traineeList
+        assertThat(traineeList.isEmpty()).isEqualTo(true)
     }
 
     companion object {
         private const val STR_TEST_FULL_NAME = "Иванов Иван Иваныч"
-        private const val STR_TEST_GENDER = "м"
-        private const val BOOLEAN_TRUE = true
-        private val TRAINEE = Trainee().apply {
-            id = 1
-            fullName = STR_TEST_FULL_NAME
-            gender = STR_TEST_GENDER
-            hasAlphaAccount = BOOLEAN_TRUE
-            hasSigmaAccount = BOOLEAN_TRUE
-            hasComputer = BOOLEAN_TRUE
-        }
+        private const val STR_TEST_GENDER_MALE = "\u2642"
+        private val TRAINEE = Trainee(
+            id = 1,
+            fullName = STR_TEST_FULL_NAME,
+            gender = STR_TEST_GENDER_MALE,
+            hasAlphaAccount = true,
+            hasSigmaAccount = true,
+            hasComputer = true
+        )
     }
 }

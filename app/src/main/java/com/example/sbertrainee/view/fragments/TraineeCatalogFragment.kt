@@ -52,7 +52,7 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog),
                 setVisibilityFragmentView(View.VISIBLE)
                 traineeCatalogPresenter.refreshTraineeList()
             }
-        } ?: throw IllegalStateException()
+        } ?: throw IllegalStateException("Binding is null in TraineeCatalogFragment")
     }
 
     override fun setVisibilityFragmentView(value: Int) {

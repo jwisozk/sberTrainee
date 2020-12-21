@@ -83,6 +83,7 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
 
     override fun setInputName(name: String) {
         binding?.editTextFullName?.setText(name)
+        binding?.editTextFullName?.setSelection(name.length)
     }
 
     override fun setEnabledAddButton(value: Boolean) {

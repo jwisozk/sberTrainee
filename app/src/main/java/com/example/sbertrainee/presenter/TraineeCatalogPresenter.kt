@@ -1,5 +1,6 @@
 package com.example.sbertrainee.presenter
 
+import android.util.Log
 import android.view.View
 import androidx.annotation.VisibleForTesting
 import com.example.sbertrainee.inrerface.Contract
@@ -9,6 +10,8 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
+import java.io.IOException
+import java.lang.NullPointerException
 
 
 class TraineeCatalogPresenter(
@@ -62,8 +65,10 @@ class TraineeCatalogPresenter(
         val traineeListJson = Json.encodeToString(traineeList)
         try {
             File(path, TRAINEE_LIST_FILE).bufferedWriter().use { out -> out.write(traineeListJson) }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        } catch (e: IOException) {
+            Log.e(this.toString(), e.toString())
+        } catch (e: NullPointerException) {
+            Log.e(this.toString(), e.toString())
         }
     }
 
@@ -72,8 +77,10 @@ class TraineeCatalogPresenter(
             val traineeListJson =
                 File(path, TRAINEE_LIST_FILE).bufferedReader().use { input -> input.readText() }
             return Json.decodeFromString(traineeListJson)
-        } catch (e: Exception) {
-            e.printStackTrace()
+        } catch (e: IOException) {
+            Log.e(this.toString(), e.toString())
+        } catch (e: NullPointerException) {
+            Log.e(this.toString(), e.toString())
         }
         return null
     }

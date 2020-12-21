@@ -42,21 +42,21 @@ class InputPresenterTest {
 
     @Test
     fun `onInputNameChanged if argument has valid characters return fullName`() {
-        presenter.onInputNameChanged(STR_TEST_FULL_NAME)
+        presenter.onInputNameChanged(STR_TEST_FULL_NAME, STR_TEST_FULL_NAME.length)
         val fullName = presenter.traineeTmp?.fullName
         Truth.assertThat(fullName).isEqualTo(STR_TEST_FULL_NAME)
     }
 
     @Test
     fun `onInputNameChanged if argument has not valid characters return fullName`() {
-        presenter.onInputNameChanged(STR_TEST_NO_VALID_FULL_NAME)
+        presenter.onInputNameChanged(STR_TEST_NO_VALID_FULL_NAME, STR_TEST_FULL_NAME.length)
         val fullName = presenter.traineeTmp?.fullName
         Truth.assertThat(fullName).isEqualTo(STR_TEST_FULL_NAME)
     }
 
     @Test
     fun `onInputNameChanged if argument is empty string return empty string`() {
-        presenter.onInputNameChanged("")
+        presenter.onInputNameChanged("", 0)
         val fullName = presenter.traineeTmp?.fullName
         Truth.assertThat(fullName).isEqualTo("")
     }
@@ -64,7 +64,7 @@ class InputPresenterTest {
     @Test
     fun `onInputNameChanged if argument is null throw IllegalArgumentException`() {
         try {
-            presenter.onInputNameChanged(null)
+            presenter.onInputNameChanged(null, 0)
         } catch (e: IllegalArgumentException) {
             Truth.assertThat(e).hasMessageThat().contains(ILLEGAL_ARGUMENT_EXCEPTION)
         }
@@ -151,7 +151,7 @@ class InputPresenterTest {
     @Test
     fun `isDataEnough if trainee has only fullName return false`() {
         presenter.traineeTmp = null
-        presenter.onInputNameChanged(STR_TEST_FULL_NAME)
+        presenter.onInputNameChanged(STR_TEST_FULL_NAME, STR_TEST_FULL_NAME.length)
         val isDataEnough = presenter.isDataEnough()
         Truth.assertThat(isDataEnough).isEqualTo(false)
     }
@@ -207,8 +207,8 @@ class InputPresenterTest {
     fun `clearInputName if call 2 methods will be called 1 time`() {
         presenter.clearInput()
         verify(exactly = 1) {
-            presenter.onInputNameChanged("")
-            view.setInputName("")
+            presenter.onInputNameChanged("", 0)
+            view.setInputName("", 0)
         }
     }
 

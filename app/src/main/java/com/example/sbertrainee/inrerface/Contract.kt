@@ -9,7 +9,7 @@ interface Contract {
         fun clearInputAlphaAccount()
         fun clearInputSigmaAccount()
         fun clearInputComputer()
-        fun setInputName(name: String)
+        fun setInputName(name: String, start: Int)
         fun setEnabledAddButton(value: Boolean)
         fun notifyNewTraineeAdded()
     }
@@ -22,7 +22,7 @@ interface Contract {
     }
 
     interface InputPresenter {
-        fun onInputNameChanged(s: CharSequence?)
+        fun onInputNameChanged(s: CharSequence?, start: Int)
         fun onInputGenderMaleChecked()
         fun onInputGenderFemaleChecked()
         fun onInputAlphaAccountChecked(isChecked: Boolean)

@@ -1,7 +1,6 @@
 package com.example.sbertrainee.presenter
 
 import android.content.res.Resources
-import android.util.Log
 import androidx.annotation.VisibleForTesting
 import com.example.sbertrainee.R
 import com.example.sbertrainee.inrerface.Contract
@@ -19,17 +18,14 @@ class InputPresenter(
     @VisibleForTesting
     var traineeTmp: Trainee? = null
 
-    override fun onInputNameChanged(s: CharSequence?) {
+    override fun onInputNameChanged(s: CharSequence?, start: Int) {
         s?.let {
-            var result: String = it.toString()
+            val result: String = it.toString()
                 .trimStart()
                 .replace(Regex(blockCharacters), "")
-                .replace(Regex(" {2}"), "")
             when {
                 result != it.toString() -> {
-                    if (result.last() != ' ')
-                        result = "$result "
-                    view.setInputName(result)
+                    view.setInputName(result, start + 1)
                 }
                 else -> {
                     val fullName = result.trim()
@@ -76,8 +72,8 @@ class InputPresenter(
 
     @VisibleForTesting
     fun clearInputName() {
-        onInputNameChanged("")
-        view.setInputName("")
+        onInputNameChanged("", 0)
+        view.setInputName("", 0)
     }
 
     @VisibleForTesting

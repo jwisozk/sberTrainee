@@ -37,8 +37,8 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
 
     private fun initListeners() {
         binding?.let {
-            it.editTextFullName.doOnTextChanged { text, _, _, _ ->
-                inputPresenter.onInputNameChanged(text)
+            it.editTextFullName.doOnTextChanged { text, start, _, _ ->
+                inputPresenter.onInputNameChanged(text, start)
             }
             it.editTextFullName.setOnFocusChangeListener { v, hasFocus ->
                 if (!hasFocus)
@@ -81,9 +81,9 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
         setFragmentResult(Constants.REQUEST_INPUT_TRAINEE, Bundle())
     }
 
-    override fun setInputName(name: String) {
+    override fun setInputName(name: String, start: Int) {
         binding?.editTextFullName?.setText(name)
-        binding?.editTextFullName?.setSelection(name.length)
+        binding?.editTextFullName?.setSelection(start)
     }
 
     override fun setEnabledAddButton(value: Boolean) {

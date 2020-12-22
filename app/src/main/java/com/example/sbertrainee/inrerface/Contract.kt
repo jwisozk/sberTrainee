@@ -28,7 +28,6 @@ interface Contract {
         fun onInputAlphaAccountChecked(isChecked: Boolean)
         fun onInputSigmaAccountChecked(isChecked: Boolean)
         fun onInputComputerChecked(isChecked: Boolean)
-        fun onClearInputNameButtonClicked()
         fun onAddButtonClicked()
     }
 

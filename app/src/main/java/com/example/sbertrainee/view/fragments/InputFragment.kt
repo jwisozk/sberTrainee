@@ -44,9 +44,6 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
                 if (!hasFocus)
                     hideSoftInputFromWindow(v)
             }
-            it.textInputLayout.setEndIconOnClickListener {
-                inputPresenter.onClearInputNameButtonClicked()
-            }
 
             it.radioMale.setOnClickListener {
                 inputPresenter.onInputGenderMaleChecked()

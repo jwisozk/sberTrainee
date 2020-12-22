@@ -1,6 +1,7 @@
 package com.example.sbertrainee.presenter
 
 import android.content.res.Resources
+import android.util.Log
 import androidx.annotation.VisibleForTesting
 import com.example.sbertrainee.R
 import com.example.sbertrainee.inrerface.Contract
@@ -19,29 +20,41 @@ class InputPresenter(
     var traineeTmp: Trainee? = null
 
     override fun onInputNameChanged(s: CharSequence?, start: Int) {
-        s?.let {
-            val result: String = it.toString()
-                .trimStart()
-                .replace(Regex(blockCharacters), "")
-            when {
-                result != it.toString() -> {
-                    if (result.isEmpty())
-                        view.setInputName(result, start)
-                    else
-                        view.setInputName(result, start + 1)
-                }
-                else -> {
-                    val fullName = result.trim()
-                    traineeTmp =
-                        traineeTmp?.copy(fullName = fullName) ?: Trainee(fullName = fullName)
-                }
-            }
+        s?.let { name ->
+            val result: String = formatInput(name)
+            processInput(result, name, start)
             view.setEnabledAddButton(isDataEnough())
+
         } ?: throw IllegalArgumentException("Argument 's' is null in onInputNameChanged method")
     }
 
-    override fun onClearInputNameButtonClicked() {
-        clearInputName()
+    private fun formatInput(name: CharSequence) =
+        name.toString()
+            .trimStart()
+            .replace(Regex(blockCharacters), "")
+
+    private fun processInput(result: String, name: CharSequence, start: Int) {
+        val isInputChangedAfterFormat = result != name.toString()
+        Log.d("TAG", "processInput: $isInputChangedAfterFormat")
+        when {
+            isInputChangedAfterFormat ->
+                updateChangedInput(result, start)
+            else ->
+                updateTempTrainee(result)
+        }
+    }
+
+    private fun updateTempTrainee(result: String) {
+        val fullName = result.trim()
+        traineeTmp =
+            traineeTmp?.copy(fullName = fullName) ?: Trainee(fullName = fullName)
+    }
+
+    private fun updateChangedInput(result: String, start: Int) {
+        if (result.isEmpty())
+            view.setInputName(result, start)
+        else
+            view.setInputName(result, start + 1)
     }
 
     override fun onInputGenderMaleChecked() {

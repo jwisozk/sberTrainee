@@ -25,7 +25,10 @@ class InputPresenter(
                 .replace(Regex(blockCharacters), "")
             when {
                 result != it.toString() -> {
-                    view.setInputName(result, start + 1)
+                    if (result.isEmpty())
+                        view.setInputName(result, start)
+                    else
+                        view.setInputName(result, start + 1)
                 }
                 else -> {
                     val fullName = result.trim()

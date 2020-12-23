@@ -10,20 +10,14 @@ import com.example.sbertrainee.view.activity.util.KeyboardResetByClickOutside
 class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null
-    private lateinit var keyboardResetByClickOutside: KeyboardResetByClickOutside
+    private val keyboardResetByClickOutside = KeyboardResetByClickOutside()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        binding?.let {
-            val view = it.root
-            setContentView(view)
-            init()
-        }
-    }
 
-    private fun init() {
-        keyboardResetByClickOutside = KeyboardResetByClickOutside()
+        binding = ActivityMainBinding.inflate(layoutInflater).apply {
+            setContentView(root)
+        }
     }
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {

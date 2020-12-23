@@ -10,7 +10,7 @@ interface Contract {
         fun clearInputSigmaAccount()
         fun clearInputComputer()
         fun setInputName(name: String, start: Int)
-        fun setEnabledAddButton(value: Boolean)
+        fun setEnabledAddButton(enabled: Boolean)
         fun notifyNewTraineeAdded()
     }
 
@@ -34,7 +34,7 @@ interface Contract {
     interface TraineeCatalogPresenter {
         fun onItemPositionSelected(position: Int)
         fun refreshTraineeList()
-        fun onRemoveButtonClicked()
+        fun onRemoveTraineeClicked(trainee: Trainee)
         fun onStop()
     }
 }

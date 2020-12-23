@@ -1,7 +1,6 @@
 package com.example.sbertrainee.presenter
 
 import android.content.res.Resources
-import android.util.Log
 import androidx.annotation.VisibleForTesting
 import com.example.sbertrainee.R
 import com.example.sbertrainee.inrerface.Contract
@@ -35,7 +34,6 @@ class InputPresenter(
 
     private fun processInput(result: String, name: CharSequence, start: Int) {
         val isInputChangedAfterFormat = result != name.toString()
-        Log.d("TAG", "processInput: $isInputChangedAfterFormat")
         when {
             isInputChangedAfterFormat ->
                 updateChangedInput(result, start)
@@ -59,15 +57,15 @@ class InputPresenter(
 
     override fun onInputGenderMaleChecked() {
         val gender = resources.getString(R.string.gender_male)
-        setGender(gender)
+        updateGender(gender)
     }
 
     override fun onInputGenderFemaleChecked() {
         val gender = resources.getString(R.string.gender_female)
-        setGender(gender)
+        updateGender(gender)
     }
 
-    private fun setGender(gender: String) {
+    private fun updateGender(gender: String) {
         traineeTmp = traineeTmp?.copy(gender = gender) ?: Trainee(gender = gender)
         view.setEnabledAddButton(isDataEnough())
     }
@@ -89,31 +87,31 @@ class InputPresenter(
     @VisibleForTesting
     fun clearInputName() {
         onInputNameChanged("", 0)
-        view.setInputName("", 0)
     }
 
     @VisibleForTesting
-    fun setTraineeId() {
+    fun generateTraineeId() {
         val traineeList = model.traineeList
         var id = traineeList.size + 1
         if (traineeList.isNotEmpty()) {
             val lastId = traineeList.last().id
             if (traineeList.size != lastId) {
-                val list = ArrayList<Int>()
-                traineeList.forEach { list.add(it.id) }
-                for (i in 1 until lastId) {
-                    if (!list.contains(i)) {
-                        id = i
+                val ids = traineeList.map(Trainee::id)
+
+                for (currentId in 1 until lastId) {
+                    if (!ids.contains(currentId)) {
+                        id = currentId
                         break
                     }
                 }
             }
         }
-        traineeTmp = traineeTmp?.copy(id = id)
+        // set id to temporary trainee
+        traineeTmp = traineeTmp?.copy(id = id) ?: Trainee(id = id)
     }
 
     override fun onAddButtonClicked() {
-        setTraineeId()
+        generateTraineeId()
         traineeTmp?.let {
             model.addNewTrainee(it)
             model.sortTraineeList()

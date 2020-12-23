@@ -1,4 +1,4 @@
-package com.example.sbertrainee.adapter.holder
+package com.example.sbertrainee.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.example.sbertrainee.R
+import com.example.sbertrainee.adapter.holder.TraineeViewHolder
 import com.example.sbertrainee.model.Trainee
-import com.example.sbertrainee.adapter.holder.holder.TraineeViewHolder
 import com.example.sbertrainee.view.fragments.util.AnimatorListener
 
 class TraineeAdapter(
@@ -27,17 +27,25 @@ class TraineeAdapter(
 
     override fun onBindViewHolder(holderTrainee: TraineeViewHolder, position: Int) {
         val trainee = traineeList[position]
-        holderTrainee.traineeNumberTextView?.text = trainee.id.toString()
-        holderTrainee.fullNameSampleInfoTextView?.text = trainee.fullName
-        holderTrainee.genderInfoTextView?.text = trainee.gender
-        updateVisibility(holderTrainee.alphaAccountInfoTextView, trainee.hasAlphaAccount)
-        updateVisibility(holderTrainee.sigmaAccountInfoTextView, trainee.hasSigmaAccount)
-        updateVisibility(holderTrainee.workComputerInfoTextView, trainee.hasComputer)
-        holderTrainee.removeTraineeLottieAnimationView?.let { v ->
-            if (!v.hasOnClickListeners()) {
-                v.setOnClickListener { listener.onRemoveTraineeClickListener(v) }
-                v.addAnimatorListener(listener.addAnimatorListener(v))
+        with(holderTrainee.binding) {
+            traineeNumberTextView.text = trainee.id.toString()
+            fullNameSampleInfoTextView.text = trainee.fullName
+            genderInfoTextView.text = trainee.gender
+            updateVisibility(alphaAccountInfoTextView, trainee.hasAlphaAccount)
+            updateVisibility(sigmaAccountInfoTextView, trainee.hasSigmaAccount)
+            updateVisibility(workComputerInfoTextView, trainee.hasComputer)
+            removeTraineeLottieAnimationView.removeAllAnimatorListeners()
+            removeTraineeLottieAnimationView.setOnClickListener {
+                listener.onRemoveTraineeClicked(
+                    removeTraineeLottieAnimationView
+                )
             }
+            removeTraineeLottieAnimationView.addAnimatorListener(
+                listener.setAnimatorListener(
+                    removeTraineeLottieAnimationView,
+                    trainee
+                )
+            )
         }
     }
 
@@ -52,7 +60,11 @@ class TraineeAdapter(
     }
 
     interface Listener {
-        fun onRemoveTraineeClickListener(lottieAnimationView: LottieAnimationView)
-        fun addAnimatorListener(lottieAnimationView: LottieAnimationView): AnimatorListener
+        fun setAnimatorListener(
+            lottieAnimationView: LottieAnimationView,
+            trainee: Trainee
+        ): AnimatorListener
+
+        fun onRemoveTraineeClicked(lottieAnimationView: LottieAnimationView)
     }
 }

@@ -12,8 +12,6 @@ import com.example.sbertrainee.App
 import com.example.sbertrainee.databinding.FragmentInputBinding
 import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.presenter.InputPresenter
-import com.example.sbertrainee.view.activity.MainActivity
-import com.example.sbertrainee.view.fragments.constants.Constants
 import java.lang.IllegalStateException
 
 class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
@@ -29,8 +27,7 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
     }
 
     private fun init() {
-        val activity = requireActivity() as MainActivity
-        val app = activity.applicationContext as App
+        val app = requireActivity().applicationContext as App
         val model = app.model
         inputPresenter = InputPresenter(this, model, resources)
     }
@@ -75,7 +72,7 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
     }
 
     override fun notifyNewTraineeAdded() {
-        setFragmentResult(Constants.REQUEST_INPUT_TRAINEE, Bundle())
+        setFragmentResult(REQUEST_INPUT_TRAINEE, Bundle())
     }
 
     override fun setInputName(name: String, start: Int) {
@@ -106,5 +103,9 @@ class InputFragment : Fragment(R.layout.fragment_input), Contract.InputView {
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+    }
+
+    companion object {
+        const val REQUEST_INPUT_TRAINEE = "requestInputTrainee"
     }
 }

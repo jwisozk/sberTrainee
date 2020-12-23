@@ -1,17 +1,11 @@
 package com.example.sbertrainee.presenter
 
-import android.util.Log
 import android.view.View
 import androidx.annotation.VisibleForTesting
 import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.model.Model
 import com.example.sbertrainee.model.Trainee
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import java.io.File
-import java.io.IOException
-import java.lang.NullPointerException
 
 
 class TraineeCatalogPresenter(
@@ -21,13 +15,12 @@ class TraineeCatalogPresenter(
 ) : Contract.TraineeCatalogPresenter {
 
     init {
-        val traineeList = readFile()
-        traineeList?.let {
-            if (it.isNotEmpty()) {
-                view.setVisibilityFragmentView(View.VISIBLE)
-                model.traineeList = ArrayList(it)
-            }
+        val traineeList = model.readWriteFile.readFile(path)
+        if (traineeList?.isNotEmpty() == true) {
+            view.setVisibilityFragmentView(View.VISIBLE)
+            model.setTraineeList(traineeList)
         }
+
         view.setTraineeList(model.traineeList)
         view.setSelectedItemPosition(model.selectedItemPosition)
     }
@@ -42,8 +35,8 @@ class TraineeCatalogPresenter(
         }
     }
 
-    override fun onRemoveButtonClicked() {
-        model.removeCurrentTrainee()
+    override fun onRemoveTraineeClicked(trainee: Trainee) {
+        model.removeTrainee(trainee)
         refreshTraineeList()
     }
 
@@ -54,43 +47,16 @@ class TraineeCatalogPresenter(
 
     @VisibleForTesting
     fun showLastAddedTrainee() {
-        view.setSelectedItemPosition(model.traineeIdShow - 1)
+        view.setSelectedItemPosition(model.lastItemIndex)
     }
 
     override fun onItemPositionSelected(position: Int) {
-        model.selectedItemPosition = position
-    }
-
-    private fun writeToFile(traineeList: List<Trainee>) {
-        val traineeListJson = Json.encodeToString(traineeList)
-        try {
-            File(path, TRAINEE_LIST_FILE).bufferedWriter().use { out -> out.write(traineeListJson) }
-        } catch (e: IOException) {
-            Log.e(this.toString(), e.toString())
-        } catch (e: NullPointerException) {
-            Log.e(this.toString(), e.toString())
-        }
-    }
-
-    private fun readFile(): List<Trainee>? {
-        try {
-            val traineeListJson =
-                File(path, TRAINEE_LIST_FILE).bufferedReader().use { input -> input.readText() }
-            return Json.decodeFromString(traineeListJson)
-        } catch (e: IOException) {
-            Log.e(this.toString(), e.toString())
-        } catch (e: NullPointerException) {
-            Log.e(this.toString(), e.toString())
-        }
-        return null
+        model.setSelectedItemPosition(position)
     }
 
     override fun onStop() {
-        if (model.traineeList.isNotEmpty())
-            writeToFile(model.traineeList)
-    }
-
-    companion object {
-        private const val TRAINEE_LIST_FILE = "trainee_list_file"
+        if (model.traineeList.isNotEmpty()) {
+            model.readWriteFile.writeToFile(path, model.traineeList)
+        }
     }
 }

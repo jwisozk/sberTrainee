@@ -13,9 +13,7 @@ import com.example.sbertrainee.databinding.FragmentTraineeCatalogBinding
 import com.example.sbertrainee.inrerface.Contract
 import com.example.sbertrainee.model.Trainee
 import com.example.sbertrainee.presenter.TraineeCatalogPresenter
-import com.example.sbertrainee.adapter.holder.TraineeAdapter
-import com.example.sbertrainee.view.activity.MainActivity
-import com.example.sbertrainee.view.fragments.constants.Constants
+import com.example.sbertrainee.adapter.TraineeAdapter
 import com.example.sbertrainee.view.fragments.util.AnimatorListener
 import com.example.sbertrainee.view.fragments.util.DepthPageTransformer
 import com.google.android.material.tabs.TabLayoutMediator
@@ -35,8 +33,7 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog),
     }
 
     private fun init() {
-        val activity = requireActivity() as MainActivity
-        val app = activity.applicationContext as App
+        val app = requireActivity().applicationContext as App
         val model = app.model
         traineeCatalogPresenter = TraineeCatalogPresenter(this, model, requireContext().filesDir)
         binding?.let {
@@ -47,8 +44,11 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog),
                 }
             })
             TabLayoutMediator(it.tabLayout, it.viewPager) { _, _ ->
+
+
             }.attach()
-            setFragmentResultListener(Constants.REQUEST_INPUT_TRAINEE) { _, _ ->
+
+            setFragmentResultListener(InputFragment.REQUEST_INPUT_TRAINEE) { _, _ ->
                 setVisibilityFragmentView(View.VISIBLE)
                 traineeCatalogPresenter.refreshTraineeList()
             }
@@ -61,18 +61,23 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog),
 
     override fun setTraineeList(traineeList: List<Trainee>) {
         traineeAdapter = TraineeAdapter(traineeList, object : TraineeAdapter.Listener {
-            override fun onRemoveTraineeClickListener(lottieAnimationView: LottieAnimationView) {
+            override fun onRemoveTraineeClicked(lottieAnimationView: LottieAnimationView) {
                 lottieAnimationView.playAnimation()
             }
 
-            override fun addAnimatorListener(lottieAnimationView: LottieAnimationView): AnimatorListener {
+            override fun setAnimatorListener(
+                lottieAnimationView: LottieAnimationView,
+                trainee: Trainee
+            ): AnimatorListener {
                 return object : AnimatorListener() {
                     override fun onAnimationEnd(animation: Animator?) {
-                        lottieAnimationView.progress = PROGRESS_ANIMATION
-                        traineeCatalogPresenter.onRemoveButtonClicked()
+                        lottieAnimationView.progress = ANIMATION_START_PROGRESS
+                        traineeCatalogPresenter.onRemoveTraineeClicked(trainee)
                     }
                 }
             }
+
+
         })
         binding?.viewPager?.adapter = traineeAdapter
     }
@@ -96,6 +101,6 @@ class TraineeCatalogFragment : Fragment(R.layout.fragment_trainee_catalog),
     }
 
     companion object {
-        private const val PROGRESS_ANIMATION = 0f
+        private const val ANIMATION_START_PROGRESS = 0f
     }
 }

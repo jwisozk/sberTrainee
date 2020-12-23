@@ -38,7 +38,7 @@ class ModelTest {
 
     @Test
     fun `removeCurrentTrainee if call remove item equals selectedItemPosition`() {
-        model.selectedItemPosition = 0
+        model.setSelectedItemPosition(0)
         model.addNewTrainee(TRAINEE)
         model.removeCurrentTrainee()
         val traineeList = model.traineeList

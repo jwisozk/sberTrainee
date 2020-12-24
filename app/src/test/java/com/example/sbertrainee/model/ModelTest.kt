@@ -40,14 +40,14 @@ class ModelTest {
     fun `removeCurrentTrainee if call remove item equals selectedItemPosition`() {
         model.setSelectedItemPosition(0)
         model.addNewTrainee(TRAINEE)
-        model.removeCurrentTrainee()
+        model.removeTrainee(TRAINEE)
         val traineeList = model.traineeList
         assertThat(traineeList.isEmpty()).isEqualTo(true)
     }
 
     @Test
     fun `removeCurrentTrainee if traineeList is empty nothing to do`() {
-        model.removeCurrentTrainee()
+        model.removeTrainee(TRAINEE)
         val traineeList = model.traineeList
         assertThat(traineeList.isEmpty()).isEqualTo(true)
     }

@@ -71,13 +71,6 @@ class InputPresenterTest {
     }
 
     @Test
-    fun `onClearInputNameButtonClicked if call return empty fullName`() {
-        presenter.onClearInputNameButtonClicked()
-        val fullName = presenter.traineeTmp?.fullName
-        Truth.assertThat(fullName).isEqualTo("")
-    }
-
-    @Test
     fun `onInputGenderMaleChecked if call return male sign`() {
         every { resources.getString(R.string.gender_male) } returns STR_TEST_GENDER_MALE
         presenter.onInputGenderMaleChecked()
@@ -167,7 +160,7 @@ class InputPresenterTest {
     @Test
     fun `setTraineeId if traineeList empty return first free id - 1`() {
         every { model.traineeList } returns mutableListOf()
-        presenter.setTraineeId()
+        presenter.generateTraineeId()
         val id = presenter.traineeTmp?.id
         Truth.assertThat(id).isEqualTo(1)
     }
@@ -175,7 +168,7 @@ class InputPresenterTest {
     @Test
     fun `setTraineeId if traineeList has 1 item return first free id - 2`() {
         every { model.traineeList } returns mutableListOf(TRAINEE)
-        presenter.setTraineeId()
+        presenter.generateTraineeId()
         val id = presenter.traineeTmp?.id
         Truth.assertThat(id).isEqualTo(2)
     }
@@ -208,7 +201,6 @@ class InputPresenterTest {
         presenter.clearInput()
         verify(exactly = 1) {
             presenter.onInputNameChanged("", 0)
-            view.setInputName("", 0)
         }
     }
 

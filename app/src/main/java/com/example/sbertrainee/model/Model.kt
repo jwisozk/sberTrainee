@@ -4,9 +4,9 @@ import com.example.sbertrainee.view.fragments.util.ReadWriteFile
 
 class Model {
 
-    private var traineeIdShow = 1
     private var _selectedItemPosition = 0
     private var _traineeList: MutableList<Trainee> = ArrayList()
+    var traineeIdShow = 1
     val readWriteFile = ReadWriteFile()
     val selectedItemPosition
         get() = _selectedItemPosition

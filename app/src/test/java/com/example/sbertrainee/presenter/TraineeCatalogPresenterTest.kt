@@ -43,7 +43,6 @@ class TraineeCatalogPresenterTest {
         presenter.refreshTraineeList()
         verify(exactly = 1) {
             presenter.updateTraineeList(traineeList)
-            presenter.showLastAddedTrainee()
         }
     }
 
@@ -59,7 +58,7 @@ class TraineeCatalogPresenterTest {
 
     @Test
     fun `onRemoveButtonClicked if call 1 method will be called 1 time`() {
-        every { model.removeCurrentTrainee() } returns Unit
+        every { model.removeTrainee(TRAINEE) } returns Unit
         presenter.refreshTraineeList()
         verify(exactly = 1) {
             view.setVisibilityFragmentView(View.INVISIBLE)
@@ -76,20 +75,11 @@ class TraineeCatalogPresenterTest {
     }
 
     @Test
-    fun `showLastAddedTrainee if call 1 method will be called 1 time`() {
-        every { model.traineeIdShow } returns 0
-        presenter.showLastAddedTrainee()
-        verify(exactly = 1) {
-            view.setSelectedItemPosition(model.traineeIdShow - 1)
-        }
-    }
-
-    @Test
     fun `onItemPositionSelected if call 1 method will be called 1 time`() {
         val position = 0
         presenter.onItemPositionSelected(position)
         verify(exactly = 1) {
-            model.selectedItemPosition = position
+            model.setSelectedItemPosition(position)
         }
     }
 
